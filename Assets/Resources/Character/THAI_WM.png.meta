@@ -1,0 +1,198 @@
+fileFormatVersion: 2
+guid: f91864ef373de465eb1a99450cef4b34
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: hend
+    21300002: neck
+    21300004: left_hand
+    21300006: right_hand
+    21300008: cloth
+    21300010: skirt
+    21300012: left_arm1
+    21300014: right_arm1
+    21300016: body
+    21300018: left_arm2
+    21300020: right_arm2
+    21300022: left_leg
+    21300024: right_leg
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: Web
+    maxTextureSize: 2048
+    textureFormat: -1
+    compressionQuality: 50
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: hend
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 574
+        width: 394
+        height: 313
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: neck
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 802
+        width: 94
+        height: 59
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_hand
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 800
+        width: 54
+        height: 96
+      alignment: 9
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_hand
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 802
+        width: 54
+        height: 94
+      alignment: 9
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cloth
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 608
+        width: 168
+        height: 314
+      alignment: 9
+      pivot: {x: .774441302, y: .964976728}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skirt
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 650
+        width: 221
+        height: 276
+      alignment: 9
+      pivot: {x: .556502521, y: .973311484}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_arm1
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 604
+        width: 51
+        height: 137
+      alignment: 9
+      pivot: {x: .5024001, y: .873648345}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_arm1
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 604
+        width: 51
+        height: 136
+      alignment: 9
+      pivot: {x: .5024001, y: .873648286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: body
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 335
+        width: 208
+        height: 210
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_arm2
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 425
+        width: 42
+        height: 111
+      alignment: 9
+      pivot: {x: .545740783, y: .854795694}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_arm2
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 425
+        width: 43
+        height: 111
+      alignment: 9
+      pivot: {x: .545740783, y: .854795694}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_leg
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 432
+        width: 89
+        height: 158
+      alignment: 9
+      pivot: {x: .348903686, y: .895160556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_leg
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 430
+        width: 87
+        height: 157
+      alignment: 9
+      pivot: {x: .348903686, y: .895160615}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
