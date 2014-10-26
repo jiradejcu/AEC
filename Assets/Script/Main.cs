@@ -1,15 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Main : MonoBehaviour {
+public class Main : MonoBehaviour
+{
+		string selectedScene = "intro";
+		int currentSceneNo;
+		GameObject[] characterList;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+		void Start ()
+		{
+				StoryData.InitData ();
+				currentSceneNo = 0;
+				characterList = GameObject.FindGameObjectsWithTag ("Character");
+		}
+
+		void Update ()
+		{
+				if (Input.GetKeyDown (KeyCode.Space) && StoryData.storyThaiData [selectedScene].Count > currentSceneNo) {
+						foreach (GameObject characterObject in characterList) {
+								Character character = characterObject.GetComponent<Character> ();
+								character.PlayAnimation (StoryData.storyThaiData [selectedScene] [currentSceneNo++]);
+						}
+				}
+		}
 }
