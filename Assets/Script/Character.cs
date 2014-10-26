@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
 		public void PlayAnimation (AnimationData animationData)
 		{
 				AnimatorStateInfo current = animator.GetCurrentAnimatorStateInfo (0);
-				if (!current.IsName (animationData.animationName)) {
+				if (!string.IsNullOrEmpty (animationData.animationName) && !current.IsName (animationData.animationName)) {
 						animator.SetTrigger (animationData.animationName);
 						animator.SetFloat ("length", animationData.animationLength);
 				}

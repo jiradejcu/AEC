@@ -16,11 +16,13 @@ public class StoryData
 				animationData.animationName = "walk";
 				animationData.animationLength = 3.0f;
 				animationData.positionX = -5.3f;
+				animationData.imageName = "island";
 				introThaiData.Add (animationData);
 		
 				animationData = new AnimationData ();
 				animationData.animationName = "respect";
-				animationData.scaleX = -1f;
+				//				animationData.scaleX = -1f;
+				animationData.imageName = "flag";
 
 				introThaiData.Add (animationData);
 				storyThaiData ["intro"] = introThaiData;
@@ -33,4 +35,6 @@ public class AnimationData
 		public float animationLength;
 		public float? positionX;
 		public float? scaleX;
+		public string imageName;
+		public string text;
 }
