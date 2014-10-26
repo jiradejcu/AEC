@@ -1,24 +1,24 @@
 fileFormatVersion: 2
-guid: 3652e65f660744a82931dad5872a5eeb
+guid: 53b01c55a8470450a9e28929e19b68fd
 TextureImporter:
   fileIDToRecycleName:
     21300000: head
     21300002: neck
-    21300004: right_hand
-    21300006: left_hand
-    21300008: right_leg1
-    21300010: left_leg1
-    21300012: right_arm1
-    21300014: left_arm1
-    21300016: right_leg2
-    21300018: left_leg2
-    21300020: body
+    21300004: left_hand
+    21300006: right_hand
+    21300008: right_leg
+    21300010: skit
+    21300012: left_arm1
+    21300014: right_arm1
+    21300016: left_leg
+    21300018: body
+    21300020: left_arm2
     21300022: right_arm2
-    21300024: left_arm2
+    21300024: hair
     21300026: eye_left
-    21300028: eye_left_no
-    21300030: eye_right_no
-    21300032: eye_right
+    21300028: eye_right
+    21300030: eye_left_no
+    21300032: eye_right_no
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -71,160 +71,140 @@ TextureImporter:
     - name: head
       rect:
         serializedVersion: 2
-        x: 34
-        y: 572
-        width: 327
-        height: 352
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        x: 48
+        y: 644
+        width: 296
+        height: 274
+      alignment: 9
+      pivot: {x: .570051789, y: .0151353823}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: neck
       rect:
         serializedVersion: 2
-        x: 424
-        y: 805
-        width: 62
-        height: 65
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_hand
-      rect:
-        serializedVersion: 2
-        x: 544
-        y: 780
-        width: 77
-        height: 131
-      alignment: 9
-      pivot: {x: .293947697, y: .974047005}
+        x: 402
+        y: 800
+        width: 110
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: left_hand
       rect:
         serializedVersion: 2
-        x: 663
-        y: 780
-        width: 77
-        height: 131
+        x: 547
+        y: 784
+        width: 74
+        height: 128
       alignment: 9
-      pivot: {x: .293947697, y: .974047005}
+      pivot: {x: .352849185, y: .8167696}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_leg1
+    - name: right_hand
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 784
+        width: 74
+        height: 128
+      alignment: 9
+      pivot: {x: .341530472, y: .846828938}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_leg
       rect:
         serializedVersion: 2
         x: 802
-        y: 745
-        width: 149
-        height: 181
+        y: 682
+        width: 130
+        height: 236
       alignment: 9
-      pivot: {x: .5, y: .811348736}
+      pivot: {x: .303073347, y: .867152333}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: left_leg1
+    - name: skit
       rect:
         serializedVersion: 2
-        x: 1035
-        y: 747
-        width: 150
-        height: 179
-      alignment: 9
-      pivot: {x: .5, y: .811348677}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_arm1
-      rect:
-        serializedVersion: 2
-        x: 424
-        y: 599
-        width: 71
-        height: 151
-      alignment: 9
-      pivot: {x: .452114493, y: .882766008}
+        x: 960
+        y: 648
+        width: 247
+        height: 288
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: left_arm1
       rect:
         serializedVersion: 2
-        x: 554
-        y: 599
+        x: 425
+        y: 598
         width: 71
+        height: 149
+      alignment: 9
+      pivot: {x: .5, y: .75427407}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_arm1
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 596
+        width: 70
         height: 151
       alignment: 9
-      pivot: {x: .452114493, y: .882766008}
+      pivot: {x: .5, y: .778842568}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_leg2
+    - name: left_leg
       rect:
         serializedVersion: 2
-        x: 802
-        y: 427
-        width: 169
-        height: 234
+        x: 703
+        y: 435
+        width: 128
+        height: 237
       alignment: 9
-      pivot: {x: .383290321, y: .855223536}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: left_leg2
-      rect:
-        serializedVersion: 2
-        x: 1039
-        y: 438
-        width: 171
-        height: 233
-      alignment: 9
-      pivot: {x: .383290291, y: .855223477}
+      pivot: {x: .269226551, y: .857293904}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body
       rect:
         serializedVersion: 2
-        x: 82
-        y: 270
-        width: 258
-        height: 275
+        x: 68
+        y: 326
+        width: 216
+        height: 272
       alignment: 0
       pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_arm2
-      rect:
-        serializedVersion: 2
-        x: 416
-        y: 383
-        width: 119
-        height: 163
-      alignment: 9
-      pivot: {x: .37619558, y: .882397592}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: left_arm2
       rect:
         serializedVersion: 2
-        x: 546
-        y: 383
-        width: 119
-        height: 163
+        x: 416
+        y: 408
+        width: 77
+        height: 140
       alignment: 9
-      pivot: {x: .37619561, y: .882397592}
+      pivot: {x: .474637508, y: .778990805}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_arm2
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 408
+        width: 78
+        height: 140
+      alignment: 9
+      pivot: {x: .474963069, y: .778990805}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hair
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 32
+        width: 389
+        height: 532
+      alignment: 9
+      pivot: {x: .515187263, y: .773921072}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: eye_left
       rect:
         serializedVersion: 2
-        x: 436
-        y: 300
-        width: 61
-        height: 60
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: eye_left_no
-      rect:
-        serializedVersion: 2
-        x: 733
-        y: 342
-        width: 48
-        height: 10
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: eye_right_no
-      rect:
-        serializedVersion: 2
-        x: 872
-        y: 342
-        width: 35
-        height: 10
+        x: 428
+        y: 298
+        width: 65
+        height: 65
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,9 +212,29 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 579
-        y: 301
-        width: 42
-        height: 41
+        y: 298
+        width: 55
+        height: 55
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: eye_left_no
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 212
+        width: 68
+        height: 15
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: eye_right_no
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 206
+        width: 51
+        height: 12
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

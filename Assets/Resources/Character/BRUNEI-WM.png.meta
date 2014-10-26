@@ -1,24 +1,25 @@
 fileFormatVersion: 2
-guid: 3652e65f660744a82931dad5872a5eeb
+guid: d4edc004981124fd5b205a52879ed5bd
 TextureImporter:
   fileIDToRecycleName:
     21300000: head
-    21300002: neck
-    21300004: right_hand
-    21300006: left_hand
-    21300008: right_leg1
-    21300010: left_leg1
+    21300002: left_leg
+    21300004: right_leg
+    21300006: cloth_1
+    21300008: body
+    21300010: left_arm1
     21300012: right_arm1
-    21300014: left_arm1
-    21300016: right_leg2
-    21300018: left_leg2
-    21300020: body
+    21300014: left_hand
+    21300016: right_hand
+    21300018: Shawl
+    21300020: left_arm2
     21300022: right_arm2
-    21300024: left_arm2
-    21300026: eye_left
-    21300028: eye_left_no
-    21300030: eye_right_no
-    21300032: eye_right
+    21300024: cloth_2
+    21300026: eye_left_no
+    21300028: eye_right_no
+    21300030: skirt
+    21300032: eye_left
+    21300034: eye_right
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -71,170 +72,180 @@ TextureImporter:
     - name: head
       rect:
         serializedVersion: 2
-        x: 34
-        y: 572
-        width: 327
-        height: 352
+        x: 33
+        y: 1175
+        width: 336
+        height: 261
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: neck
+    - name: left_leg
       rect:
         serializedVersion: 2
-        x: 424
-        y: 805
-        width: 62
-        height: 65
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_hand
-      rect:
-        serializedVersion: 2
-        x: 544
-        y: 780
-        width: 77
-        height: 131
+        x: 402
+        y: 1193
+        width: 138
+        height: 226
       alignment: 9
-      pivot: {x: .293947697, y: .974047005}
+      pivot: {x: .367601484, y: .889526904}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: left_hand
+    - name: right_leg
       rect:
         serializedVersion: 2
-        x: 663
-        y: 780
-        width: 77
-        height: 131
+        x: 568
+        y: 1193
+        width: 138
+        height: 226
       alignment: 9
-      pivot: {x: .293947697, y: .974047005}
+      pivot: {x: .331492543, y: .867478073}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_leg1
+    - name: cloth_1
       rect:
         serializedVersion: 2
-        x: 802
-        y: 745
-        width: 149
-        height: 181
+        x: 787
+        y: 634
+        width: 493
+        height: 802
       alignment: 9
-      pivot: {x: .5, y: .811348736}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: left_leg1
-      rect:
-        serializedVersion: 2
-        x: 1035
-        y: 747
-        width: 150
-        height: 179
-      alignment: 9
-      pivot: {x: .5, y: .811348677}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_arm1
-      rect:
-        serializedVersion: 2
-        x: 424
-        y: 599
-        width: 71
-        height: 151
-      alignment: 9
-      pivot: {x: .452114493, y: .882766008}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: left_arm1
-      rect:
-        serializedVersion: 2
-        x: 554
-        y: 599
-        width: 71
-        height: 151
-      alignment: 9
-      pivot: {x: .452114493, y: .882766008}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_leg2
-      rect:
-        serializedVersion: 2
-        x: 802
-        y: 427
-        width: 169
-        height: 234
-      alignment: 9
-      pivot: {x: .383290321, y: .855223536}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: left_leg2
-      rect:
-        serializedVersion: 2
-        x: 1039
-        y: 438
-        width: 171
-        height: 233
-      alignment: 9
-      pivot: {x: .383290291, y: .855223477}
+      pivot: {x: .506738365, y: .854153812}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: body
       rect:
         serializedVersion: 2
-        x: 82
-        y: 270
-        width: 258
-        height: 275
+        x: 53
+        y: 748
+        width: 267
+        height: 371
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: right_arm2
+    - name: left_arm1
       rect:
         serializedVersion: 2
-        x: 416
-        y: 383
-        width: 119
-        height: 163
+        x: 422
+        y: 950
+        width: 74
+        height: 153
       alignment: 9
-      pivot: {x: .37619558, y: .882397592}
+      pivot: {x: .455107808, y: .825686812}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_arm1
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 950
+        width: 74
+        height: 153
+      alignment: 9
+      pivot: {x: .522446096, y: .825686812}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_hand
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 761
+        width: 72
+        height: 126
+      alignment: 9
+      pivot: {x: .430791229, y: .816381037}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_hand
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 756
+        width: 72
+        height: 126
+      alignment: 9
+      pivot: {x: .453860819, y: .790016294}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shawl
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 580
+        width: 251
+        height: 103
+      alignment: 9
+      pivot: {x: .638968229, y: .661261976}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: left_arm2
       rect:
         serializedVersion: 2
-        x: 546
-        y: 383
-        width: 119
-        height: 163
+        x: 101
+        y: 399
+        width: 81
+        height: 141
       alignment: 9
-      pivot: {x: .37619561, y: .882397592}
+      pivot: {x: .417974979, y: .841624141}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: eye_left
+    - name: right_arm2
       rect:
         serializedVersion: 2
-        x: 436
-        y: 300
-        width: 61
-        height: 60
-      alignment: 0
-      pivot: {x: .5, y: .5}
+        x: 239
+        y: 399
+        width: 81
+        height: 141
+      alignment: 9
+      pivot: {x: .41797477, y: .818064153}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cloth_2
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 38
+        width: 452
+        height: 511
+      alignment: 9
+      pivot: {x: .419154882, y: .821798861}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: eye_left_no
       rect:
         serializedVersion: 2
-        x: 733
-        y: 342
-        width: 48
-        height: 10
+        x: 1002
+        y: 451
+        width: 64
+        height: 18
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: eye_right_no
       rect:
         serializedVersion: 2
-        x: 872
-        y: 342
-        width: 35
-        height: 10
+        x: 1172
+        y: 451
+        width: 46
+        height: 13
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skirt
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 61
+        width: 231
+        height: 267
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: eye_left
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 264
+        width: 62
+        height: 58
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: eye_right
       rect:
         serializedVersion: 2
-        x: 579
-        y: 301
-        width: 42
-        height: 41
+        x: 1169
+        y: 264
+        width: 53
+        height: 50
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
