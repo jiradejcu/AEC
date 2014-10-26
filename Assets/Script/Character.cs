@@ -8,6 +8,10 @@ public class Character : MonoBehaviour
 		void Start ()
 		{
 				animator = GetComponent<Animator> ();
+				SpriteRenderer[] spriteList = GetComponentsInChildren<SpriteRenderer> ();
+				foreach (SpriteRenderer sr in spriteList) {
+						sr.sortingLayerName = "Character";
+				}
 		}
 
 		void Update ()
