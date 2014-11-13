@@ -1,0 +1,231 @@
+fileFormatVersion: 2
+guid: 25e11d73a58f549c492276a6db1c69d4
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: head
+    21300002: left_hand
+    21300004: right_hand
+    21300006: left_leg1
+    21300008: right_leg1
+    21300010: left_arm1
+    21300012: right_arm1
+    21300014: left_leg2
+    21300016: right_leg2
+    21300018: body
+    21300020: left_arm2
+    21300022: right_arm2
+    21300024: eye_left
+    21300026: eye_right
+    21300028: eye_left_no
+    21300030: eye_right_no
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: Web
+    maxTextureSize: 2048
+    textureFormat: -1
+    compressionQuality: 50
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: head
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 554
+        width: 426
+        height: 388
+      alignment: 9
+      pivot: {x: .549403429, y: -.00473557319}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_hand
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 787
+        width: 80
+        height: 140
+      alignment: 9
+      pivot: {x: .393557727, y: .912143409}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_hand
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 787
+        width: 80
+        height: 140
+      alignment: 9
+      pivot: {x: .381731421, y: .87846154}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_leg1
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 673
+        width: 207
+        height: 287
+      alignment: 9
+      pivot: {x: .437779814, y: .859013915}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_leg1
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 673
+        width: 207
+        height: 287
+      alignment: 9
+      pivot: {x: .456924498, y: .814137101}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_arm1
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 520
+        width: 78
+        height: 163
+      alignment: 9
+      pivot: {x: .48786965, y: .801840544}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_arm1
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 512
+        width: 78
+        height: 164
+      alignment: 9
+      pivot: {x: .487870425, y: .817307651}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_leg2
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 320
+        width: 198
+        height: 324
+      alignment: 9
+      pivot: {x: .449962586, y: .851651609}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_leg2
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 320
+        width: 198
+        height: 324
+      alignment: 9
+      pivot: {x: .459970176, y: .857767344}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: body
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 168
+        width: 253
+        height: 323
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: left_arm2
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 295
+        width: 85
+        height: 166
+      alignment: 9
+      pivot: {x: .488868982, y: .847683072}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: right_arm2
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 288
+        width: 84
+        height: 166
+      alignment: 9
+      pivot: {x: .476411372, y: .834225595}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: eye_left
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 172
+        width: 48
+        height: 59
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: eye_right
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 172
+        width: 48
+        height: 58
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: eye_left_no
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 201
+        width: 56
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: eye_right_no
+      rect:
+        serializedVersion: 2
+        x: 1048
+        y: 201
+        width: 56
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
