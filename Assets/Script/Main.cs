@@ -69,7 +69,8 @@ public class Main : MonoBehaviour
 		void playAllCharacterAnimation ()
 		{
 				foreach (Character character in characterList) {
-						character.PlayAnimation (StoryData.storyData [selectedCountry] [selectedScene] .animationDataList [currentSceneNo++]);
+						character.PlayAnimation (StoryData.storyData [selectedCountry] [selectedScene] .animationDataList [currentSceneNo]);
 				}
+				currentSceneNo++;
 		}
 }
