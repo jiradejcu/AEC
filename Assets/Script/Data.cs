@@ -1,56 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using SimpleJSON;
 
-public class StoryData
+public class StoryData : Singleton<StoryData>
 {
+		public delegate void Callback ();
+
+		public Callback callback;
 		public static string defaultAnimation = "idle";
 		public static Dictionary<string, Dictionary<string, StorySet>> storyData = new Dictionary<string, Dictionary<string, StorySet>> ();
 
-		public static void InitData ()
+		public void RetrieveData (Callback callback)
+		{
+				WWWForm form = new WWWForm ();
+				string url = CommonConfig.API_URL + "route=api/aec";
+				this.callback = callback;
+		
+				StartCoroutine (ServerEngine.PostData (url, form, new ServerEngine.Callback (RetrieveDataCallback)));
+		}
+
+		void RetrieveDataCallback (JSONNode data)
 		{
 				List<AnimationData> animationDataList = new List<AnimationData> ();
 				AnimationData animationData;
 
-				animationData = new AnimationData ();
-				animationData.animationName = "walk";
-				animationData.animationLength = 3.0f;
-				animationData.positionX = -5.3f;
-				animationData.imageName = "island";
-				animationDataList.Add (animationData);
+				JSONArray animationDataArray = data ["results"].AsArray;
+				foreach (JSONNode animationDataNode in animationDataArray) {
+						animationData = new AnimationData ();
+						animationData.animationName = animationDataNode ["animation_name"].Value;
+						animationData.animationLength = animationDataNode ["animation_length"].AsFloat;
+						animationData.animationDelay = animationDataNode ["animation_delay"].AsFloat;
+						if (animationDataNode ["image_name"].Value != "null")
+								animationData.imageName = animationDataNode ["image_name"].Value;
+						if (animationDataNode ["sound"].Value != "null")
+								animationData.sound = animationDataNode ["sound"].Value;
+						if (animationDataNode ["text"].Value != "null")
+								animationData.text = animationDataNode ["text"].Value;
+						if (animationDataNode ["position_x"].Value != "null")
+								animationData.positionX = animationDataNode ["position_x"].AsFloat;
+						if (animationDataNode ["scale_x"].Value != "null")
+								animationData.scaleX = animationDataNode ["scale_x"].AsFloat;
+						animationData.autoProceed = animationDataNode ["auto_proceed"].AsBool;
+						animationDataList.Add (animationData);
+				}
 		
-				animationData = new AnimationData ();
-				animationData.animationName = "respect";
-				animationData.animationLength = 3.0f;
-				animationData.imageName = "flag";
-				animationData.sound = "th_sawasdee";
-				animationData.text = "Hello";
-				animationDataList.Add (animationData);
-		
-				animationData = new AnimationData ();
-				animationData.animationName = "respect";
-				animationData.animationLength = 3.0f;
-				animationData.imageName = "night";
-				animationData.sound = "th_thankyou";
-				animationData.text = "Thank you";
-				animationData.autoProceed = true;
-				animationDataList.Add (animationData);
-		
-				animationData = new AnimationData ();
-				animationData.animationName = "walk";
-				animationData.imageName = "night";
-				animationData.animationDelay = 0.5f;
-				animationData.animationLength = 3.0f;
-				animationData.positionX = -9f;
-				animationData.scaleX = -1f;
-				animationDataList.Add (animationData);
-
 				StorySet storySet = new StorySet ();
 				storySet.animationDataList = animationDataList;
 				storySet.bgm = "ค้างคาวกินกล้วย";
-
+		
 				storyData ["th"] = new Dictionary<string, StorySet> ();
 				storyData ["th"] ["intro"] = storySet;
+
+				callback ();
 		}
 }
 
