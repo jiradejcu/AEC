@@ -21,7 +21,7 @@ public class SelectCountry : MonoBehaviour
 			                        new Vector3 (i % (StoryData.countryCodeList.Length / rowCount) * width + offsetX, offsetY - i / (StoryData.countryCodeList.Length / rowCount) * height)
 			                                                  , transform.rotation) as GameObject;
 						buttonObject.GetComponent<SelectCountryButton> ().countryCode = StoryData.countryCodeList [i];
-						buttonObject.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Image/button/" + StoryData.countryCodeList [i]);
+						buttonObject.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Image/Button/" + StoryData.countryCodeList [i]);
 				}
 		}
 }
