@@ -5,6 +5,7 @@ using SimpleJSON;
 
 public class StoryData : Singleton<StoryData>
 {
+		public static string[] countryCodeList = {"th", "sg"};
 		public delegate void Callback ();
 
 		public Callback callback;
@@ -22,35 +23,40 @@ public class StoryData : Singleton<StoryData>
 
 		void RetrieveDataCallback (JSONNode data)
 		{
-				List<AnimationData> animationDataList = new List<AnimationData> ();
 				AnimationData animationData;
 
-				JSONArray animationDataArray = data ["results"].AsArray;
-				foreach (JSONNode animationDataNode in animationDataArray) {
-						animationData = new AnimationData ();
-						animationData.animationName = animationDataNode ["animation_name"].Value;
-						animationData.animationLength = animationDataNode ["animation_length"].AsFloat;
-						animationData.animationDelay = animationDataNode ["animation_delay"].AsFloat;
-						if (animationDataNode ["image_name"].Value != "null")
-								animationData.imageName = animationDataNode ["image_name"].Value;
-						if (animationDataNode ["sound"].Value != "null")
-								animationData.sound = animationDataNode ["sound"].Value;
-						if (animationDataNode ["text"].Value != "null")
-								animationData.text = animationDataNode ["text"].Value;
-						if (animationDataNode ["position_x"].Value != "null")
-								animationData.positionX = animationDataNode ["position_x"].AsFloat;
-						if (animationDataNode ["scale_x"].Value != "null")
-								animationData.scaleX = animationDataNode ["scale_x"].AsFloat;
-						animationData.autoProceed = animationDataNode ["auto_proceed"].AsBool;
-						animationDataList.Add (animationData);
+				foreach (string countryCode in countryCodeList) {
+						if (data ["results"] [countryCode] != null) {
+								JSONArray storyDataArray = data ["results"] [countryCode].AsArray;
+								storyData [countryCode] = new Dictionary<string, StorySet> ();
+
+								foreach (JSONNode storyDataNode in storyDataArray) {
+										StorySet storySet = new StorySet ();
+										List<AnimationData> animationDataList = new List<AnimationData> ();
+										foreach (JSONNode animationDataNode in storyDataNode["contents"].AsArray) {
+												animationData = new AnimationData ();
+												animationData.animationName = animationDataNode ["animation_name"].Value;
+												animationData.animationLength = animationDataNode ["animation_length"].AsFloat;
+												animationData.animationDelay = animationDataNode ["animation_delay"].AsFloat;
+												if (animationDataNode ["image_name"].Value != "null")
+														animationData.imageName = animationDataNode ["image_name"].Value;
+												if (animationDataNode ["sound"].Value != "null")
+														animationData.sound = animationDataNode ["sound"].Value;
+												if (animationDataNode ["text"].Value != "null")
+														animationData.text = animationDataNode ["text"].Value;
+												if (animationDataNode ["position_x"].Value != "null")
+														animationData.positionX = animationDataNode ["position_x"].AsFloat;
+												if (animationDataNode ["scale_x"].Value != "null")
+														animationData.scaleX = animationDataNode ["scale_x"].AsFloat;
+												animationData.autoProceed = animationDataNode ["auto_proceed"].AsBool;
+												animationDataList.Add (animationData);
+										}
+										storySet.animationDataList = animationDataList;
+										storySet.bgm = storyDataNode ["bgm"];
+										storyData [countryCode] [storyDataNode ["name"]] = storySet;
+								}
+						}
 				}
-		
-				StorySet storySet = new StorySet ();
-				storySet.animationDataList = animationDataList;
-				storySet.bgm = "ค้างคาวกินกล้วย";
-		
-				storyData ["th"] = new Dictionary<string, StorySet> ();
-				storyData ["th"] ["intro"] = storySet;
 
 				callback ();
 		}
