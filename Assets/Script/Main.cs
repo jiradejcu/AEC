@@ -4,8 +4,8 @@ using System.Collections;
 public class Main : MonoBehaviour
 {
 		public static GameObject sound;
-		string selectedCountry = "th";
-		string selectedScene = "intro";
+		public static string selectedCountry = "th";
+		public static string selectedScene = "intro";
 		int currentSceneNo;
 		float? countdown = null;
 		bool? isInit = null;
@@ -16,6 +16,7 @@ public class Main : MonoBehaviour
 
 		void Awake ()
 		{
+				Input.simulateMouseWithTouches = true;
 				sound = Resources.Load ("Prefabs/Sound") as GameObject;
 		}
 
@@ -26,7 +27,7 @@ public class Main : MonoBehaviour
 	
 		void Update ()
 		{
-				if (isInit.HasValue && (!isInit.Value || (Input.GetKeyDown (KeyCode.Space) && !countdown.HasValue))) {
+				if (isInit.HasValue && (!isInit.Value || ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space)) && !countdown.HasValue))) {
 						isInit = true;
 						playAllCharacterAnimation ();
 				}
@@ -73,7 +74,7 @@ public class Main : MonoBehaviour
 		{
 				if (StoryData.storyData [selectedCountry] [selectedScene].animationDataList.Count > currentSceneNo) {
 						animationData = StoryData.storyData [selectedCountry] [selectedScene].animationDataList [currentSceneNo];
-						frame.SetImage (animationData.imageName);
+						frame.SetImage (selectedCountry, animationData.imageName);
 						countdown = animationData.animationDelay + animationData.animationLength;
 						foreach (Character character in characterList) {
 								character.PlayAnimation (StoryData.storyData [selectedCountry] [selectedScene] .animationDataList [currentSceneNo]);
