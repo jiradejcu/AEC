@@ -5,7 +5,7 @@ using SimpleJSON;
 
 public class StoryData : Singleton<StoryData>
 {
-		public static string[] countryCodeList = {"th", "sg"};
+		public static string[] countryCodeList = {"th", "sg", "ab", "cd", "ef", "gh", "ij", "kl", "mn", "op"};
 		public delegate void Callback ();
 
 		public Callback callback;

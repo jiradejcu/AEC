@@ -10,11 +10,11 @@ public class Frame : MonoBehaviour
 				sr = GetComponent<SpriteRenderer> ();
 		}
 
-		public void SetImage (string imageName)
+		public void SetImage (string countryCode, string imageName)
 		{
 				if (!string.IsNullOrEmpty (imageName)) {
 						sr.transform.localScale = new Vector3 (1f, 1f);
-						sr.sprite = Resources.Load<Sprite> ("Image/Thailand/" + imageName);
+						sr.sprite = Resources.Load<Sprite> ("Image/" + countryCode + "/" + imageName);
 						sr.transform.localScale = new Vector3 (9.0f / sr.bounds.size.x, 6.0f / sr.bounds.size.y);
 				}
 		}
