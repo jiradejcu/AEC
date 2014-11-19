@@ -7,21 +7,47 @@ public class Main : MonoBehaviour
 		string selectedCountry = "th";
 		string selectedScene = "intro";
 		int currentSceneNo;
-		float? countdown;
-		bool isInit = false;
+		float? countdown = null;
+		bool? isInit = null;
 		Frame frame;
 		Character[] characterList;
 		AnimationData animationData = null;
 		public static TextMesh subtitle;
 
+		void Awake ()
+		{
+				sound = Resources.Load ("Prefabs/Sound") as GameObject;
+		}
+
 		void Start ()
 		{
-				StoryData.InitData ();
+				StoryData.Instance.RetrieveData (new StoryData.Callback (OnDataReady));
+		}
+	
+		void Update ()
+		{
+				if (isInit.HasValue && (!isInit.Value || (Input.GetKeyDown (KeyCode.Space) && !countdown.HasValue))) {
+						isInit = true;
+						playAllCharacterAnimation ();
+				}
+
+				if (countdown.HasValue) {
+						countdown = countdown.Value - Time.deltaTime;
+						if (countdown < 0) {
+								countdown = null;
+								if (animationData.autoProceed)
+										playAllCharacterAnimation ();
+						}
+				}
+		}
+
+		void OnDataReady ()
+		{
 				currentSceneNo = 0;
 		
 				GameObject frameObject = GameObject.FindGameObjectWithTag ("Frame");
 				frame = frameObject.GetComponent<Frame> ();
-
+		
 				GameObject subtitleObject = GameObject.FindGameObjectWithTag ("Subtitle");
 				subtitle = subtitleObject.GetComponent<TextMesh> ();
 		
@@ -33,43 +59,26 @@ public class Main : MonoBehaviour
 						characterList [i++] = character;
 				}
 
-				sound = Resources.Load ("Prefabs/Sound") as GameObject;
 				AudioSource bgmSource = (GameObject.Instantiate (sound) as GameObject).GetComponent<AudioSource> ();
 				AudioClip bgmClip = Resources.Load ("Sound/BGM/" + StoryData.storyData [selectedCountry] [selectedScene].bgm) as AudioClip;
 				bgmSource.clip = bgmClip;
 				bgmSource.loop = true;
 				bgmSource.volume = 0.2f;
 				bgmSource.Play ();
-		}
-	
-		void Update ()
-		{
-				if (!isInit || (Input.GetKeyDown (KeyCode.Space) && !countdown.HasValue)) {
-						isInit = true;
-						countdown = null;
-						if (StoryData.storyData [selectedCountry] [selectedScene].animationDataList.Count > currentSceneNo) {
-								animationData = StoryData.storyData [selectedCountry] [selectedScene].animationDataList [currentSceneNo];
-								frame.SetImage (animationData.imageName);
-								playAllCharacterAnimation ();
-								countdown = animationData.animationDelay + animationData.animationLength;
-						}
-				}
 
-				if (countdown.HasValue) {
-						countdown = countdown.Value - Time.deltaTime;
-						Debug.Log (countdown);
-						if (countdown < 0) {
-								countdown = null;
-								if (animationData.autoProceed)
-										playAllCharacterAnimation ();
-						}
-				}
+				isInit = false;
 		}
 
 		void playAllCharacterAnimation ()
 		{
-				foreach (Character character in characterList) {
-						character.PlayAnimation (StoryData.storyData [selectedCountry] [selectedScene] .animationDataList [currentSceneNo++]);
+				if (StoryData.storyData [selectedCountry] [selectedScene].animationDataList.Count > currentSceneNo) {
+						animationData = StoryData.storyData [selectedCountry] [selectedScene].animationDataList [currentSceneNo];
+						frame.SetImage (animationData.imageName);
+						countdown = animationData.animationDelay + animationData.animationLength;
+						foreach (Character character in characterList) {
+								character.PlayAnimation (StoryData.storyData [selectedCountry] [selectedScene] .animationDataList [currentSceneNo]);
+						}
+						currentSceneNo++;
 				}
 		}
 }
