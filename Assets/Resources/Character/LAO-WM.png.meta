@@ -13,7 +13,7 @@ TextureImporter:
     21300016: right_arm2
     21300018: left_leg
     21300020: right_leg
-    21300022: LAO-WM_11
+    21300022: left_hand
     21300024: right_hand
     21300026: eye_left_no
     21300028: eye_right_no
@@ -74,7 +74,7 @@ TextureImporter:
         width: 380
         height: 415
       alignment: 9
-      pivot: {x: .640632212, y: .0621765889}
+      pivot: {x: .632589161, y: .0179883111}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: eye_left
       rect:
@@ -176,7 +176,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .550896525, y: .807201266}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: LAO-WM_11
+    - name: left_hand
       rect:
         serializedVersion: 2
         x: 492
