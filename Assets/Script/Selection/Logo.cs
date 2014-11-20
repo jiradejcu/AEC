@@ -9,7 +9,8 @@ public class Logo : MonoBehaviour
 
 		void Start ()
 		{
-				iTween.FadeTo (gameObject, iTween.Hash ("alpha", 0f, "time", 1f, "delay", 2f, "oncomplete", "LogoFadeOut"));
+				iTween.FadeFrom (gameObject, iTween.Hash ("alpha", 0f, "time", 0.3f, "delay", 0.5f));
+				iTween.FadeTo (gameObject, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 2f, "oncomplete", "LogoFadeOut"));
 		}
 
 		void LogoFadeOut ()

@@ -8,6 +8,8 @@ public class SelectCountry : MonoBehaviour
 		static float offsetY = 3f;
 		static float width = 2.5f;
 		static float height = 2f;
+		static float buttonTransLateOffsetY = -1f;
+		static float delayInterval = 0.1f;
 
 		void Start ()
 		{
@@ -20,6 +22,9 @@ public class SelectCountry : MonoBehaviour
 						GameObject buttonObject = GameObject.Instantiate (Resources.Load ("Prefabs/SelectCountryButton"),
 			                        new Vector3 (i % (StoryData.countryCodeList.Length / rowCount) * width + offsetX, offsetY - i / (StoryData.countryCodeList.Length / rowCount) * height)
 			                                                  , transform.rotation) as GameObject;
+						Vector3 fromPosition = new Vector3 (buttonObject.transform.position.x, buttonObject.transform.position.y + buttonTransLateOffsetY);
+						iTween.MoveFrom (buttonObject, iTween.Hash ("position", fromPosition, "time", 1f, "delay", i * delayInterval));
+						iTween.FadeFrom (buttonObject, iTween.Hash ("alpha", 0, "time", 1f, "delay", i * delayInterval));
 						buttonObject.GetComponent<SelectCountryButton> ().countryCode = StoryData.countryCodeList [i];
 						buttonObject.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Image/Button/" + StoryData.countryCodeList [i]);
 				}
