@@ -6,7 +6,7 @@ public class Character : MonoBehaviour
 		private Animator animator;
 		private AudioSource verbalSource;
 
-		void Start ()
+		void Awake ()
 		{
 				verbalSource = (GameObject.Instantiate (Main.sound) as GameObject).GetComponent<AudioSource> ();
 				animator = GetComponent<Animator> ();
@@ -36,15 +36,21 @@ public class Character : MonoBehaviour
 						animator.SetFloat ("length", animationData.animationLength);
 						animator.SetFloat ("delay", animationData.animationDelay);
 				}
+
 				if (animationData.positionX.HasValue)
 						iTween.MoveTo (gameObject.transform.parent.gameObject, iTween.Hash ("x", animationData.positionX.Value, "time", animationData.animationLength, "delay", animationData.animationDelay, "easetype", iTween.EaseType.linear));
 				if (animationData.scaleX.HasValue)
 						transform.parent.localScale = new Vector3 (transform.parent.localScale.x * animationData.scaleX.Value, transform.parent.localScale.y);
 
-				AudioClip verbalClip = Resources.Load ("Sound/Verbal/" + animationData.sound) as AudioClip;
-				verbalSource.clip = verbalClip;
-				verbalSource.Play ();
+				if (!string.IsNullOrEmpty (animationData.sound)) {
+						AudioClip verbalClip = Resources.Load ("Sound/Verbal/" + animationData.sound) as AudioClip;
+						verbalSource.clip = verbalClip;
+						verbalSource.Play ();
+				}
+		}
 
-				Main.subtitle.text = animationData.text;
+		public static string GetCharacterName (string countryCode, string sex)
+		{
+				return "Character_" + StoryData.countryNameList [countryCode] + "_" + sex;
 		}
 }

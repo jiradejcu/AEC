@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Main : MonoBehaviour
 {
 		public static GameObject sound;
 		public static string selectedCountry = "th";
 		public static string selectedScene = "intro";
+		GameObject[] characterContainer;
 		int currentSceneNo;
+		int currentCharacter;
 		float? countdown = null;
 		bool? isInit = null;
 		Frame frame;
-		Character[] characterList;
+		Dictionary<string, Character> characterList;
 		AnimationData animationData = null;
 		public static TextMesh subtitle;
 
@@ -22,6 +25,7 @@ public class Main : MonoBehaviour
 
 		void Start ()
 		{
+				characterList = new Dictionary<string, Character> ();
 				StoryData.Instance.RetrieveData (new StoryData.Callback (OnDataReady));
 		}
 	
@@ -45,27 +49,26 @@ public class Main : MonoBehaviour
 		void OnDataReady ()
 		{
 				currentSceneNo = 0;
+				currentCharacter = 0;
 		
 				GameObject frameObject = GameObject.FindGameObjectWithTag ("Frame");
 				frame = frameObject.GetComponent<Frame> ();
 		
 				GameObject subtitleObject = GameObject.FindGameObjectWithTag ("Subtitle");
 				subtitle = subtitleObject.GetComponent<TextMesh> ();
-		
-				GameObject[] characterObjectList = GameObject.FindGameObjectsWithTag ("Character");
-				characterList = new Character[characterObjectList.Length];
-				int i = 0;
-				foreach (GameObject characterObject in characterObjectList) {
-						Character character = characterObject.GetComponent<Character> ();
-						characterList [i++] = character;
-				}
 
-				AudioSource bgmSource = (GameObject.Instantiate (sound) as GameObject).GetComponent<AudioSource> ();
-				AudioClip bgmClip = Resources.Load ("Sound/BGM/" + StoryData.storyData [selectedCountry] [selectedScene].bgm) as AudioClip;
-				bgmSource.clip = bgmClip;
-				bgmSource.loop = true;
-				bgmSource.volume = 0.2f;
-				bgmSource.Play ();
+				characterContainer = new GameObject[2];
+				characterContainer [0] = GameObject.Find ("CharacterContainer1");
+				characterContainer [1] = GameObject.Find ("CharacterContainer2");
+
+				if (StoryData.storyData [selectedCountry] [selectedScene].bgm != null) {
+						AudioSource bgmSource = (GameObject.Instantiate (sound) as GameObject).GetComponent<AudioSource> ();
+						AudioClip bgmClip = Resources.Load ("Sound/BGM/" + StoryData.storyData [selectedCountry] [selectedScene].bgm) as AudioClip;
+						bgmSource.clip = bgmClip;
+						bgmSource.loop = true;
+						bgmSource.volume = 0.2f;
+						bgmSource.Play ();
+				}
 
 				isInit = false;
 		}
@@ -76,9 +79,20 @@ public class Main : MonoBehaviour
 						animationData = StoryData.storyData [selectedCountry] [selectedScene].animationDataList [currentSceneNo];
 						frame.SetImage (selectedCountry, animationData.imageName);
 						countdown = animationData.animationDelay + animationData.animationLength;
-						foreach (Character character in characterList) {
-								character.PlayAnimation (StoryData.storyData [selectedCountry] [selectedScene] .animationDataList [currentSceneNo]);
+
+						string characterName = Character.GetCharacterName (selectedCountry, animationData.character);
+						if (!characterList.ContainsKey (characterName)) {
+								GameObject characterObject = GameObject.Instantiate (Resources.Load ("Prefabs/" + characterName)) as GameObject;
+								characterObject.transform.parent = characterContainer [currentCharacter++].transform;
+								characterObject.transform.localPosition = Vector3.zero;
+								characterList.Add (characterName, characterObject.GetComponent<Character> ());
 						}
+
+						characterList [characterName].PlayAnimation (animationData);
+
+						if (animationData.text != "null")
+								subtitle.text = animationData.text;
+
 						currentSceneNo++;
 				}
 		}
