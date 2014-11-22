@@ -15,7 +15,8 @@ public class CommonSelect : MonoBehaviour
 	
 		protected GameObject CreateSelectButton (string buttonName, int index, int length)
 		{
-				GameObject buttonObject = GameObject.Instantiate (Resources.Load ("Prefabs/" + buttonName),
+				Object buttonPrefab = Resources.Load ("Prefabs/" + buttonName);
+				GameObject buttonObject = GameObject.Instantiate (buttonPrefab,
 		                                                  new Vector3 (index % (length / rowCount) * width * scaleWidthCoeff + offsetX, offsetY - index / (length / rowCount) * height * scaleHeightCoeff)
 			                                                  , transform.rotation) as GameObject;
 				Vector3 fromPosition = new Vector3 (buttonObject.transform.position.x, buttonObject.transform.position.y + buttonTransLateOffsetY);

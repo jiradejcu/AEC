@@ -23,6 +23,7 @@ public class SelectCountry : CommonSelect
 						buttonObject.GetComponent<SelectCountryButton> ().countryCode = StoryData.countryCodeList [i];
 						buttonObject.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Image/Button/" + StoryData.countryCodeList [i]);
 				}
+				Logo.FadeOutCompleted -= CreateSelectCountryButton;
 		}
 
 		public static void ClearSelectCountryButton ()

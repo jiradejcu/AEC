@@ -14,25 +14,28 @@ public class SelectStory : CommonSelect
 	
 		void CreateSelectStoryButton ()
 		{
-				Dictionary<string, StorySet> storyDictionary = StoryData.storyData [Main.selectedCountry];
-				buttonObjectList = new GameObject[storyDictionary.Count];
-				int i = 0;
-				foreach (string storyName in storyDictionary.Keys) {
-						GameObject buttonObject = CreateSelectButton ("SelectStoryButton", i, storyDictionary.Count);
-						buttonObjectList [i] = buttonObject;
-						SelectStoryButton selectStoryButton = buttonObject.GetComponent<SelectStoryButton> ();
-						selectStoryButton.storyName = storyName;
-						selectStoryButton.storyDisplayName = storyDictionary [storyName].displayName;
-						foreach (AnimationData animationData in storyDictionary[storyName].animationDataList) {
-								if (!string.IsNullOrEmpty (animationData.imageName)) {
-										SpriteRenderer sr = buttonObject.GetComponentInChildren<SpriteRenderer> ();
-										sr.sprite = Resources.Load<Sprite> ("Country/" + Main.selectedCountry + "/" + animationData.imageName);
-										sr.transform.localScale = new Vector3 (width / sr.bounds.size.x, height / sr.bounds.size.y);
-										break;
+				if (StoryData.storyData.ContainsKey (Main.selectedCountry)) {
+						Dictionary<string, StorySet> storyDictionary = StoryData.storyData [Main.selectedCountry];
+						buttonObjectList = new GameObject[storyDictionary.Count];
+						int i = 0;
+						foreach (string storyName in storyDictionary.Keys) {
+								GameObject buttonObject = CreateSelectButton ("SelectStoryButton", i, storyDictionary.Count);
+								buttonObjectList [i] = buttonObject;
+								SelectStoryButton selectStoryButton = buttonObject.GetComponent<SelectStoryButton> ();
+								selectStoryButton.storyName = storyName;
+								selectStoryButton.storyDisplayName = storyDictionary [storyName].displayName;
+								foreach (AnimationData animationData in storyDictionary[storyName].animationDataList) {
+										if (!string.IsNullOrEmpty (animationData.imageName)) {
+												SpriteRenderer sr = buttonObject.GetComponentInChildren<SpriteRenderer> ();
+												sr.sprite = Resources.Load<Sprite> ("Country/" + Main.selectedCountry + "/" + animationData.imageName);
+												sr.transform.localScale = new Vector3 (width / sr.bounds.size.x, height / sr.bounds.size.y);
+												break;
+										}
 								}
+								i++;
 						}
-						i++;
 				}
+				SelectCountry.FadeOutCompleted -= CreateSelectStoryButton;
 		}
 	
 		public static void ClearSelectStoryButton ()

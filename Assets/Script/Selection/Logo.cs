@@ -7,15 +7,24 @@ public class Logo : MonoBehaviour
 
 		public static event Callback FadeOutCompleted;
 
+		public static bool isPlayed = false;
+
 		void Start ()
 		{
-				iTween.FadeFrom (gameObject, iTween.Hash ("alpha", 0f, "time", 0.3f, "delay", 0.5f));
-				iTween.FadeTo (gameObject, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 2f, "oncomplete", "LogoFadeOut"));
-				StoryData.Instance.RetrieveData ();
+				if (!isPlayed) {
+						iTween.FadeFrom (gameObject, iTween.Hash ("alpha", 0f, "time", 0.3f, "delay", 0.5f));
+						iTween.FadeTo (gameObject, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 2f, "oncomplete", "LogoFadeOut"));
+						StoryData.Instance.RetrieveData ();
+						isPlayed = true;
+				} else {
+						gameObject.renderer.enabled = false;
+						StartCoroutine (LogoFadeOut ());
+				}
 		}
 
-		void LogoFadeOut ()
+		IEnumerator LogoFadeOut ()
 		{
+				yield return new WaitForEndOfFrame ();
 				FadeOutCompleted.Invoke ();
 		}
 }
