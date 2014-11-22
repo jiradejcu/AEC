@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class Main : MonoBehaviour
 {
 		public static GameObject sound;
-		public static string selectedCountry = "th";
-		public static string selectedStory = "intro";
+		public static string selectedCountry = "";
+		public static string selectedStory = "";
 		GameObject[] characterContainer;
 		int currentSceneNo;
 		int currentCharacter;
@@ -16,6 +16,7 @@ public class Main : MonoBehaviour
 		Dictionary<string, Character> characterList;
 		AnimationData animationData = null;
 		public static TextMesh subtitle;
+		public static TextMesh label;
 
 		void Awake ()
 		{
@@ -34,6 +35,11 @@ public class Main : MonoBehaviour
 		
 				GameObject subtitleObject = GameObject.FindGameObjectWithTag ("Subtitle");
 				subtitle = subtitleObject.GetComponent<TextMesh> ();
+		
+				GameObject labelObject = GameObject.FindGameObjectWithTag ("Label");
+				label = labelObject.GetComponent<TextMesh> ();
+
+				label.text = StoryData.storyData [selectedCountry] [selectedStory].displayName;
 		
 				characterContainer = new GameObject[2];
 				characterContainer [0] = GameObject.Find ("CharacterContainer1");
