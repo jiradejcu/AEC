@@ -9,6 +9,6 @@ public class SelectCountryButton : MonoBehaviour
 		{
 				Debug.Log (countryCode);
 				Main.selectedCountry = countryCode;
-				Application.LoadLevel ("Main");
+				SelectCountry.ClearSelectCountryButton ();
 		}
 }

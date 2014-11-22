@@ -38,7 +38,7 @@ public class StoryData : Singleton<StoryData>
 				countryNameList.Add (countryCodeList [9], "Vietnam");
 		}
 
-		public void RetrieveData (Callback callback)
+		public void RetrieveData (Callback callback = null)
 		{
 				WWWForm form = new WWWForm ();
 				string url = CommonConfig.API_URL + "route=api/aec";
@@ -85,7 +85,8 @@ public class StoryData : Singleton<StoryData>
 						}
 				}
 
-				callback ();
+				if (callback != null)
+						callback ();
 		}
 }
 
