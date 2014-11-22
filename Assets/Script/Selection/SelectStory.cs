@@ -8,6 +8,7 @@ public class SelectStory : CommonSelect
 	
 		void Start ()
 		{
+				scaleHeightCoeff = 1.8f;
 				SelectCountry.FadeOutCompleted += CreateSelectStoryButton;
 		}
 	
@@ -19,14 +20,14 @@ public class SelectStory : CommonSelect
 				foreach (string storyName in storyDictionary.Keys) {
 						GameObject buttonObject = CreateSelectButton ("SelectStoryButton", i, storyDictionary.Count);
 						buttonObjectList [i] = buttonObject;
-						buttonObject.GetComponent<SelectStoryButton> ().storyName = storyName;
+						SelectStoryButton selectStoryButton = buttonObject.GetComponent<SelectStoryButton> ();
+						selectStoryButton.storyName = storyName;
+						selectStoryButton.storyDisplayName = storyDictionary [storyName].displayName;
 						foreach (AnimationData animationData in storyDictionary[storyName].animationDataList) {
 								if (!string.IsNullOrEmpty (animationData.imageName)) {
-										SpriteRenderer sr = buttonObject.GetComponent<SpriteRenderer> ();
-										BoxCollider2D bc = buttonObject.GetComponent<BoxCollider2D> ();
+										SpriteRenderer sr = buttonObject.GetComponentInChildren<SpriteRenderer> ();
 										sr.sprite = Resources.Load<Sprite> ("Country/" + Main.selectedCountry + "/" + animationData.imageName);
 										sr.transform.localScale = new Vector3 (width / sr.bounds.size.x, height / sr.bounds.size.y);
-										bc.size = new Vector2 (bc.size.x / sr.transform.localScale.x, bc.size.y / sr.transform.localScale.y);
 										break;
 								}
 						}

@@ -6,16 +6,16 @@ using SimpleJSON;
 public class StoryData : Singleton<StoryData>
 {
 		public static string[] countryCodeList = {
-				"bn",
-				"id",
-				"kh",
-				"la",
-				"mm",
-				"my",
-				"ph",
-				"sg",
-				"th",
-				"vn"
+			"bn",
+			"kh",
+			"id",
+			"la",
+			"my",
+			"mm",
+			"ph",
+			"sg",
+			"th",
+			"vn"
 		};
 		public static Dictionary<string, string> countryNameList = new Dictionary<string, string> ();
 		public delegate void Callback ();
@@ -27,11 +27,11 @@ public class StoryData : Singleton<StoryData>
 		public StoryData ()
 		{
 				countryNameList.Add (countryCodeList [0], "Brunei");
-				countryNameList.Add (countryCodeList [1], "Indonesia");
-				countryNameList.Add (countryCodeList [2], "Cambodia");
+				countryNameList.Add (countryCodeList [1], "Cambodia");
+				countryNameList.Add (countryCodeList [2], "Indonesia");
 				countryNameList.Add (countryCodeList [3], "Lao");
-				countryNameList.Add (countryCodeList [4], "Myanmar");
-				countryNameList.Add (countryCodeList [5], "Malaysia");
+				countryNameList.Add (countryCodeList [4], "Malaysia");
+				countryNameList.Add (countryCodeList [5], "Myanmar");
 				countryNameList.Add (countryCodeList [6], "Philipines");
 				countryNameList.Add (countryCodeList [7], "Singapore");
 				countryNameList.Add (countryCodeList [8], "Thai");
@@ -79,6 +79,7 @@ public class StoryData : Singleton<StoryData>
 												animationDataList.Add (animationData);
 										}
 										storySet.animationDataList = animationDataList;
+										storySet.displayName = storyDataNode ["display_name"];
 										storySet.bgm = storyDataNode ["bgm"];
 										storyData [countryCode] [storyDataNode ["name"]] = storySet;
 								}
@@ -107,5 +108,6 @@ public class AnimationData
 public class StorySet
 {
 		public List<AnimationData> animationDataList;
+		public string displayName;
 		public string bgm;
 }
