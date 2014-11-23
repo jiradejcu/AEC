@@ -11,7 +11,8 @@ public class SelectCountry : CommonSelect
 
 		void Start ()
 		{
-				Logo.FadeOutCompleted += CreateSelectCountryButton;
+				if (string.IsNullOrEmpty (Main.selectedCountry))
+						Logo.FadeOutCompleted += CreateSelectCountryButton;
 		}
 
 		void CreateSelectCountryButton ()

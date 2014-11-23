@@ -7,19 +7,20 @@ public class Main : MonoBehaviour
 		public static GameObject sound;
 		public static string selectedCountry = "";
 		public static string selectedStory = "";
+		public static float? countdown;
 		GameObject[] characterContainer;
-		int currentSceneNo;
-		int currentCharacter;
-		float? countdown = null;
+		static int currentSceneNo;
+		static int currentCharacter;
 		bool isInit = false;
 		Frame frame;
 		Dictionary<string, Character> characterList;
-		AnimationData animationData = null;
+		static AnimationData animationData = null;
 		public static TextMesh subtitle;
 		public static TextMesh label;
 
 		void Awake ()
 		{
+				countdown = null;
 				Input.simulateMouseWithTouches = true;
 				sound = Resources.Load ("Prefabs/Sound") as GameObject;
 		}
@@ -59,7 +60,7 @@ public class Main : MonoBehaviour
 		{
 				if (!isInit || ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space)) && !countdown.HasValue)) {
 						isInit = true;
-						playAllCharacterAnimation ();
+						playAnimation ();
 				}
 
 				if (countdown.HasValue) {
@@ -67,14 +68,14 @@ public class Main : MonoBehaviour
 						if (countdown < 0) {
 								countdown = null;
 								if (animationData.autoProceed)
-										playAllCharacterAnimation ();
+										playAnimation ();
 						}
 				}
 		}
 
-		void playAllCharacterAnimation ()
+		void playAnimation ()
 		{
-				if (StoryData.storyData [selectedCountry] [selectedStory].animationDataList.Count > currentSceneNo) {
+				if (!IsFinished) {
 						animationData = StoryData.storyData [selectedCountry] [selectedStory].animationDataList [currentSceneNo];
 						frame.SetImage (selectedCountry, animationData.imageName);
 						countdown = animationData.animationDelay + animationData.animationLength;
@@ -93,6 +94,22 @@ public class Main : MonoBehaviour
 								subtitle.text = animationData.text;
 
 						currentSceneNo++;
+				} else
+						Application.LoadLevel ("SelectStory");
+		}
+
+		public static bool IsFinished {
+				get {
+						return  currentSceneNo >= StoryData.storyData [selectedCountry] [selectedStory].animationDataList.Count;
+				}
+		}
+
+		public static bool IsAutoProceed {
+				get {
+						if (animationData != null)
+								return animationData.autoProceed;
+						else
+								return false;
 				}
 		}
 }

@@ -9,7 +9,10 @@ public class SelectStory : CommonSelect
 		void Start ()
 		{
 				scaleHeightCoeff = 1.8f;
-				SelectCountry.FadeOutCompleted += CreateSelectStoryButton;
+				if (string.IsNullOrEmpty (Main.selectedCountry))
+						SelectCountry.FadeOutCompleted += CreateSelectStoryButton;
+				else
+						Logo.FadeOutCompleted += CreateSelectStoryButton;
 		}
 	
 		void CreateSelectStoryButton ()
@@ -36,6 +39,7 @@ public class SelectStory : CommonSelect
 						}
 				}
 				SelectCountry.FadeOutCompleted -= CreateSelectStoryButton;
+				Logo.FadeOutCompleted -= CreateSelectStoryButton;
 		}
 	
 		public static void ClearSelectStoryButton ()
