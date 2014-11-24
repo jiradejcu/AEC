@@ -15,6 +15,7 @@ public class Logo : MonoBehaviour
 						iTween.FadeFrom (gameObject, iTween.Hash ("alpha", 0f, "time", 0.3f, "delay", 0.5f));
 						iTween.FadeTo (gameObject, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 2f, "oncomplete", "LogoFadeOut"));
 						StoryData.Instance.RetrieveData ();
+						StoryData.Instance.RetrieveQuestion ();
 						isPlayed = true;
 				} else {
 						gameObject.renderer.enabled = false;

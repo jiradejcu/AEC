@@ -23,7 +23,8 @@ public class StoryData : Singleton<StoryData>
 		public Callback callback;
 		public static string defaultAnimation = "idle";
 		public static Dictionary<string, Dictionary<string, StorySet>> storyData = new Dictionary<string, Dictionary<string, StorySet>> ();
-
+		public static Dictionary<string, Dictionary<string, List<Question>>> questionData = new Dictionary<string, Dictionary<string, List<Question>>> ();
+	
 		public StoryData ()
 		{
 				countryNameList.Add (countryCodeList [0], "Brunei");
@@ -69,8 +70,14 @@ public class StoryData : Singleton<StoryData>
 														animationData.imageName = animationDataNode ["image_name"].Value;
 												if (!string.IsNullOrEmpty (animationDataNode ["sound"].Value))
 														animationData.sound = animationDataNode ["sound"].Value;
-												if (!string.IsNullOrEmpty (animationDataNode ["text"].Value))
-														animationData.text = animationDataNode ["text"].Value;
+												JSONArray textArray = animationDataNode ["text"].AsArray;
+												animationData.text = new List<SubtitleText> ();
+												foreach (JSONNode textNode in textArray) {
+														SubtitleText subtitleText = new SubtitleText ();
+														subtitleText.time = textNode ["time"].AsFloat;
+														subtitleText.text = textNode ["text"].Value;
+														animationData.text.Add (subtitleText);
+												}
 												if (animationDataNode ["position_x"].Value != "null")
 														animationData.positionX = animationDataNode ["position_x"].AsFloat;
 												if (animationDataNode ["scale_x"].Value != "null")
@@ -79,13 +86,55 @@ public class StoryData : Singleton<StoryData>
 												animationDataList.Add (animationData);
 										}
 										storySet.animationDataList = animationDataList;
-										storySet.displayName = storyDataNode ["display_name"];
-										storySet.bgm = storyDataNode ["bgm"];
-										storyData [countryCode] [storyDataNode ["name"]] = storySet;
+										storySet.displayName = storyDataNode ["display_name"].Value;
+										storySet.bgm = storyDataNode ["bgm"].Value;
+										storyData [countryCode] [storyDataNode ["name"].Value] = storySet;
 								}
 						}
 				}
 
+				if (callback != null)
+						callback ();
+		}
+	
+		public void RetrieveQuestion (Callback callback = null)
+		{
+				WWWForm form = new WWWForm ();
+				string url = CommonConfig.API_URL + "route=api/aec/questions";
+				this.callback = callback;
+		
+				StartCoroutine (ServerEngine.PostData (url, form, new ServerEngine.Callback (RetrieveQuestionCallback)));
+		}
+
+		void RetrieveQuestionCallback (JSONNode data)
+		{
+				foreach (string countryCode in countryCodeList) {
+						if (data ["results"] [countryCode] != null) {
+								JSONArray storyDataArray = data ["results"] [countryCode].AsArray;
+								questionData [countryCode] = new Dictionary<string, List<Question>> ();
+		
+								foreach (JSONNode storyDataNode in storyDataArray) {
+										List<Question> questionList = new List<Question> ();
+
+										JSONArray questionArray = storyDataNode ["questions"].AsArray;
+										foreach (JSONNode questionNode in questionArray) {
+												Question question = new Question ();
+												question.text = questionNode ["text"].Value;
+												question.answerList = new List<Answer> ();
+
+												foreach (JSONNode answerNode in questionNode["answers"].AsArray) {
+														Answer answer = new Answer ();
+														answer.text = answerNode ["text"].Value;
+														answer.isCorrect = (answerNode ["is_correct"].AsInt == 1);
+														question.answerList.Add (answer);
+												}
+												questionList.Add (question);
+										}
+										questionData [countryCode] [storyDataNode ["name"].Value] = questionList;
+								}
+						}
+				}
+			
 				if (callback != null)
 						callback ();
 		}
@@ -101,7 +150,7 @@ public class AnimationData
 		public float? scaleX;
 		public string imageName;
 		public string sound;
-		public string text;
+		public List<SubtitleText> text;
 		public bool autoProceed;
 }
 
@@ -110,4 +159,22 @@ public class StorySet
 		public List<AnimationData> animationDataList;
 		public string displayName;
 		public string bgm;
+}
+
+public class SubtitleText
+{
+		public float time;
+		public string text;
+}
+
+public class Question
+{
+		public string text;
+		public List<Answer> answerList;
+}
+
+public class Answer
+{
+		public string text;
+		public bool isCorrect;
 }

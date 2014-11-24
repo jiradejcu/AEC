@@ -15,7 +15,7 @@ public class Main : MonoBehaviour
 		Frame frame;
 		Dictionary<string, Character> characterList;
 		static AnimationData animationData = null;
-		public static TextMesh subtitle;
+		public static Subtitle subtitle;
 		public static TextMesh label;
 
 		void Awake ()
@@ -35,7 +35,7 @@ public class Main : MonoBehaviour
 				frame = frameObject.GetComponent<Frame> ();
 		
 				GameObject subtitleObject = GameObject.FindGameObjectWithTag ("Subtitle");
-				subtitle = subtitleObject.GetComponent<TextMesh> ();
+				subtitle = subtitleObject.GetComponent<Subtitle> ();
 		
 				GameObject labelObject = GameObject.FindGameObjectWithTag ("Label");
 				label = labelObject.GetComponent<TextMesh> ();
@@ -53,6 +53,14 @@ public class Main : MonoBehaviour
 						bgmSource.loop = true;
 						bgmSource.volume = 0.2f;
 						bgmSource.Play ();
+				}
+
+				List<Question> questionList = new List<Question> ();
+				foreach (Question question in StoryData.questionData[selectedCountry][selectedStory]) {
+						Debug.Log (question.text);
+						foreach (Answer answer in question.answerList) {
+								Debug.Log (answer.text + " " + answer.isCorrect);
+						}
 				}
 		}
 	
@@ -89,9 +97,7 @@ public class Main : MonoBehaviour
 						}
 
 						characterList [characterName].PlayAnimation (animationData);
-
-						if (animationData.text != "null")
-								subtitle.text = animationData.text;
+						subtitle.TextList = animationData.text;
 
 						currentSceneNo++;
 				} else
