@@ -19,9 +19,9 @@ public class Hand : MonoBehaviour
 
 		void Update ()
 		{
+				renderer.enabled = Main.HasNext;
 				if (previousValue != Main.countdown.HasValue) {
 						previousValue = Main.countdown.HasValue;
-						renderer.enabled = Main.HasNext;
 						if (renderer.enabled)
 								iTween.Resume (gameObject);
 						else

@@ -120,11 +120,13 @@ public class StoryData : Singleton<StoryData>
 										foreach (JSONNode questionNode in questionArray) {
 												Question question = new Question ();
 												question.text = questionNode ["text"].Value;
+												question.sound = questionNode ["sound"].Value;
 												question.answerList = new List<Answer> ();
 
 												foreach (JSONNode answerNode in questionNode["answers"].AsArray) {
 														Answer answer = new Answer ();
 														answer.text = answerNode ["text"].Value;
+														answer.sound = answerNode ["sound"].Value;
 														answer.isCorrect = (answerNode ["is_correct"].AsInt == 1);
 														question.answerList.Add (answer);
 												}

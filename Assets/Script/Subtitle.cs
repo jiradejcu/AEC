@@ -11,7 +11,9 @@ public class Subtitle : MonoBehaviour
 		public List<SubtitleText> TextList {
 				set {
 						countup = 0;
-						textList = value;
+						textList = new List<SubtitleText> ();
+						foreach (SubtitleText subtitleText in value)
+								textList.Add (subtitleText);
 				}
 		}
 

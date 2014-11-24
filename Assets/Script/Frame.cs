@@ -11,7 +11,7 @@ public class Frame : MonoBehaviour
 
 		void Start ()
 		{
-				sr = GetComponentInChildren<SpriteRenderer> ();
+				sr = GetComponent<SpriteRenderer> ();
 				SpriteRenderer parent_sr = transform.parent.GetComponent<SpriteRenderer> ();
 				width = parent_sr.bounds.size.x * scale;
 				height = parent_sr.bounds.size.y * scale;
@@ -28,10 +28,9 @@ public class Frame : MonoBehaviour
 				}
 		}
 
-		public void SetQuestion (Question question)
+		public void SetQuestion ()
 		{
 				sr.renderer.enabled = false;
 				qp.gameObject.SetActive (true);
-				qp.SetQuestion (question);
 		}
 }

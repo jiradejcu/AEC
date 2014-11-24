@@ -17,6 +17,8 @@ public class Main : MonoBehaviour
 		static AnimationData animationData = null;
 		public static Subtitle subtitle;
 		public static TextMesh label;
+		public static int score;
+		public static int fullScore;
 		public enum Mode
 		{
 				NORMAL = 0,
@@ -36,9 +38,17 @@ public class Main : MonoBehaviour
 				characterList = new Dictionary<string, Character> ();
 				currentSceneNo = 0;
 				currentCharacter = 0;
+				score = 0;
+				fullScore = 0;
+
+				foreach (AnimationData animationData in StoryData.storyData [selectedCountry] [selectedStory].animationDataList) {
+						if (animationData.autoProceed == (int)Mode.QUESTION)
+								fullScore++;
+				}
 		
 				GameObject frameObject = GameObject.FindGameObjectWithTag ("Frame");
 				frame = frameObject.GetComponent<Frame> ();
+				frame.qp.main = this;
 		
 				GameObject subtitleObject = GameObject.FindGameObjectWithTag ("Subtitle");
 				subtitle = subtitleObject.GetComponent<Subtitle> ();
@@ -66,7 +76,7 @@ public class Main : MonoBehaviour
 		{
 				if (!isInit || IsNext) {
 						isInit = true;
-						playAnimation ();
+						PlayAnimation ();
 				}
 
 				if (countdown.HasValue) {
@@ -74,12 +84,12 @@ public class Main : MonoBehaviour
 						if (countdown < 0) {
 								countdown = null;
 								if (animationData.autoProceed == (int)Mode.AUTO)
-										playAnimation ();
+										PlayAnimation ();
 						}
 				}
 		}
 
-		void playAnimation ()
+		public void PlayAnimation ()
 		{
 				if (!IsFinished) {
 						animationData = StoryData.storyData [selectedCountry] [selectedStory].animationDataList [currentSceneNo];
@@ -93,8 +103,12 @@ public class Main : MonoBehaviour
 						}
 
 						if (animationData.autoProceed == (int)Mode.QUESTION) {
-								if (StoryData.questionData [selectedCountry] [selectedStory].Count > 0)
-										frame.SetQuestion (StoryData.questionData [selectedCountry] [selectedStory] [0]);
+								if (StoryData.questionData [selectedCountry] [selectedStory].Count > 0) {
+										Question question = StoryData.questionData [selectedCountry] [selectedStory] [0];
+										frame.SetQuestion ();
+										frame.qp.SetQuestion (question, characterList [characterName]);
+								} else
+										countdown = 0;
 						} else {
 								frame.SetImage (selectedCountry, animationData.imageName);
 								countdown = animationData.animationDelay + animationData.animationLength;
