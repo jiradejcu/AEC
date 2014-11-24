@@ -17,6 +17,12 @@ public class Main : MonoBehaviour
 		static AnimationData animationData = null;
 		public static Subtitle subtitle;
 		public static TextMesh label;
+		public enum Mode
+		{
+				NORMAL = 0,
+				AUTO = 1,
+				QUESTION = 2
+		}
 
 		void Awake ()
 		{
@@ -51,22 +57,14 @@ public class Main : MonoBehaviour
 						AudioClip bgmClip = Resources.Load ("Sound/BGM/" + StoryData.storyData [selectedCountry] [selectedStory].bgm) as AudioClip;
 						bgmSource.clip = bgmClip;
 						bgmSource.loop = true;
-						bgmSource.volume = 0.2f;
+						bgmSource.volume = 0.1f;
 						bgmSource.Play ();
-				}
-
-				List<Question> questionList = new List<Question> ();
-				foreach (Question question in StoryData.questionData[selectedCountry][selectedStory]) {
-						Debug.Log (question.text);
-						foreach (Answer answer in question.answerList) {
-								Debug.Log (answer.text + " " + answer.isCorrect);
-						}
 				}
 		}
 	
 		void Update ()
 		{
-				if (!isInit || ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space)) && !countdown.HasValue)) {
+				if (!isInit || IsNext) {
 						isInit = true;
 						playAnimation ();
 				}
@@ -75,7 +73,7 @@ public class Main : MonoBehaviour
 						countdown = countdown.Value - Time.deltaTime;
 						if (countdown < 0) {
 								countdown = null;
-								if (animationData.autoProceed)
+								if (animationData.autoProceed == (int)Mode.AUTO)
 										playAnimation ();
 						}
 				}
@@ -85,9 +83,7 @@ public class Main : MonoBehaviour
 		{
 				if (!IsFinished) {
 						animationData = StoryData.storyData [selectedCountry] [selectedStory].animationDataList [currentSceneNo];
-						frame.SetImage (selectedCountry, animationData.imageName);
-						countdown = animationData.animationDelay + animationData.animationLength;
-
+			
 						string characterName = Character.GetCharacterName (selectedCountry, animationData.character);
 						if (!characterList.ContainsKey (characterName)) {
 								GameObject characterObject = GameObject.Instantiate (Resources.Load ("Prefabs/" + characterName)) as GameObject;
@@ -96,24 +92,43 @@ public class Main : MonoBehaviour
 								characterList.Add (characterName, characterObject.GetComponent<Character> ());
 						}
 
-						characterList [characterName].PlayAnimation (animationData);
-						subtitle.TextList = animationData.text;
+						if (animationData.autoProceed == (int)Mode.QUESTION) {
+								if (StoryData.questionData [selectedCountry] [selectedStory].Count > 0)
+										frame.SetQuestion (StoryData.questionData [selectedCountry] [selectedStory] [0]);
+						} else {
+								frame.SetImage (selectedCountry, animationData.imageName);
+								countdown = animationData.animationDelay + animationData.animationLength;
+
+								characterList [characterName].PlayAnimation (animationData);
+								subtitle.TextList = animationData.text;
+						} 
 
 						currentSceneNo++;
 				} else
 						Application.LoadLevel ("SelectStory");
 		}
 
-		public static bool IsFinished {
+		bool IsNext {
+				get {
+						return (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space)) && HasNext;
+				}
+		}
+
+		static bool IsMode (Mode mode)
+		{
+				return animationData.autoProceed == (int)mode;
+		}
+	
+		static bool IsFinished {
 				get {
 						return  currentSceneNo >= StoryData.storyData [selectedCountry] [selectedStory].animationDataList.Count;
 				}
 		}
 
-		public static bool IsAutoProceed {
+		public static bool HasNext {
 				get {
 						if (animationData != null)
-								return animationData.autoProceed;
+								return !countdown.HasValue && IsMode (Mode.NORMAL);
 						else
 								return false;
 				}

@@ -82,7 +82,7 @@ public class StoryData : Singleton<StoryData>
 														animationData.positionX = animationDataNode ["position_x"].AsFloat;
 												if (animationDataNode ["scale_x"].Value != "null")
 														animationData.scaleX = animationDataNode ["scale_x"].AsFloat;
-												animationData.autoProceed = animationDataNode ["auto_proceed"].AsBool;
+												animationData.autoProceed = animationDataNode ["auto_proceed"].AsInt;
 												animationDataList.Add (animationData);
 										}
 										storySet.animationDataList = animationDataList;
@@ -151,7 +151,7 @@ public class AnimationData
 		public string imageName;
 		public string sound;
 		public List<SubtitleText> text;
-		public bool autoProceed;
+		public int autoProceed;
 }
 
 public class StorySet
@@ -170,11 +170,13 @@ public class SubtitleText
 public class Question
 {
 		public string text;
+		public string sound;
 		public List<Answer> answerList;
 }
 
 public class Answer
 {
 		public string text;
+		public string sound;
 		public bool isCorrect;
 }

@@ -21,7 +21,7 @@ public class Hand : MonoBehaviour
 		{
 				if (previousValue != Main.countdown.HasValue) {
 						previousValue = Main.countdown.HasValue;
-						renderer.enabled = (!Main.IsFinished || !Main.IsAutoProceed) && !Main.countdown.HasValue;
+						renderer.enabled = Main.HasNext;
 						if (renderer.enabled)
 								iTween.Resume (gameObject);
 						else
