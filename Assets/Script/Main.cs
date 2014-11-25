@@ -5,20 +5,30 @@ using System.Collections.Generic;
 public class Main : MonoBehaviour
 {
 		public static GameObject sound;
-		public static string selectedCountry = "th";
-		public static string selectedScene = "intro";
+		public static string selectedCountry = "";
+		public static string selectedStory = "";
+		public static float? countdown;
 		GameObject[] characterContainer;
-		int currentSceneNo;
-		int currentCharacter;
-		float? countdown = null;
-		bool? isInit = null;
+		static int currentSceneNo;
+		static int currentCharacter;
+		bool isInit = false;
 		Frame frame;
 		Dictionary<string, Character> characterList;
-		AnimationData animationData = null;
-		public static TextMesh subtitle;
+		static AnimationData animationData = null;
+		public static Subtitle subtitle;
+		public static TextMesh label;
+		public static int score;
+		public static int fullScore;
+		public enum Mode
+		{
+				NORMAL = 0,
+				AUTO = 1,
+				QUESTION = 2
+		}
 
 		void Awake ()
 		{
+				countdown = null;
 				Input.simulateMouseWithTouches = true;
 				sound = Resources.Load ("Prefabs/Sound") as GameObject;
 		}
@@ -26,60 +36,64 @@ public class Main : MonoBehaviour
 		void Start ()
 		{
 				characterList = new Dictionary<string, Character> ();
-				StoryData.Instance.RetrieveData (new StoryData.Callback (OnDataReady));
+				currentSceneNo = 0;
+				currentCharacter = 0;
+				score = 0;
+				fullScore = 0;
+
+				foreach (AnimationData animationData in StoryData.storyData [selectedCountry] [selectedStory].animationDataList) {
+						if (animationData.autoProceed == (int)Mode.QUESTION)
+								fullScore++;
+				}
+		
+				GameObject frameObject = GameObject.FindGameObjectWithTag ("Frame");
+				frame = frameObject.GetComponent<Frame> ();
+				frame.qp.main = this;
+		
+				GameObject subtitleObject = GameObject.FindGameObjectWithTag ("Subtitle");
+				subtitle = subtitleObject.GetComponent<Subtitle> ();
+		
+				GameObject labelObject = GameObject.FindGameObjectWithTag ("Label");
+				label = labelObject.GetComponent<TextMesh> ();
+
+				label.text = StoryData.storyData [selectedCountry] [selectedStory].displayName;
+		
+				characterContainer = new GameObject[2];
+				characterContainer [0] = GameObject.Find ("CharacterContainer1");
+				characterContainer [1] = GameObject.Find ("CharacterContainer2");
+		
+				if (StoryData.storyData [selectedCountry] [selectedStory].bgm != null) {
+						AudioSource bgmSource = (GameObject.Instantiate (sound) as GameObject).GetComponent<AudioSource> ();
+						AudioClip bgmClip = Resources.Load ("Sound/BGM/" + StoryData.storyData [selectedCountry] [selectedStory].bgm) as AudioClip;
+						bgmSource.clip = bgmClip;
+						bgmSource.loop = true;
+						bgmSource.volume = 0.1f;
+						bgmSource.Play ();
+				}
 		}
 	
 		void Update ()
 		{
-				if (isInit.HasValue && (!isInit.Value || ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space)) && !countdown.HasValue))) {
+				if (!isInit || IsNext) {
 						isInit = true;
-						playAllCharacterAnimation ();
+						PlayAnimation ();
 				}
 
 				if (countdown.HasValue) {
 						countdown = countdown.Value - Time.deltaTime;
 						if (countdown < 0) {
 								countdown = null;
-								if (animationData.autoProceed)
-										playAllCharacterAnimation ();
+								if (animationData.autoProceed == (int)Mode.AUTO)
+										PlayAnimation ();
 						}
 				}
 		}
 
-		void OnDataReady ()
+		public void PlayAnimation ()
 		{
-				currentSceneNo = 0;
-				currentCharacter = 0;
-		
-				GameObject frameObject = GameObject.FindGameObjectWithTag ("Frame");
-				frame = frameObject.GetComponent<Frame> ();
-		
-				GameObject subtitleObject = GameObject.FindGameObjectWithTag ("Subtitle");
-				subtitle = subtitleObject.GetComponent<TextMesh> ();
-
-				characterContainer = new GameObject[2];
-				characterContainer [0] = GameObject.Find ("CharacterContainer1");
-				characterContainer [1] = GameObject.Find ("CharacterContainer2");
-
-				if (StoryData.storyData [selectedCountry] [selectedScene].bgm != null) {
-						AudioSource bgmSource = (GameObject.Instantiate (sound) as GameObject).GetComponent<AudioSource> ();
-						AudioClip bgmClip = Resources.Load ("Sound/BGM/" + StoryData.storyData [selectedCountry] [selectedScene].bgm) as AudioClip;
-						bgmSource.clip = bgmClip;
-						bgmSource.loop = true;
-						bgmSource.volume = 0.2f;
-						bgmSource.Play ();
-				}
-
-				isInit = false;
-		}
-
-		void playAllCharacterAnimation ()
-		{
-				if (StoryData.storyData [selectedCountry] [selectedScene].animationDataList.Count > currentSceneNo) {
-						animationData = StoryData.storyData [selectedCountry] [selectedScene].animationDataList [currentSceneNo];
-						frame.SetImage (selectedCountry, animationData.imageName);
-						countdown = animationData.animationDelay + animationData.animationLength;
-
+				if (!IsFinished) {
+						animationData = StoryData.storyData [selectedCountry] [selectedStory].animationDataList [currentSceneNo];
+			
 						string characterName = Character.GetCharacterName (selectedCountry, animationData.character);
 						if (!characterList.ContainsKey (characterName)) {
 								GameObject characterObject = GameObject.Instantiate (Resources.Load ("Prefabs/" + characterName)) as GameObject;
@@ -88,12 +102,49 @@ public class Main : MonoBehaviour
 								characterList.Add (characterName, characterObject.GetComponent<Character> ());
 						}
 
-						characterList [characterName].PlayAnimation (animationData);
+						if (animationData.autoProceed == (int)Mode.QUESTION) {
+								if (StoryData.questionData [selectedCountry] [selectedStory].Count > 0) {
+										Question question = StoryData.questionData [selectedCountry] [selectedStory] [0];
+										frame.SetQuestion ();
+										frame.qp.SetQuestion (question, characterList [characterName]);
+								} else
+										countdown = 0;
+						} else {
+								frame.SetImage (selectedCountry, animationData.imageName);
+								countdown = animationData.animationDelay + animationData.animationLength;
 
-						if (animationData.text != "null")
-								subtitle.text = animationData.text;
+								characterList [characterName].PlayAnimation (animationData);
+								subtitle.TextList = animationData.text;
+						} 
 
 						currentSceneNo++;
+				} else
+						Application.LoadLevel ("SelectStory");
+		}
+
+		bool IsNext {
+				get {
+						return (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space)) && HasNext;
+				}
+		}
+
+		static bool IsMode (Mode mode)
+		{
+				return animationData.autoProceed == (int)mode;
+		}
+	
+		static bool IsFinished {
+				get {
+						return  currentSceneNo >= StoryData.storyData [selectedCountry] [selectedStory].animationDataList.Count;
+				}
+		}
+
+		public static bool HasNext {
+				get {
+						if (animationData != null)
+								return !countdown.HasValue && IsMode (Mode.NORMAL);
+						else
+								return false;
 				}
 		}
 }

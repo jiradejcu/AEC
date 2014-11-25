@@ -43,10 +43,15 @@ public class Character : MonoBehaviour
 						transform.parent.localScale = new Vector3 (transform.parent.localScale.x * animationData.scaleX.Value, transform.parent.localScale.y);
 
 				if (!string.IsNullOrEmpty (animationData.sound)) {
-						AudioClip verbalClip = Resources.Load ("Sound/Verbal/" + animationData.sound) as AudioClip;
+						AudioClip verbalClip = GetVerbalClip (animationData.sound);
 						verbalSource.clip = verbalClip;
 						verbalSource.Play ();
 				}
+		}
+
+		public static AudioClip GetVerbalClip (string name)
+		{
+				return Resources.Load ("Sound/Verbal/" + name) as AudioClip;
 		}
 
 		public static string GetCharacterName (string countryCode, string sex)
