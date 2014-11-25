@@ -17,6 +17,11 @@ TextureImporter:
     21300024: right_leg
     21300026: eye_left_no
     21300028: eye_right_no
+    21300030: mouth1
+    21300032: mouth2
+    21300034: mouth3
+    21300036: mouth4
+    21300038: mouth5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -213,6 +218,56 @@ TextureImporter:
         y: 182
         width: 53
         height: 18
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth1
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 157
+        width: 61
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth2
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 156
+        width: 28
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth3
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 160
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth4
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 164
+        width: 29
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth5
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 168
+        width: 52
+        height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

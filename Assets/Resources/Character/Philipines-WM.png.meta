@@ -18,6 +18,11 @@ TextureImporter:
     21300026: eye_right
     21300028: left_leg
     21300030: right_leg
+    21300032: mouth1
+    21300034: mouth2
+    21300036: mouth3
+    21300038: mouth4
+    21300040: mouth5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -226,6 +231,56 @@ TextureImporter:
         height: 251
       alignment: 9
       pivot: {x: .254599452, y: .865301013}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 56
+        width: 49
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 57
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth3
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 60
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth4
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 64
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: mouth5
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 68
+        width: 43
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
