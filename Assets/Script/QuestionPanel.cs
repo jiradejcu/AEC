@@ -21,20 +21,25 @@ public class QuestionPanel : MonoBehaviour
 				animationDataList.Add (animationData);
 
 				animationData = new AnimationData ();
-				animationData.sound = question.sound;
-				animationDataList.Add (animationData);
+				if (!string.IsNullOrEmpty (question.sound)) {
+						animationData.sound = question.sound;
+						animationDataList.Add (animationData);
+				}
 
 				int i = 0;
 				foreach (string answerSound in CommonConfig.ANSWER_SOUND) {
 						if (question.answerList.Count > i) {
-								animationData = new AnimationData ();
-								animationData.sound = answerSound;
-								animationDataList.Add (animationData);
-
 								Answer answer = question.answerList [i];
-								animationData = new AnimationData ();
-								animationData.sound = answer.sound;
-								animationDataList.Add (animationData);
+
+								if (!string.IsNullOrEmpty (answer.sound)) {
+										animationData = new AnimationData ();
+										animationData.sound = answerSound;
+										animationDataList.Add (animationData);
+
+										animationData = new AnimationData ();
+										animationData.sound = answer.sound;
+										animationDataList.Add (animationData);
+								}
 
 								aTextList [i].SetAnswer (answer);
 						} else

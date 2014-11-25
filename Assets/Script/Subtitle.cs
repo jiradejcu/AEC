@@ -1,19 +1,19 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Subtitle : MonoBehaviour
 {
-		private List<SubtitleText> textList;
+		private List<ContentText> textList;
 		private TextMesh text;
 		private float countup;
 
-		public List<SubtitleText> TextList {
+		public List<ContentText> TextList {
 				set {
 						countup = 0;
-						textList = new List<SubtitleText> ();
-						foreach (SubtitleText subtitleText in value)
-								textList.Add (subtitleText);
+						textList = new List<ContentText> ();
+						foreach (ContentText contentText in value)
+								textList.Add (contentText);
 				}
 		}
 
@@ -28,7 +28,7 @@ public class Subtitle : MonoBehaviour
 						if (textList.Count > 0) {
 								countup += Time.deltaTime;
 								if (countup > textList [0].time) {
-										text.text = textList [0].text;
+										text.text = textList [0].subtitle;
 										textList.RemoveAt (0);
 								}
 						}

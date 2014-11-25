@@ -74,12 +74,13 @@ public class StoryData : Singleton<StoryData>
 																animationData.animationLength = Character.GetVerbalClip (animationData.sound).length;
 												}
 												JSONArray textArray = animationDataNode ["text"].AsArray;
-												animationData.text = new List<SubtitleText> ();
+												animationData.text = new List<ContentText> ();
 												foreach (JSONNode textNode in textArray) {
-														SubtitleText subtitleText = new SubtitleText ();
-														subtitleText.time = textNode ["time"].AsFloat;
-														subtitleText.text = textNode ["text"].Value;
-														animationData.text.Add (subtitleText);
+														ContentText contentText = new ContentText ();
+														contentText.time = textNode ["time"].AsFloat;
+														contentText.text = textNode ["text"].Value;
+														contentText.subtitle = textNode ["subtitle"].Value;
+														animationData.text.Add (contentText);
 												}
 												if (animationDataNode ["position_x"].Value != "null")
 														animationData.positionX = animationDataNode ["position_x"].AsFloat;
@@ -155,7 +156,7 @@ public class AnimationData
 		public float? scaleX;
 		public string imageName;
 		public string sound;
-		public List<SubtitleText> text;
+		public List<ContentText> text;
 		public int autoProceed;
 }
 
@@ -166,10 +167,11 @@ public class StorySet
 		public string bgm;
 }
 
-public class SubtitleText
+public class ContentText
 {
 		public float time;
 		public string text;
+		public string subtitle;
 }
 
 public class Question
