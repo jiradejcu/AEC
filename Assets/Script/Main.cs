@@ -67,7 +67,7 @@ public class Main : MonoBehaviour
 						AudioClip bgmClip = Resources.Load ("Sound/BGM/" + StoryData.storyData [selectedCountry] [selectedStory].bgm) as AudioClip;
 						bgmSource.clip = bgmClip;
 						bgmSource.loop = true;
-						bgmSource.volume = 0.1f;
+						bgmSource.volume = 0.15f;
 						bgmSource.Play ();
 				}
 		}
