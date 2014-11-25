@@ -68,8 +68,11 @@ public class StoryData : Singleton<StoryData>
 												animationData.animationDelay = animationDataNode ["animation_delay"].AsFloat;
 												if (!string.IsNullOrEmpty (animationDataNode ["image_name"].Value))
 														animationData.imageName = animationDataNode ["image_name"].Value;
-												if (!string.IsNullOrEmpty (animationDataNode ["sound"].Value))
+												if (!string.IsNullOrEmpty (animationDataNode ["sound"].Value)) {
 														animationData.sound = animationDataNode ["sound"].Value;
+														if (animationData.animationLength == 0)
+																animationData.animationLength = Character.GetVerbalClip (animationData.sound).length;
+												}
 												JSONArray textArray = animationDataNode ["text"].AsArray;
 												animationData.text = new List<SubtitleText> ();
 												foreach (JSONNode textNode in textArray) {

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CommonSelect : MonoBehaviour
 {
-		static int rowCount = 2;
+		static float rowCount = 2;
 		static float offsetX = -5f;
 		static float offsetY = 3f;
 		protected static float width = 1.8f;
@@ -17,7 +17,7 @@ public class CommonSelect : MonoBehaviour
 		{
 				Object buttonPrefab = Resources.Load ("Prefabs/" + buttonName);
 				GameObject buttonObject = GameObject.Instantiate (buttonPrefab,
-		                                                  new Vector3 (index % (length / rowCount) * width * scaleWidthCoeff + offsetX, offsetY - index / (length / rowCount) * height * scaleHeightCoeff)
+		                                                  new Vector3 (index % Mathf.CeilToInt (length / rowCount) * width * scaleWidthCoeff + offsetX, offsetY - index / Mathf.CeilToInt (length / rowCount) * height * scaleHeightCoeff)
 			                                                  , transform.rotation) as GameObject;
 				Vector3 fromPosition = new Vector3 (buttonObject.transform.position.x, buttonObject.transform.position.y + buttonTransLateOffsetY);
 				iTween.MoveFrom (buttonObject, iTween.Hash ("position", fromPosition, "time", 1f, "delay", index * delayInterval));
