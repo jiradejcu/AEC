@@ -174,16 +174,18 @@ public class ContentText
 		public string subtitle;
 }
 
-public class Question
+public class ContentSound
 {
 		public string text;
 		public string sound;
+}
+
+public class Question : ContentSound
+{
 		public List<Answer> answerList;
 }
 
-public class Answer
+public class Answer: ContentSound
 {
-		public string text;
-		public string sound;
 		public bool isCorrect;
 }
