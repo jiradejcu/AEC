@@ -105,12 +105,12 @@ public class Main : MonoBehaviour
 						if (animationData.autoProceed == (int)Mode.QUESTION) {
 								if (StoryData.questionData [selectedCountry] [selectedStory].Count > 0) {
 										Question question = StoryData.questionData [selectedCountry] [selectedStory] [0];
-										frame.SetQuestion ();
+										frame.SetLayout ((int)Frame.Layout.QUESTION);
 										frame.qp.SetQuestion (question, characterList [characterName]);
 								} else
 										countdown = 0;
 						} else {
-								frame.SetImage (selectedCountry, animationData.imageName);
+								frame.SetImage (selectedCountry, animationData.imageName, animationData.text);
 								countdown = animationData.animationDelay + animationData.animationLength;
 
 								characterList [characterName].PlayAnimation (animationData);
@@ -146,5 +146,19 @@ public class Main : MonoBehaviour
 						else
 								return false;
 				}
+		}
+	
+		public static string ConcatText (List<ContentText> contentTextList)
+		{
+				string result = "";
+				foreach (ContentText contentText in contentTextList) {
+						result += contentText.text;
+				}
+				return result;
+		}
+
+		public static bool ContainText (List<ContentText> contentTextList)
+		{
+				return !string.IsNullOrEmpty (ConcatText (contentTextList));
 		}
 }
