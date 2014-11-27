@@ -5,13 +5,12 @@ using System.Collections;
 public class CurrentCountry : MonoBehaviour
 {
 		Image image;
-		bool isShow;
+		static bool isShow = false;
 		Sprite currentCountrySprite;
 		Sprite logoSprite;
 
 		void Start ()
 		{
-				isShow = false;
 				Logo.FadeOutCompleted += SetShow;
 				image = GetComponent<Image> ();
 				logoSprite = Resources.Load<Sprite> ("Image/Logo/icon_asean_small");
