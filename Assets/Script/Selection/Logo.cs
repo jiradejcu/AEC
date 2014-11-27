@@ -18,7 +18,8 @@ public class Logo : MonoBehaviour
 						StoryData.Instance.RetrieveQuestion ();
 						isPlayed = true;
 				} else {
-						gameObject.renderer.enabled = false;
+						foreach (SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>())
+								sr.renderer.enabled = false;
 						StartCoroutine (LogoFadeOut ());
 				}
 		}
