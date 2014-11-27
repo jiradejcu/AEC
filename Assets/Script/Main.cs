@@ -15,6 +15,7 @@ public class Main : MonoBehaviour
 		bool isInit = false;
 		Frame frame;
 		Dictionary<string, Character> characterList;
+		List<Question> questionList;
 		static AnimationData animationData = null;
 		public static Subtitle subtitle;
 		public static Text title;
@@ -45,6 +46,11 @@ public class Main : MonoBehaviour
 				foreach (AnimationData animationData in StoryData.storyData [selectedCountry] [selectedStory].animationDataList) {
 						if (animationData.autoProceed == (int)Mode.QUESTION)
 								fullScore++;
+				}
+
+				questionList = new List<Question> ();
+				foreach (Question question in StoryData.questionData [selectedCountry] [selectedStory]) {
+						questionList.Add (question);
 				}
 		
 				GameObject frameObject = GameObject.FindGameObjectWithTag ("Frame");
@@ -104,8 +110,10 @@ public class Main : MonoBehaviour
 						}
 
 						if (animationData.autoProceed == (int)Mode.QUESTION) {
-								if (StoryData.questionData [selectedCountry] [selectedStory].Count > 0) {
-										Question question = StoryData.questionData [selectedCountry] [selectedStory] [0];
+								if (questionList.Count > 0) {
+										int index = Random.Range (0, questionList.Count);
+										Question question = questionList [index];
+										questionList.Remove (question);
 										frame.SetLayout ((int)Frame.Layout.QUESTION);
 										frame.qp.SetQuestion (question, characterList [characterName]);
 								} else

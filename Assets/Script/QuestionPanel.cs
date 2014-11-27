@@ -8,6 +8,7 @@ public class QuestionPanel : MonoBehaviour
 		public Text qText;
 		public AnswerPanel[] aTextList;
 		List<AnimationData> animationDataList;
+		List<Answer> answerList;
 		AnimationData animationData;
 		Character character;
 		int correctIndex;
@@ -31,10 +32,21 @@ public class QuestionPanel : MonoBehaviour
 						animationDataList.Add (animationData);
 				}
 
+				answerList = new List<Answer> ();
+				foreach (Answer answer in question.answerList)
+						answerList.Add (answer);
+
+				answerList.Sort (delegate(Answer x, Answer y) {
+						if (Random.value < 0.5f)
+								return 1;
+						else
+								return -1;
+				});
+
 				int i = 0;
 				foreach (string answerSound in CommonConfig.ANSWER_SOUND) {
-						if (question.answerList.Count > i) {
-								Answer answer = question.answerList [i];
+						if (answerList.Count > i) {
+								Answer answer = answerList [i];
 
 								if (!string.IsNullOrEmpty (answer.sound)) {
 										animationData = new AnimationData ();
@@ -50,7 +62,8 @@ public class QuestionPanel : MonoBehaviour
 										correctIndex = i;
 										correctAnswer = answer;
 								}
-
+				
+								aTextList [i].SetActive (true);
 								aTextList [i].SetAnswer (answer, i);
 						} else
 								aTextList [i].SetActive (false);
