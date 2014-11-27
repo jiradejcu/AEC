@@ -13,7 +13,7 @@ public class SelectCountry : CommonSelect
 		{
 				if (string.IsNullOrEmpty (Main.selectedCountry))
 						Logo.FadeOutCompleted += CreateSelectCountryButton;
-		}
+				}
 
 		void CreateSelectCountryButton ()
 		{

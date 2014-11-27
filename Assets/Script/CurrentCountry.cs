@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CurrentCountry : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class CurrentCountry : MonoBehaviour
 		static bool isShow = false;
 		Sprite currentCountrySprite;
 		Sprite logoSprite;
+		string selectedStory;
+		public SelectStory selectStory;
 
 		void Start ()
 		{
@@ -20,7 +23,7 @@ public class CurrentCountry : MonoBehaviour
 		{
 				if (isShow) {
 						image.enabled = true;
-						if (!string.IsNullOrEmpty (Main.selectedCountry)) {
+						if (!string.IsNullOrEmpty (Main.selectedCountry) && Main.selectedCountry != StoryData.aecName) {
 								if (currentCountrySprite == null || currentCountrySprite.name != Main.selectedCountry) {
 										currentCountrySprite = Resources.Load<Sprite> ("Image/Button/" + Main.selectedCountry);
 										image.sprite = currentCountrySprite;
@@ -35,5 +38,21 @@ public class CurrentCountry : MonoBehaviour
 		void SetShow ()
 		{
 				isShow = true;
+		}
+
+		public void OnClick ()
+		{
+				if (image.sprite.name == logoSprite.name) {
+						SelectCountry.FadeOutCompleted -= selectStory.CreateSelectStoryButton;
+						Logo.FadeOutCompleted -= selectStory.CreateSelectStoryButton;
+						Main.selectedCountry = StoryData.aecName;
+						if (string.IsNullOrEmpty (selectedStory)) {
+								Dictionary<string, StorySet>.KeyCollection.Enumerator en = StoryData.storyData [Main.selectedCountry].Keys.GetEnumerator ();
+								if (en.MoveNext ())
+										selectedStory = en.Current;
+						}
+						Main.selectedStory = selectedStory;
+						Application.LoadLevel ("Main");
+				}
 		}
 }

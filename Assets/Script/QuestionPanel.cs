@@ -124,6 +124,7 @@ public class QuestionPanel : MonoBehaviour
 
 		void PlayAnswerAnimation (Answer answer, int index)
 		{
+				StopAllCoroutines ();
 				isEnabled = false;
 				animationDataList = new List<AnimationData> ();
 		

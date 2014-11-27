@@ -56,6 +56,8 @@ public class Character : MonoBehaviour
 
 		public static string GetCharacterName (string countryCode, string sex)
 		{
+				if (countryCode.Equals (StoryData.aecName))
+						countryCode = StoryData.defaultCountryCode;
 				return "Character_" + StoryData.countryNameList [countryCode] + "_" + sex;
 		}
 }

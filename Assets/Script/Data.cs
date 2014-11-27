@@ -17,6 +17,8 @@ public class StoryData : Singleton<StoryData>
 			"th",
 			"vn"
 		};
+		public static string aecName = "aec";
+		public static string defaultCountryCode = countryCodeList [8];
 		public static Dictionary<string, string> countryNameList = new Dictionary<string, string> ();
 		public delegate void Callback ();
 
@@ -51,8 +53,10 @@ public class StoryData : Singleton<StoryData>
 		void RetrieveDataCallback (JSONNode data)
 		{
 				AnimationData animationData;
+		
+				string[] customerCountryCodeList = GetCustomCountryCodeList ();
 
-				foreach (string countryCode in countryCodeList) {
+				foreach (string countryCode in customerCountryCodeList) {
 						if (data ["results"] [countryCode] != null) {
 								JSONArray storyDataArray = data ["results"] [countryCode].AsArray;
 								storyData [countryCode] = new Dictionary<string, StorySet> ();
@@ -112,7 +116,9 @@ public class StoryData : Singleton<StoryData>
 
 		void RetrieveQuestionCallback (JSONNode data)
 		{
-				foreach (string countryCode in countryCodeList) {
+				string[] customerCountryCodeList = GetCustomCountryCodeList ();
+
+				foreach (string countryCode in customerCountryCodeList) {
 						if (data ["results"] [countryCode] != null) {
 								JSONArray storyDataArray = data ["results"] [countryCode].AsArray;
 								questionData [countryCode] = new Dictionary<string, List<Question>> ();
@@ -143,6 +149,14 @@ public class StoryData : Singleton<StoryData>
 			
 				if (callback != null)
 						callback ();
+		}
+
+		string[] GetCustomCountryCodeList ()
+		{
+				string[] customerCountryCodeList = new string[countryCodeList.Length + 1];
+				countryCodeList.CopyTo (customerCountryCodeList, 0);
+				customerCountryCodeList [countryCodeList.Length] = aecName;
+				return customerCountryCodeList;
 		}
 }
 

@@ -13,9 +13,9 @@ public class SelectStory : CommonSelect
 						SelectCountry.FadeOutCompleted += CreateSelectStoryButton;
 				else
 						Logo.FadeOutCompleted += CreateSelectStoryButton;
-		}
+				}
 	
-		void CreateSelectStoryButton ()
+		public void CreateSelectStoryButton ()
 		{
 				if (StoryData.storyData.ContainsKey (Main.selectedCountry)) {
 						Dictionary<string, StorySet> storyDictionary = StoryData.storyData [Main.selectedCountry];
