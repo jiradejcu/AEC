@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Subtitle : MonoBehaviour
 {
 		private List<ContentText> textList;
-		private TextMesh text;
+		private Text text;
 		private float countup;
 
 		public List<ContentText> TextList {
@@ -19,7 +20,7 @@ public class Subtitle : MonoBehaviour
 
 		void Start ()
 		{
-				text = GetComponent<TextMesh> ();
+				text = GetComponent<Text> ();
 		}
 
 		void Update ()
