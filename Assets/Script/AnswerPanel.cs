@@ -17,6 +17,13 @@ public class AnswerPanel : MonoBehaviour
 				ANSWER = 2
 		}
 
+		void Update ()
+		{
+				if (this.button != null) {
+						this.button.interactable = QuestionPanel.isEnabled;
+				}
+		}
+
 		void InitComponent ()
 		{
 				this.button = GetComponentInChildren<Button> ();
@@ -42,12 +49,13 @@ public class AnswerPanel : MonoBehaviour
 		{
 				switch (state) {
 				case (int)State.NORMAL:
+						this.button.image.color = this.button.colors.normalColor;
 						break;
 				case (int)State.SELECTED:
-//						this.button.color = new Color (0, 0, 0, 0f);
+						this.button.image.color = this.button.colors.pressedColor;
 						break;
 				case (int)State.ANSWER:
-//						this.button.color = new Color (0, 0, 0, 1f);
+						this.button.image.color = this.button.colors.highlightedColor;
 						break;
 				}
 		}
