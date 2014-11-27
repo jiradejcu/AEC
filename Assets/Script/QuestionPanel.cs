@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class QuestionPanel : MonoBehaviour
 {
-		public TextMesh qText;
+		public Text qText;
 		public AnswerPanel[] aTextList;
 		List<AnimationData> animationDataList;
 		AnimationData animationData;

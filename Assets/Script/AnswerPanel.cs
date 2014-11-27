@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class AnswerPanel : MonoBehaviour
 {
-		SpriteRenderer bg;
-		TextMesh text;
+		Button button;
+		Text text;
 		int index;
 		Answer answer;
 		QuestionPanel qp;
@@ -18,9 +19,9 @@ public class AnswerPanel : MonoBehaviour
 
 		void InitComponent ()
 		{
-				this.bg = GetComponent<SpriteRenderer> ();
-				this.text = transform.parent.GetComponentInChildren<TextMesh> ();
-				this.qp = transform.parent.transform.parent.GetComponent<QuestionPanel> ();
+				this.button = GetComponentInChildren<Button> ();
+				this.text = GetComponentInChildren<Text> ();
+				this.qp = GetComponentInParent <QuestionPanel> ();
 		}
 
 		public void SetAnswer (Answer answer, int index)
@@ -34,25 +35,24 @@ public class AnswerPanel : MonoBehaviour
 
 		public void SetActive (bool active)
 		{
-				transform.parent.gameObject.SetActive (active);
+				gameObject.SetActive (active);
 		}
 
 		public void SetState (int state)
 		{
 				switch (state) {
 				case (int)State.NORMAL:
-						this.bg.color = new Color (0, 0, 0, 0.5f);
 						break;
 				case (int)State.SELECTED:
-						this.bg.color = new Color (0, 0, 0, 0f);
+//						this.button.color = new Color (0, 0, 0, 0f);
 						break;
 				case (int)State.ANSWER:
-						this.bg.color = new Color (0, 0, 0, 1f);
+//						this.button.color = new Color (0, 0, 0, 1f);
 						break;
 				}
 		}
 
-		void OnMouseDown ()
+		public void OnClick ()
 		{
 				if (QuestionPanel.isEnabled) {
 						SetState ((int)State.SELECTED);

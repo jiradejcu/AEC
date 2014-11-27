@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,7 +17,7 @@ public class Main : MonoBehaviour
 		Dictionary<string, Character> characterList;
 		static AnimationData animationData = null;
 		public static Subtitle subtitle;
-		public static TextMesh label;
+		public static Text title;
 		public static int score;
 		public static int fullScore;
 		public enum Mode
@@ -53,10 +54,10 @@ public class Main : MonoBehaviour
 				GameObject subtitleObject = GameObject.FindGameObjectWithTag ("Subtitle");
 				subtitle = subtitleObject.GetComponent<Subtitle> ();
 		
-				GameObject labelObject = GameObject.FindGameObjectWithTag ("Label");
-				label = labelObject.GetComponent<TextMesh> ();
+				GameObject labelObject = GameObject.FindGameObjectWithTag ("Title");
+				title = labelObject.GetComponent<Text> ();
 
-				label.text = StoryData.storyData [selectedCountry] [selectedStory].displayName;
+				title.text = StoryData.storyData [selectedCountry] [selectedStory].displayName;
 		
 				characterContainer = new GameObject[2];
 				characterContainer [0] = GameObject.Find ("CharacterContainer1");
