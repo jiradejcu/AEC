@@ -14,4 +14,5 @@ public class CommonConfig
 		};
 		public static string ANSWER_CORRECT = "answer_correct";
 		public static string ANSWER_WRONG = "answer_wrong";
+		public static string SCORE_SUMMARY = "score_summary";
 }

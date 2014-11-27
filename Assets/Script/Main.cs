@@ -13,6 +13,7 @@ public class Main : MonoBehaviour
 		static int currentSceneNo;
 		static int currentCharacter;
 		bool isInit = false;
+		static int mode;
 		Frame frame;
 		Dictionary<string, Character> characterList;
 		List<Question> questionList;
@@ -49,9 +50,11 @@ public class Main : MonoBehaviour
 				}
 
 				questionList = new List<Question> ();
-				foreach (Question question in StoryData.questionData [selectedCountry] [selectedStory]) {
-						questionList.Add (question);
-				}
+				if (StoryData.questionData.ContainsKey (selectedCountry)
+						&& StoryData.questionData [selectedCountry].ContainsKey (selectedStory))
+						foreach (Question question in StoryData.questionData [selectedCountry] [selectedStory]) {
+								questionList.Add (question);
+						}
 		
 				GameObject frameObject = GameObject.FindGameObjectWithTag ("Frame");
 				frame = frameObject.GetComponent<Frame> ();
@@ -90,7 +93,7 @@ public class Main : MonoBehaviour
 						countdown = countdown.Value - Time.deltaTime;
 						if (countdown < 0) {
 								countdown = null;
-								if (animationData.autoProceed == (int)Mode.AUTO)
+								if (mode == (int)Mode.AUTO)
 										PlayAnimation ();
 						}
 				}
@@ -100,7 +103,8 @@ public class Main : MonoBehaviour
 		{
 				if (!IsFinished) {
 						animationData = StoryData.storyData [selectedCountry] [selectedStory].animationDataList [currentSceneNo];
-			
+						mode = animationData.autoProceed;
+
 						string characterName = Character.GetCharacterName (selectedCountry, animationData.character);
 						if (!characterList.ContainsKey (characterName)) {
 								GameObject characterObject = GameObject.Instantiate (Resources.Load ("Prefabs/" + characterName)) as GameObject;
@@ -109,7 +113,7 @@ public class Main : MonoBehaviour
 								characterList.Add (characterName, characterObject.GetComponent<Character> ());
 						}
 
-						if (animationData.autoProceed == (int)Mode.QUESTION) {
+						if (mode == (int)Mode.QUESTION) {
 								if (questionList.Count > 0) {
 										int index = Random.Range (0, questionList.Count);
 										Question question = questionList [index];
@@ -127,6 +131,11 @@ public class Main : MonoBehaviour
 						} 
 
 						currentSceneNo++;
+
+				} else if (fullScore > 0) {
+						mode = (int)Mode.QUESTION;
+						frame.SetLayout ((int)Frame.Layout.QUESTION);
+						frame.qp.SetShowScore ();
 				} else
 						Application.LoadLevel ("SelectStory");
 		}
@@ -139,7 +148,7 @@ public class Main : MonoBehaviour
 
 		static bool IsMode (Mode mode)
 		{
-				return animationData.autoProceed == (int)mode;
+				return Main.mode == (int)mode;
 		}
 	
 		static bool IsFinished {
@@ -169,5 +178,11 @@ public class Main : MonoBehaviour
 		public static bool ContainText (List<ContentText> contentTextList)
 		{
 				return !string.IsNullOrEmpty (ConcatText (contentTextList));
+		}
+	
+		public static void SetNormalMode ()
+		{
+				fullScore = 0;
+				mode = (int)Mode.NORMAL;
 		}
 }

@@ -75,7 +75,7 @@ public class QuestionPanel : MonoBehaviour
 				StartCoroutine (PlayAnimation ());
 		}
 
-		IEnumerator PlayAnimation (bool continueToMain = false)
+		IEnumerator PlayAnimation (bool continueToMain = false, bool setNormal = false)
 		{
 				AnimationData animationData = animationDataList [0];
 				animationData.animationLength = Character.GetVerbalClip (animationData.sound).length;
@@ -94,7 +94,10 @@ public class QuestionPanel : MonoBehaviour
 						StartCoroutine (PlayAnimation (continueToMain));
 				else if (continueToMain) {
 						yield return new WaitForSeconds (1f);
-						main.PlayAnimation ();
+						if (!setNormal)
+								main.PlayAnimation ();
+						else
+								Main.SetNormalMode ();
 				}
 		}
 
@@ -159,5 +162,20 @@ public class QuestionPanel : MonoBehaviour
 		void SetAnswerState ()
 		{
 				aTextList [correctIndex].SetState ((int)AnswerPanel.State.ANSWER);
+		}
+
+		public void SetShowScore ()
+		{
+				foreach (AnswerPanel aText in aTextList) {
+						aText.SetActive (false);
+				}
+
+				qText.text = Main.score + " / " + Main.fullScore;
+
+				animationData = new AnimationData ();
+				animationData.sound = CommonConfig.SCORE_SUMMARY;
+				animationDataList.Add (animationData);
+		
+				StartCoroutine (PlayAnimation (true, true));
 		}
 }
