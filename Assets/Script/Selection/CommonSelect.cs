@@ -3,13 +3,13 @@ using System.Collections;
 
 public class CommonSelect : MonoBehaviour
 {
-		static int[] columnCount = {3, 4, 3};
+		protected int[] columnCount;
 		protected static float width = 1.8f;
 		protected static float height = 1.2f;
 		protected float scaleWidthCoeff = 1.4f;
 		protected float scaleHeightCoeff = 1.8f;
-		static float buttonTransLateOffsetY = -1f;
-		static float delayInterval = 0.1f;
+		protected static float buttonTransLateOffsetY = -1f;
+		protected static float delayInterval = 0.1f;
 	
 		protected GameObject CreateSelectButton (string buttonName, int index, int length)
 		{

@@ -11,9 +11,10 @@ public class SelectCountry : CommonSelect
 
 		void Start ()
 		{
+				columnCount = new int[]{3, 4, 3};
 				if (string.IsNullOrEmpty (Main.selectedCountry))
 						Logo.FadeOutCompleted += CreateSelectCountryButton;
-				}
+		}
 
 		void CreateSelectCountryButton ()
 		{
