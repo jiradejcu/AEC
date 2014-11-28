@@ -5,14 +5,19 @@ public class Character : MonoBehaviour
 {
 		private Animator animator;
 		private AudioSource verbalSource;
+		public int containerNo;
 
 		void Awake ()
 		{
 				verbalSource = (GameObject.Instantiate (Main.sound) as GameObject).GetComponent<AudioSource> ();
 				animator = GetComponent<Animator> ();
+		}
+
+		void Start ()
+		{
 				SpriteRenderer[] spriteList = GetComponentsInChildren<SpriteRenderer> ();
 				foreach (SpriteRenderer sr in spriteList) {
-						sr.sortingLayerName = "Character";
+						sr.sortingLayerName = "Character" + containerNo;
 				}
 		}
 

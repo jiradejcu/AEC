@@ -108,9 +108,11 @@ public class Main : MonoBehaviour
 						string characterName = Character.GetCharacterName (selectedCountry, animationData.character);
 						if (!characterList.ContainsKey (characterName)) {
 								GameObject characterObject = GameObject.Instantiate (Resources.Load ("Prefabs/" + characterName)) as GameObject;
-								characterObject.transform.parent = characterContainer [currentCharacter++].transform;
+								Character character = characterObject.GetComponent<Character> ();
+								character.containerNo = currentCharacter++;
+								characterObject.transform.parent = characterContainer [character.containerNo].transform;
 								characterObject.transform.localPosition = Vector3.zero;
-								characterList.Add (characterName, characterObject.GetComponent<Character> ());
+								characterList.Add (characterName, character);
 						}
 
 						if (mode == (int)Mode.QUESTION) {
