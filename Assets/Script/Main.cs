@@ -123,6 +123,7 @@ public class Main : MonoBehaviour
 										subtitle.TextList = new List<ContentText> ();
 										frame.SetLayout ((int)Frame.Layout.QUESTION);
 										frame.qp.SetQuestion (question, characterList [characterName]);
+										characterList [characterName].PlayAnimation (animationData);
 								} else
 										countdown = 0;
 						} else {
