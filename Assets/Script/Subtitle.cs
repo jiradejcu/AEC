@@ -32,7 +32,8 @@ public class Subtitle : MonoBehaviour
 										text.text = textList [0].subtitle;
 										textList.RemoveAt (0);
 								}
-						}
+						} else
+								text.text = "";
 				}
 		}
 }

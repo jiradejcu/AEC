@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class QuestionPanel : MonoBehaviour
 {
 		public Text qText;
+		public Text scoreSummary;
 		public AnswerPanel[] aTextList;
 		List<AnimationData> animationDataList;
 		List<Answer> answerList;
@@ -19,6 +20,7 @@ public class QuestionPanel : MonoBehaviour
 		public void SetQuestion (Question question, Character character)
 		{
 				qText.text = question.text;
+				scoreSummary.gameObject.SetActive (false);
 				this.character = character;
 				animationDataList = new List<AnimationData> ();
 
@@ -170,7 +172,9 @@ public class QuestionPanel : MonoBehaviour
 						aText.SetActive (false);
 				}
 
-				qText.text = Main.score + " / " + Main.fullScore;
+				qText.text = "";
+				scoreSummary.gameObject.SetActive (true);
+				scoreSummary.text = "Score : " + Main.score + " of " + Main.fullScore;
 
 				animationData = new AnimationData ();
 				animationData.sound = CommonConfig.SCORE_SUMMARY;

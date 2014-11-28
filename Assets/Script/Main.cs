@@ -118,6 +118,7 @@ public class Main : MonoBehaviour
 										int index = Random.Range (0, questionList.Count);
 										Question question = questionList [index];
 										questionList.Remove (question);
+										subtitle.TextList = new List<ContentText> ();
 										frame.SetLayout ((int)Frame.Layout.QUESTION);
 										frame.qp.SetQuestion (question, characterList [characterName]);
 								} else
@@ -134,6 +135,7 @@ public class Main : MonoBehaviour
 
 				} else if (fullScore > 0) {
 						mode = (int)Mode.QUESTION;
+						subtitle.TextList = new List<ContentText> ();
 						frame.SetLayout ((int)Frame.Layout.QUESTION);
 						frame.qp.SetShowScore ();
 				} else
@@ -170,7 +172,7 @@ public class Main : MonoBehaviour
 		{
 				string result = "";
 				foreach (ContentText contentText in contentTextList) {
-						result += contentText.text;
+						result += contentText.text + "\n";
 				}
 				return result;
 		}
