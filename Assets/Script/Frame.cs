@@ -38,7 +38,7 @@ public class Frame : MonoBehaviour
 
 				text = GetComponentInChildren<Text> ();
 				if (text != null) {
-						text.text = Main.ConcatText (contentTextList);
+						text.text = Main.ConcatText (contentTextList, true);
 				}
 		}
 

@@ -12,6 +12,7 @@ public class Subtitle : MonoBehaviour
 		public List<ContentText> TextList {
 				set {
 						countup = 0;
+						text.text = "";
 						textList = new List<ContentText> ();
 						foreach (ContentText contentText in value)
 								textList.Add (contentText);
@@ -28,12 +29,13 @@ public class Subtitle : MonoBehaviour
 				if (textList != null) {
 						if (textList.Count > 0) {
 								countup += Time.deltaTime;
-								if (countup > textList [0].time) {
+								if (countup < textList [0].time) {
 										text.text = textList [0].subtitle;
+								} else {
 										textList.RemoveAt (0);
+										text.text = "";
 								}
-						} else
-								text.text = "";
+						}
 				}
 		}
 }

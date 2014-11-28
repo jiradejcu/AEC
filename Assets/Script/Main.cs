@@ -171,11 +171,13 @@ public class Main : MonoBehaviour
 				}
 		}
 	
-		public static string ConcatText (List<ContentText> contentTextList)
+		public static string ConcatText (List<ContentText> contentTextList, bool withNewLine = false)
 		{
 				string result = "";
 				foreach (ContentText contentText in contentTextList) {
-						result += contentText.text + "\n";
+						result += contentText.text;
+						if (withNewLine)
+								result += "\n";
 				}
 				return result;
 		}
