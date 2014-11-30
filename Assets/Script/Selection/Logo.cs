@@ -11,6 +11,7 @@ public class Logo : MonoBehaviour
 
 		void Start ()
 		{
+				Input.simulateMouseWithTouches = true;
 				if (Main.selectedCountry.Equals (StoryData.aecName))
 						Main.selectedCountry = "";
 

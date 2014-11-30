@@ -13,6 +13,7 @@ public class ServerEngine
 				WWW w = null;
 
 				Debug.Log (url);
+				form.AddField ("dummy", "");
 				w = new WWW (url, form);
 				yield return w;
 
