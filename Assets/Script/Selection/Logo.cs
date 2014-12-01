@@ -8,6 +8,8 @@ public class Logo : MonoBehaviour
 		public static event Callback FadeOutCompleted;
 
 		public static bool isPlayed = false;
+		public GameObject logoPanel;
+		public GameObject objectivePanel;
 
 		void Start ()
 		{
@@ -16,8 +18,10 @@ public class Logo : MonoBehaviour
 						Main.selectedCountry = "";
 
 				if (!isPlayed) {
-						iTween.FadeFrom (gameObject, iTween.Hash ("alpha", 0f, "time", 0.3f, "delay", 0.5f));
-						iTween.FadeTo (gameObject, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 2f, "oncomplete", "LogoFadeOut"));
+						iTween.FadeFrom (logoPanel, iTween.Hash ("alpha", 0f, "time", 0.3f, "delay", 0.5f));
+						iTween.FadeTo (logoPanel, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 3f));
+						iTween.FadeFrom (objectivePanel, iTween.Hash ("alpha", 0f, "time", 0.3f, "delay", 3.5f));
+						iTween.FadeTo (objectivePanel, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 7f, "oncomplete", "LogoFadeOut", "oncompletetarget", gameObject));
 						StoryData.Instance.RetrieveData ();
 						StoryData.Instance.RetrieveQuestion ();
 						isPlayed = true;
