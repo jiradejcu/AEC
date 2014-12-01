@@ -36,7 +36,7 @@ public class AnswerPanel : MonoBehaviour
 				InitComponent ();
 				this.index = index;
 				this.answer = answer;
-				this.text.text = answer.text;
+				this.text.text = CommonConfig.ANSWER_PREFIX [index] + ". " + answer.text;
 				SetState ((int)State.NORMAL);
 		}
 
