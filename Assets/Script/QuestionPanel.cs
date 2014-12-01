@@ -19,7 +19,7 @@ public class QuestionPanel : MonoBehaviour
 	
 		public void SetQuestion (Question question, Character character)
 		{
-				qText.text = question.text;
+				qText.text = ++Main.questionNo + ". " + question.text;
 				scoreSummary.gameObject.SetActive (false);
 				this.character = character;
 				animationDataList = new List<AnimationData> ();
@@ -38,12 +38,7 @@ public class QuestionPanel : MonoBehaviour
 				foreach (Answer answer in question.answerList)
 						answerList.Add (answer);
 
-				answerList.Sort (delegate(Answer x, Answer y) {
-						if (Random.value < 0.5f)
-								return 1;
-						else
-								return -1;
-				});
+				Shuffle (answerList);
 
 				int i = 0;
 				foreach (string answerSound in CommonConfig.ANSWER_SOUND) {
@@ -181,5 +176,15 @@ public class QuestionPanel : MonoBehaviour
 				animationDataList.Add (animationData);
 		
 				StartCoroutine (PlayAnimation (true, true));
+		}
+
+		public static void Shuffle (List<Answer> answerList)
+		{
+				for (int i = 0; i < answerList.Count; i++) {
+						Answer tmp = answerList [i];
+						int r = Random.Range (i, answerList.Count);
+						answerList [i] = answerList [r];
+						answerList [r] = tmp;
+				}
 		}
 }

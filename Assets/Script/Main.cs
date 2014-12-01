@@ -22,6 +22,7 @@ public class Main : MonoBehaviour
 		public static Text title;
 		public static int score;
 		public static int fullScore;
+		public static int questionNo;
 		public enum Mode
 		{
 				NORMAL = 0,
@@ -43,6 +44,7 @@ public class Main : MonoBehaviour
 				currentCharacter = 0;
 				score = 0;
 				fullScore = 0;
+				questionNo = 0;
 
 				foreach (AnimationData animationData in StoryData.storyData [selectedCountry] [selectedStory].animationDataList) {
 						if (animationData.autoProceed == (int)Mode.QUESTION)
@@ -175,11 +177,13 @@ public class Main : MonoBehaviour
 		{
 				string result = "";
 				foreach (ContentText contentText in contentTextList) {
-						if (withNewLine)
-								result += "- ";
-						result += contentText.text;
-						if (withNewLine)
-								result += "\n";
+						if (!string.IsNullOrEmpty (contentText.text)) {
+								if (withNewLine)
+										result += "- ";
+								result += contentText.text;
+								if (withNewLine)
+										result += "\n";
+						}
 				}
 				return result;
 		}
