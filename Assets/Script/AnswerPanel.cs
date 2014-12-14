@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -17,6 +17,11 @@ public class AnswerPanel : MonoBehaviour
 				ANSWER = 2
 		}
 
+		void Start ()
+		{
+				InitComponent ();
+		}
+
 		void Update ()
 		{
 				if (this.button != null) {
@@ -33,11 +38,11 @@ public class AnswerPanel : MonoBehaviour
 
 		public void SetAnswer (Answer answer, int index)
 		{
-				InitComponent ();
 				this.index = index;
 				this.answer = answer;
 				this.text.text = CommonConfig.ANSWER_PREFIX [index] + ". " + answer.text;
 				SetState ((int)State.NORMAL);
+				AnimationEngine.Instance.animateButton (gameObject, index);
 		}
 
 		public void SetActive (bool active)
@@ -47,6 +52,10 @@ public class AnswerPanel : MonoBehaviour
 
 		public void SetState (int state)
 		{
+				Animator animator = GetComponent<Animator> ();
+				if (animator != null) {
+						animator.enabled = false;
+				}
 				switch (state) {
 				case (int)State.NORMAL:
 						this.button.image.color = this.button.colors.normalColor;

@@ -36,12 +36,7 @@ public class SelectStory : CommonSelect
 												break;
 										}
 								}
-								GameObject shadowObject = GameObject.Instantiate (Resources.Load ("Prefabs/Shadow")) as GameObject;
-								SpriteRenderer shadow = shadowObject.GetComponent<SpriteRenderer> ();
-								shadowObject.transform.parent = buttonObject.transform;
-								shadowObject.transform.localPosition = new Vector3 (0.05f, -0.05f);
-								shadowObject.transform.localScale = new Vector3 (width / shadow.bounds.size.x, height / shadow.bounds.size.y);
-								iTween.FadeFrom (shadowObject, iTween.Hash ("alpha", 0, "time", 0.5f, "delay", i * delayInterval + 0.5f));
+								AnimationEngine.Instance.addButtonShadow (buttonObject, i, width, height);
 								i++;
 						}
 				}

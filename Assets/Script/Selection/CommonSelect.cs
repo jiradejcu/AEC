@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class CommonSelect : MonoBehaviour
@@ -8,8 +9,6 @@ public class CommonSelect : MonoBehaviour
 		protected static float height = 1.2f;
 		protected float scaleWidthCoeff = 1.4f;
 		protected float scaleHeightCoeff = 1.8f;
-		protected static float buttonTransLateOffsetY = -1f;
-		protected static float delayInterval = 0.1f;
 	
 		protected GameObject CreateSelectButton (string buttonName, int index, int length)
 		{
@@ -17,9 +16,7 @@ public class CommonSelect : MonoBehaviour
 				GameObject buttonObject = GameObject.Instantiate (buttonPrefab,
 		                                                  new Vector3 (GetX (index) * width * scaleWidthCoeff, - GetY (index) * height * scaleHeightCoeff)
 			                                                  , transform.rotation) as GameObject;
-				Vector3 fromPosition = new Vector3 (buttonObject.transform.position.x, buttonObject.transform.position.y + buttonTransLateOffsetY);
-				iTween.MoveFrom (buttonObject, iTween.Hash ("position", fromPosition, "time", 1f, "delay", index * delayInterval));
-				iTween.FadeFrom (buttonObject, iTween.Hash ("alpha", 0, "time", 1f, "delay", index * delayInterval));
+				AnimationEngine.Instance.animateButton (buttonObject, index);
 				return buttonObject;
 		}
 
