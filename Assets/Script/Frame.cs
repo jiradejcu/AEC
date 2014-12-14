@@ -34,6 +34,7 @@ public class Frame : MonoBehaviour
 				image = GetComponentInChildren<Image> ();
 				if (image != null && !string.IsNullOrEmpty (imageName)) {
 						image.sprite = Resources.Load<Sprite> ("Image/Country/" + countryCode + "/" + imageName);
+						AnimationEngine.Instance.animateButton (image.gameObject, 0);
 				}
 
 				text = GetComponentInChildren<Text> ();
