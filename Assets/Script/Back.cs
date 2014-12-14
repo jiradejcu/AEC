@@ -15,7 +15,7 @@ public class Back : MonoBehaviour
 
 		void Update ()
 		{
-				if (Application.loadedLevelName.Equals ("SelectStory") && string.IsNullOrEmpty (Main.selectedCountry)) {
+				if (Application.loadedLevelName.Equals ("SelectStory") && !Logo.isPlayed) {
 						button.enabled = false;
 						button.image.enabled = false;
 						text.enabled = false;
@@ -23,6 +23,10 @@ public class Back : MonoBehaviour
 						button.enabled = true;
 						button.image.enabled = true;
 						text.enabled = true;
+						if (Application.loadedLevelName.Equals ("SelectStory") && string.IsNullOrEmpty (Main.selectedCountry))
+								text.text = "Quit";
+						else
+								text.text = "Back";
 				}
 		}
 
@@ -30,9 +34,13 @@ public class Back : MonoBehaviour
 		{
 				if (Application.loadedLevelName.Equals ("Main"))
 						Application.LoadLevel ("SelectStory");
-				else if (Application.loadedLevelName.Equals ("SelectStory") && !string.IsNullOrEmpty (Main.selectedCountry)) {
-						Main.selectedCountry = "";
-						Application.LoadLevel ("SelectStory");
+				else if (Application.loadedLevelName.Equals ("SelectStory")) {
+						if (!string.IsNullOrEmpty (Main.selectedCountry)) {
+								Main.selectedCountry = "";
+								Application.LoadLevel ("SelectStory");
+						} else {
+								Application.Quit ();
+						}
 				}
 		}
 }

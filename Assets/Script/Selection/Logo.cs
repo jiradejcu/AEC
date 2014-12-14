@@ -31,7 +31,6 @@ public class Logo : MonoBehaviour
 				if (!isPlayed) {
 						StoryData.Instance.RetrieveData ();
 						StoryData.Instance.RetrieveQuestion ();
-						isPlayed = true;
 				}
 		}
 
@@ -39,5 +38,6 @@ public class Logo : MonoBehaviour
 		{
 				yield return new WaitForEndOfFrame ();
 				FadeOutCompleted.Invoke ();
+				isPlayed = true;
 		}
 }
