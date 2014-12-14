@@ -76,6 +76,7 @@ public class QuestionPanel : MonoBehaviour
 		{
 				AnimationData animationData = animationDataList [0];
 				animationData.animationLength = Character.GetVerbalClip (animationData.sound).length;
+				animationData.animationName = "talk";
 				character.PlayAnimation (animationData);
 				animationDataList.RemoveAt (0);
 
