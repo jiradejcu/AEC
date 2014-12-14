@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Frame : MonoBehaviour
 {
 		private Image image;
-		private Text text;
+		private MultipleText multipleText;
 		public QuestionPanel qp;
 		public GameObject imageOnlyLayout;
 		public GameObject imageWithTextLayout;
@@ -37,9 +37,13 @@ public class Frame : MonoBehaviour
 						AnimationEngine.Instance.animateButton (image.gameObject, 0);
 				}
 
-				text = GetComponentInChildren<Text> ();
-				if (text != null) {
-						text.text = Main.ConcatText (contentTextList, true);
+				multipleText = GetComponentInChildren<MultipleText> ();
+				if (multipleText != null) {
+						List<ContentText> cloneContentTextList = new List<ContentText> ();
+						foreach (ContentText contentText in contentTextList)
+								cloneContentTextList.Add (contentText);
+						MultipleText.previousTime = 0f;
+						multipleText.Text = cloneContentTextList;
 				}
 		}
 
