@@ -178,8 +178,6 @@ public class Main : MonoBehaviour
 				string result = "";
 				foreach (ContentText contentText in contentTextList) {
 						if (!string.IsNullOrEmpty (contentText.text)) {
-								if (withNewLine)
-										result += "- ";
 								result += contentText.text;
 								if (withNewLine)
 										result += "\n";

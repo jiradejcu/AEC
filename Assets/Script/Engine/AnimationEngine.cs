@@ -4,12 +4,13 @@ using System.Collections;
 
 public class AnimationEngine : Singleton<AnimationEngine>
 {
-		protected static float buttonTransLateOffsetY = -1f;
+		protected static float imageTransLateOffsetY = -1f;
+		protected static float imageTransLateOffsetZ = -5f;
 		protected static float delayInterval = 0.1f;
 
 		public void animateButton (GameObject go, int index)
 		{
-				Vector3 fromPosition = new Vector3 (go.transform.position.x, go.transform.position.y + buttonTransLateOffsetY);
+				Vector3 fromPosition = new Vector3 (go.transform.position.x, go.transform.position.y + imageTransLateOffsetY, go.transform.position.z + imageTransLateOffsetZ);
 				iTween.MoveFrom (go, iTween.Hash ("position", fromPosition, "time", 1f, "delay", index * delayInterval));
 				iTween.FadeFrom (go, iTween.Hash ("alpha", 0, "time", 1f, "delay", index * delayInterval));
 				Animator animator = go.GetComponent<Animator> ();
