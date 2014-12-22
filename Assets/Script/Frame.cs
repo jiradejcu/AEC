@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 public class Frame : MonoBehaviour
 {
-		private Image image;
 		private MultipleText multipleText;
 		public QuestionPanel qp;
 		public GameObject imageOnlyLayout;
 		public GameObject imageWithTextLayout;
 		public GameObject textOnlyLayout;
+		ImageContent imageContent;
 
 		public enum Layout
 		{
@@ -31,17 +31,19 @@ public class Frame : MonoBehaviour
 				} else
 						SetLayout ((int)Layout.IMAGE_ONLY);
 
-				image = GetComponentInChildren<Image> ();
-				if (image != null && !string.IsNullOrEmpty (imageName)) {
-						image.sprite = Resources.Load<Sprite> ("Image/Country/" + countryCode + "/" + imageName);
-						AnimationEngine.Instance.animateButton (image.gameObject, 0);
+				imageContent = GetComponentInChildren<ImageContent> ();
+				if (imageContent != null && !string.IsNullOrEmpty (imageName)) {
+						imageContent.sprite = Resources.Load<Sprite> ("Image/Country/" + countryCode + "/" + imageName);
+						AnimationEngine.Instance.animateImage (imageContent.gameObject, 0);
 				}
 
 				multipleText = GetComponentInChildren<MultipleText> ();
 				if (multipleText != null) {
 						List<ContentText> cloneContentTextList = new List<ContentText> ();
-						foreach (ContentText contentText in contentTextList)
-								cloneContentTextList.Add (contentText);
+						foreach (ContentText contentText in contentTextList) {
+								if (!string.IsNullOrEmpty (contentText.text))
+										cloneContentTextList.Add (contentText);
+						}
 						MultipleText.previousTime = 0f;
 						multipleText.Text = cloneContentTextList;
 				}

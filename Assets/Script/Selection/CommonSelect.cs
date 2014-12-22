@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -16,7 +16,7 @@ public class CommonSelect : MonoBehaviour
 				GameObject buttonObject = GameObject.Instantiate (buttonPrefab,
 		                                                  new Vector3 (GetX (index) * width * scaleWidthCoeff, - GetY (index) * height * scaleHeightCoeff)
 			                                                  , transform.rotation) as GameObject;
-				AnimationEngine.Instance.animateButton (buttonObject, index);
+				AnimationEngine.Instance.animateImage (buttonObject, index);
 				return buttonObject;
 		}
 

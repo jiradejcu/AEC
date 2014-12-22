@@ -8,7 +8,7 @@ public class AnimationEngine : Singleton<AnimationEngine>
 		protected static float imageTransLateOffsetZ = -5f;
 		protected static float delayInterval = 0.1f;
 
-		public void animateButton (GameObject go, int index)
+		public void animateImage (GameObject go, int index)
 		{
 				Vector3 fromPosition = new Vector3 (go.transform.position.x, go.transform.position.y + imageTransLateOffsetY, go.transform.position.z + imageTransLateOffsetZ);
 				iTween.MoveFrom (go, iTween.Hash ("position", fromPosition, "time", 1f, "delay", index * delayInterval));

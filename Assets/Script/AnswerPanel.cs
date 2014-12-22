@@ -42,7 +42,7 @@ public class AnswerPanel : MonoBehaviour
 				this.answer = answer;
 				this.text.text = CommonConfig.ANSWER_PREFIX [index] + ". " + answer.text;
 				SetState ((int)State.NORMAL);
-				AnimationEngine.Instance.animateButton (gameObject, index);
+				AnimationEngine.Instance.animateImage (gameObject, index);
 		}
 
 		public void SetActive (bool active)
