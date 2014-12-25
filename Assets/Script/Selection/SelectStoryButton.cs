@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SelectStoryButton : MonoBehaviour
+public class SelectStoryButton : CommonButton
 {
 		public string storyName;
 		public string storyDisplayName;

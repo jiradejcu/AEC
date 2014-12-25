@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SelectCountryButton : MonoBehaviour
+public class SelectCountryButton : CommonButton
 {
 		public string countryCode;
 	
