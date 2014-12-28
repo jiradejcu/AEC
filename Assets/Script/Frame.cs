@@ -11,6 +11,7 @@ public class Frame : MonoBehaviour
 		public GameObject imageWithTextLayout;
 		public GameObject textOnlyLayout;
 		ImageContent imageContent;
+		ScrollableImage scrollableImage;
 
 		public enum Layout
 		{
@@ -34,6 +35,10 @@ public class Frame : MonoBehaviour
 				imageContent = GetComponentInChildren<ImageContent> ();
 				if (imageContent != null && !string.IsNullOrEmpty (imageName)) {
 						imageContent.sprite = Resources.Load<Sprite> ("Image/Country/" + countryCode + "/" + imageName);
+						scrollableImage = GetComponentInChildren<ScrollableImage> ();
+						if (scrollableImage != null) {
+								scrollableImage.Reset ();
+						}
 						AnimationEngine.Instance.animateImage (imageContent.gameObject, 0);
 				}
 

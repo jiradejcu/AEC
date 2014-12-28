@@ -18,10 +18,13 @@ public class Logo : MonoBehaviour
 				if (Main.selectedCountry.Equals (StoryData.aecName))
 						Main.selectedCountry = "";
 
-				if (!isPlayed && !CommonConfig.TEST_MODE) {
+				if (bgmSource == null) {
 						GameObject sound = GameObject.Instantiate (Resources.Load ("Prefabs/Sound")) as GameObject;
 						GameObject.DontDestroyOnLoad (sound);
 						bgmSource = sound.GetComponent<AudioSource> ();
+				}
+
+				if (!isPlayed && !CommonConfig.TEST_MODE) {
 						bgmSource.clip = Resources.Load ("Sound/BGM/asean_way1") as AudioClip;
 						bgmSource.volume = 0.5f;
 						bgmSource.Play ();
@@ -58,12 +61,12 @@ public class Logo : MonoBehaviour
 
 		IEnumerator PlayBGM ()
 		{
+				yield return null;
 				if (!bgmSource.isPlaying) {
 						bgmSource.clip = Resources.Load ("Sound/BGM/asean_way2") as AudioClip;
 						bgmSource.volume = 0.5f;
 						bgmSource.loop = true;
 						bgmSource.Play ();
 				}
-				yield return null;
 		}
 }
