@@ -7,6 +7,7 @@ public class Logo : MonoBehaviour
 
 		public static event Callback FadeOutCompleted;
 
+		public static AudioSource bgmSource;
 		public static bool isPlayed = false;
 		public GameObject logoPanel;
 		public GameObject objectivePanel;
@@ -20,19 +21,20 @@ public class Logo : MonoBehaviour
 				if (!isPlayed && !CommonConfig.TEST_MODE) {
 						GameObject sound = GameObject.Instantiate (Resources.Load ("Prefabs/Sound")) as GameObject;
 						GameObject.DontDestroyOnLoad (sound);
-						AudioSource bgmSource = sound.GetComponent<AudioSource> ();
-						bgmSource.clip = Resources.Load ("Sound/BGM/asean_way") as AudioClip;
-						bgmSource.loop = true;
+						bgmSource = sound.GetComponent<AudioSource> ();
+						bgmSource.clip = Resources.Load ("Sound/BGM/asean_way1") as AudioClip;
 						bgmSource.volume = 0.5f;
 						bgmSource.Play ();
-						iTween.FadeFrom (logoPanel, iTween.Hash ("alpha", 0f, "time", 2f, "delay", 1f));
-						iTween.FadeTo (logoPanel, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 5f));
-						iTween.FadeFrom (objectivePanel, iTween.Hash ("alpha", 0f, "time", 0.3f, "delay", 5.5f));
-						iTween.FadeTo (objectivePanel, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 9f, "oncomplete", "LogoFadeOut", "oncompletetarget", gameObject));
+						StartCoroutine (PlayDelayBGM ());
+						iTween.FadeFrom (logoPanel, iTween.Hash ("alpha", 0f, "time", 0.8f, "delay", 1f));
+						iTween.FadeTo (logoPanel, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 3.5f));
+						iTween.FadeFrom (objectivePanel, iTween.Hash ("alpha", 0f, "time", 0.3f, "delay", 4f));
+						iTween.FadeTo (objectivePanel, iTween.Hash ("alpha", 0f, "time", 0.2f, "delay", 7.5f, "oncomplete", "LogoFadeOut", "oncompletetarget", gameObject));
 				} else {
 						foreach (SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>())
 								sr.renderer.enabled = false;
 						StartCoroutine (LogoFadeOut ());
+						StartCoroutine (PlayBGM ());
 				}
 
 				if (!isPlayed) {
@@ -46,5 +48,22 @@ public class Logo : MonoBehaviour
 				yield return new WaitForEndOfFrame ();
 				FadeOutCompleted.Invoke ();
 				isPlayed = true;
+		}
+	
+		IEnumerator PlayDelayBGM ()
+		{
+				yield return new WaitForSeconds (bgmSource.clip.length);
+				StartCoroutine (PlayBGM ());
+		}
+
+		IEnumerator PlayBGM ()
+		{
+				if (!bgmSource.isPlaying) {
+						bgmSource.clip = Resources.Load ("Sound/BGM/asean_way2") as AudioClip;
+						bgmSource.volume = 0.5f;
+						bgmSource.loop = true;
+						bgmSource.Play ();
+				}
+				yield return null;
 		}
 }

@@ -23,8 +23,8 @@ public class AnimationEngine : Singleton<AnimationEngine>
 
 		IEnumerator fadeIn (GameObject go, int index)
 		{
-				yield return new WaitForSeconds (index * delayInterval);
 				Animator animator = go.GetComponent<Animator> ();
+				yield return new WaitForSeconds (index * delayInterval);
 				if (animator != null) {
 						animator.enabled = true;
 						animator.SetTrigger ("fadeIn");

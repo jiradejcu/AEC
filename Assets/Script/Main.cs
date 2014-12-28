@@ -34,6 +34,7 @@ public class Main : MonoBehaviour
 		{
 				countdown = null;
 				Input.simulateMouseWithTouches = true;
+				Logo.bgmSource.Stop ();
 				sound = Resources.Load ("Prefabs/Sound") as GameObject;
 		}
 
