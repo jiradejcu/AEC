@@ -7,27 +7,30 @@ public class AnimationEngine : Singleton<AnimationEngine>
 		protected static float imageTransLateOffsetY = -1f;
 		protected static float imageTransLateOffsetZ = -5f;
 		protected static float delayInterval = 0.1f;
+		public delegate void Callback ();
 
-		public void animateImage (GameObject go, int index)
+		public void animateImage (GameObject go, int index, Callback callback = null)
 		{
 				Vector3 fromPosition = new Vector3 (go.transform.position.x, go.transform.position.y + imageTransLateOffsetY, go.transform.position.z + imageTransLateOffsetZ);
 				iTween.MoveFrom (go, iTween.Hash ("position", fromPosition, "time", 1f, "delay", index * delayInterval));
-				iTween.FadeFrom (go, iTween.Hash ("alpha", 0, "time", 1f, "delay", index * delayInterval));
 				Animator animator = go.GetComponent<Animator> ();
 				if (animator != null) {
 						animator.enabled = true;
 						animator.SetTrigger ("hide");
+						StartCoroutine (fadeIn (animator, index, callback));
+				} else {
+						iTween.FadeFrom (go, iTween.Hash ("alpha", 0, "time", 1f, "delay", index * delayInterval));
 				}
-				StartCoroutine (fadeIn (go, index));
 		}
 
-		IEnumerator fadeIn (GameObject go, int index)
+		IEnumerator fadeIn (Animator animator, int index, Callback callback = null)
 		{
-				Animator animator = go.GetComponent<Animator> ();
 				yield return new WaitForSeconds (index * delayInterval);
-				if (animator != null) {
-						animator.enabled = true;
-						animator.SetTrigger ("fadeIn");
+				animator.enabled = true;
+				animator.SetTrigger ("fadeIn");
+				yield return new WaitForSeconds (animator.GetCurrentAnimatorStateInfo (0).length);
+				if (callback != null) {
+						callback ();
 				}
 		}
 

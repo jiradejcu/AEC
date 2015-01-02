@@ -36,10 +36,11 @@ public class Frame : MonoBehaviour
 				if (imageContent != null && !string.IsNullOrEmpty (imageName)) {
 						imageContent.sprite = Resources.Load<Sprite> ("Image/Country/" + countryCode + "/" + imageName);
 						scrollableImage = GetComponentInChildren<ScrollableImage> ();
-						if (scrollableImage != null) {
-								scrollableImage.Reset ();
-						}
-						AnimationEngine.Instance.animateImage (imageContent.gameObject, 0);
+						AnimationEngine.Instance.animateImage (imageContent.gameObject, 0, delegate() {
+								if (scrollableImage != null) {
+										scrollableImage.Reset ();
+								}
+						});
 				}
 
 				multipleText = GetComponentInChildren<MultipleText> ();
