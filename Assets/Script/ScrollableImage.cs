@@ -13,7 +13,6 @@ public class ScrollableImage : MonoBehaviour
 		void Start ()
 		{
 				scrollRect = GetComponent<ScrollRect> ();
-				scroll = false;
 		}
 
 		void Update ()
@@ -28,16 +27,22 @@ public class ScrollableImage : MonoBehaviour
 
 		public void Reset ()
 		{
+				scroll = false;
 				if (vertical) {
 						image.rectTransform.pivot = new Vector2 (0.5f, 1f);
 				} else {
 						image.rectTransform.pivot = new Vector2 (0f, 0.5f);
 				}
 				image.rectTransform.anchoredPosition = Vector2.zero;
-				iTween.ScaleTo (image.rectTransform.gameObject, iTween.Hash ("scale", new Vector3 (2f, 2f), "time", 2.5f, "oncomplete", "StartScroll", "oncompletetarget", gameObject));
+				image.rectTransform.localScale = new Vector2 (1f, 1f);
 		
 				scrollRect.horizontalNormalizedPosition = image.rectTransform.pivot.x;
 				scrollRect.verticalNormalizedPosition = image.rectTransform.pivot.y;
+		}
+
+		public void Zoom ()
+		{
+				iTween.ScaleTo (image.rectTransform.gameObject, iTween.Hash ("scale", new Vector3 (2f, 2f), "time", 2.5f, "oncomplete", "StartScroll", "oncompletetarget", gameObject));
 		}
 
 		private void StartScroll ()

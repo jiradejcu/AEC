@@ -34,25 +34,40 @@ public class Frame : MonoBehaviour
 
 				imageContent = GetComponentInChildren<ImageContent> ();
 				if (imageContent != null && !string.IsNullOrEmpty (imageName)) {
-						imageContent.sprite = Resources.Load<Sprite> ("Image/Country/" + countryCode + "/" + imageName);
+						imageContent.SetSprite (LoadCountryImage (countryCode, imageName));
 						scrollableImage = GetComponentInChildren<ScrollableImage> ();
+						if (scrollableImage != null) {
+								scrollableImage.Reset ();
+						}
 						AnimationEngine.Instance.animateImage (imageContent.gameObject, 0, delegate() {
 								if (scrollableImage != null) {
-										scrollableImage.Reset ();
+										scrollableImage.Zoom ();
 								}
 						});
+						List<ContentText> cloneContentTextList = ContentText.CloneImage (contentTextList);
+						SubImageContent[] subImageContentList = GetComponentsInChildren<SubImageContent> ();
+
+						foreach (SubImageContent subImageContent in subImageContentList) {
+								subImageContent.ClearSprite ();
+						}
+			
+						int i = 0;
+						foreach (ContentText contentText in cloneContentTextList) {
+								if (i < subImageContentList.Length)
+										subImageContentList [i++].SetSprite (LoadCountryImage (countryCode, contentText.image), contentText.time);
+						}
 				}
 
 				multipleText = GetComponentInChildren<MultipleText> ();
 				if (multipleText != null) {
-						List<ContentText> cloneContentTextList = new List<ContentText> ();
-						foreach (ContentText contentText in contentTextList) {
-								if (!string.IsNullOrEmpty (contentText.text))
-										cloneContentTextList.Add (contentText);
-						}
 						MultipleText.previousTime = 0f;
-						multipleText.Text = cloneContentTextList;
+						multipleText.Text = ContentText.CloneText (contentTextList);
 				}
+		}
+
+		Sprite LoadCountryImage (string countryCode, string imageName)
+		{
+				return Resources.Load<Sprite> ("Image/Country/" + countryCode + "/" + imageName);
 		}
 
 		public void SetLayout (int layout)

@@ -82,6 +82,7 @@ public class StoryData : Singleton<StoryData>
 												foreach (JSONNode textNode in textArray) {
 														ContentText contentText = new ContentText ();
 														contentText.time = textNode ["time"].AsFloat;
+														contentText.image = textNode ["image"].Value;
 														contentText.text = textNode ["text"].Value;
 														contentText.subtitle = textNode ["subtitle"].Value;
 														animationData.text.Add (contentText);
@@ -184,8 +185,44 @@ public class StorySet
 public class ContentText
 {
 		public float time;
+		public string image;
 		public string text;
 		public string subtitle;
+
+		enum Type
+		{
+				IMAGE = 1,
+				TEXT = 2
+		}
+
+		public static List<ContentText> CloneText (List<ContentText> original)
+		{
+				return Clone (original, Type.TEXT);
+		}
+
+		public static List<ContentText> CloneImage (List<ContentText> original)
+		{
+				return Clone (original, Type.IMAGE);
+		}
+
+		static List<ContentText> Clone (List<ContentText> original, Type type)
+		{
+				List<ContentText> cloneContentTextList = new List<ContentText> ();
+				foreach (ContentText contentText in original) {
+						string text = null;
+						switch (type) {
+						case Type.IMAGE:
+								text = contentText.image;
+								break;
+						case Type.TEXT:
+								text = contentText.text;
+								break;
+						}
+						if (!string.IsNullOrEmpty (text))
+								cloneContentTextList.Add (contentText);
+				}
+				return cloneContentTextList;
+		}
 }
 
 public class ContentSound

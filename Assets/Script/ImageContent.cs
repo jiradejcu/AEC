@@ -4,16 +4,15 @@ using System.Collections;
 
 public class ImageContent : MonoBehaviour
 {
-		Image image;
+		protected Image image;
 
 		void Start ()
 		{
 				image = GetComponent<Image> ();
 		}
 
-		public Sprite sprite {
-				set {
-						image.sprite = value;
-				}
+		public void SetSprite (Sprite sprite)
+		{
+				image.sprite = sprite;
 		}
 }
