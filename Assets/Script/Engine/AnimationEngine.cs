@@ -34,6 +34,15 @@ public class AnimationEngine : Singleton<AnimationEngine>
 				}
 		}
 
+		public void animateSubImage (GameObject go)
+		{
+				Animator animator = go.GetComponent<Animator> ();
+				if (animator != null) {
+						animator.enabled = true;
+						animator.SetTrigger ("moveIn");
+				}
+		}
+	
 		public void addButtonShadow (GameObject go, int index, float width, float height)
 		{
 				GameObject shadowObject = GameObject.Instantiate (Resources.Load ("Prefabs/Shadow")) as GameObject;

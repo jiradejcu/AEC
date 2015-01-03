@@ -14,6 +14,7 @@ public class SubImageContent : ImageContent
 				yield return new WaitForSeconds (delay);
 				image.enabled = true;
 				image.sprite = sprite;
+				AnimationEngine.Instance.animateSubImage (gameObject);
 		}
 
 		public void ClearSprite ()
