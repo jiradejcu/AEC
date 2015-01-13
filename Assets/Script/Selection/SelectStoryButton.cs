@@ -14,6 +14,7 @@ public class SelectStoryButton : CommonButton
 	
 		void OnMouseDown ()
 		{
+				base.OnMouseDown ();
 				Debug.Log (storyName);
 				Main.selectedStory = storyName;
 				SelectStory.ClearSelectStoryButton ();

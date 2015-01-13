@@ -4,7 +4,7 @@ using System.Collections;
 public class PlaceCamera : MonoBehaviour
 {
 		GameObject targetGameObject;
-		static float flyTime = 3f;
+		public static float flyTime = 3f;
 
 		void Start ()
 		{

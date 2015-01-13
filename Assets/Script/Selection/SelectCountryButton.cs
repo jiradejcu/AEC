@@ -13,6 +13,7 @@ public class SelectCountryButton : CommonButton
 
 		void OnMouseDown ()
 		{
+				base.OnMouseDown ();
 				Debug.Log (countryCode);
 				Main.selectedCountry = countryCode;
 				SelectCountry.ClearSelectCountryButton ();
