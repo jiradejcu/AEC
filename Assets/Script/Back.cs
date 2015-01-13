@@ -32,7 +32,7 @@ public class Back : MonoBehaviour
 
 		public void OnClick ()
 		{
-				if (Application.loadedLevelName.Equals ("Main"))
+				if (Application.loadedLevelName.Equals ("Main") || Application.loadedLevelName.Equals ("SelectPlace"))
 						Application.LoadLevel ("SelectStory");
 				else if (Application.loadedLevelName.Equals ("SelectStory")) {
 						if (!string.IsNullOrEmpty (Main.selectedCountry)) {
