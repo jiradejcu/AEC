@@ -97,6 +97,10 @@ public class StoryData : Singleton<StoryData>
 										storySet.animationDataList = animationDataList;
 										storySet.displayName = storyDataNode ["display_name"].Value;
 										storySet.bgm = storyDataNode ["bgm"].Value;
+										if (storyDataNode ["lat"].Value != "null" && storyDataNode ["lon"].Value != "null") {
+												storySet.lat = storyDataNode ["lat"].AsFloat;
+												storySet.lon = storyDataNode ["lon"].AsFloat;
+										}
 										storyData [countryCode] [storyDataNode ["name"].Value] = storySet;
 								}
 						}
@@ -180,6 +184,8 @@ public class StorySet
 		public List<AnimationData> animationDataList;
 		public string displayName;
 		public string bgm;
+		public float? lat;
+		public float? lon;
 }
 
 public class ContentText
