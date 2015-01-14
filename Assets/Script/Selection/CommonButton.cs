@@ -16,17 +16,17 @@ public class CommonButton : MonoBehaviour
 				}
 		}
 
-		public void OnMouseOver ()
+		public virtual void OnMouseOver ()
 		{
 				transform.localScale = new Vector3 (1.2f, 1.2f);
 		}
 	
-		public void OnMouseExit ()
+		public virtual void OnMouseExit ()
 		{
 				transform.localScale = new Vector3 (1f, 1f);
 		}
 
-		public void OnMouseDown ()
+		public virtual void OnMouseDown ()
 		{
 				clickSource.Play ();
 		}

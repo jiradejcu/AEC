@@ -11,7 +11,7 @@ public class SelectCountryButton : CommonButton
 				text.text = StoryData.countryNameList [countryCode];
 		}
 
-		void OnMouseDown ()
+		public override void OnMouseDown ()
 		{
 				base.OnMouseDown ();
 				Debug.Log (countryCode);

@@ -25,7 +25,7 @@ public class SelectStory : CommonSelect
 						int i = 0;
 						placeButton.SetActive (false);
 						foreach (string storyName in storyDictionary.Keys) {
-								if (!storyDictionary [storyName].lat.HasValue && !storyDictionary [storyName].lon.HasValue) {
+								if (!storyDictionary [storyName].lat.HasValue || !storyDictionary [storyName].lon.HasValue) {
 										GameObject buttonObject = CreateSelectButton ("SelectStoryButton", i, storyDictionary.Count);
 										buttonObjectList [i] = buttonObject;
 										SelectStoryButton selectStoryButton = buttonObject.GetComponent<SelectStoryButton> ();

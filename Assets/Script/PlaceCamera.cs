@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlaceCamera : MonoBehaviour
 {
-		GameObject targetGameObject;
 		public static float flyTime = 3f;
 
 		void Start ()
@@ -14,7 +13,6 @@ public class PlaceCamera : MonoBehaviour
 
 		public void SetTargetPosition (GameObject targetGameObject)
 		{
-				this.targetGameObject = targetGameObject;
 				iTween.LookTo (gameObject, targetGameObject.transform.position, flyTime);
 				iTween.MoveTo (gameObject, targetGameObject.transform.position, flyTime);
 				iTween.CameraFadeAdd (iTween.CameraTexture (Color.white));

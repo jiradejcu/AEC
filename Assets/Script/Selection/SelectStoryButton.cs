@@ -12,7 +12,7 @@ public class SelectStoryButton : CommonButton
 				text.text = storyDisplayName;
 		}
 	
-		void OnMouseDown ()
+		public override void OnMouseDown ()
 		{
 				base.OnMouseDown ();
 				Debug.Log (storyName);
