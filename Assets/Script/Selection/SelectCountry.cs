@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class SelectCountry : CommonSelect
@@ -18,12 +19,13 @@ public class SelectCountry : CommonSelect
 
 		void CreateSelectCountryButton ()
 		{
-				buttonObjectList = new GameObject[StoryData.countryCodeList.Length];
-				for (int i = 0; i< StoryData.countryCodeList.Length; i++) {
-						GameObject buttonObject = CreateSelectButton ("SelectCountryButton", i, StoryData.countryCodeList.Length);
+				string[] countryCodeList = Enum.GetNames (typeof(CommonConfig.COUNTRY_CODE));
+				buttonObjectList = new GameObject[countryCodeList.Length];
+				for (int i = 0; i< buttonObjectList.Length; i++) {
+						GameObject buttonObject = CreateSelectButton ("SelectCountryButton", i, countryCodeList.Length);
 						buttonObjectList [i] = buttonObject;
-						buttonObject.GetComponent<SelectCountryButton> ().countryCode = StoryData.countryCodeList [i];
-						buttonObject.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Image/Button/" + StoryData.countryCodeList [i]);
+						buttonObject.GetComponent<SelectCountryButton> ().countryCode = ((CommonConfig.COUNTRY_CODE)(i + 1)).ToString ();
+						buttonObject.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Image/Button/" + ((CommonConfig.COUNTRY_CODE)(i + 1)).ToString ());
 				}
 				Logo.FadeOutCompleted -= CreateSelectCountryButton;
 		}

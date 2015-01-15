@@ -43,6 +43,7 @@ public class Logo : MonoBehaviour
 				if (!isPlayed) {
 						StoryData.Instance.RetrieveData ();
 						StoryData.Instance.RetrieveQuestion ();
+						CommonConfig.Init ();
 				}
 		}
 

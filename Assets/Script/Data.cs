@@ -1,24 +1,13 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
 public class StoryData : Singleton<StoryData>
-{
-		public static string[] countryCodeList = {
-			"bn",
-			"kh",
-			"id",
-			"la",
-			"my",
-			"mm",
-			"ph",
-			"sg",
-			"th",
-			"vn"
-		};
+{		
 		public static string aecName = "aec";
-		public static string defaultCountryCode = countryCodeList [8];
+		public static string defaultCountryCode = CommonConfig.COUNTRY_CODE.th.ToString ();
 		public static Dictionary<string, string> countryNameList = new Dictionary<string, string> ();
 		public delegate void Callback ();
 
@@ -29,16 +18,16 @@ public class StoryData : Singleton<StoryData>
 	
 		public StoryData ()
 		{
-				countryNameList.Add (countryCodeList [0], "Brunei");
-				countryNameList.Add (countryCodeList [1], "Cambodia");
-				countryNameList.Add (countryCodeList [2], "Indonesia");
-				countryNameList.Add (countryCodeList [3], "Lao");
-				countryNameList.Add (countryCodeList [4], "Malaysia");
-				countryNameList.Add (countryCodeList [5], "Myanmar");
-				countryNameList.Add (countryCodeList [6], "Philipines");
-				countryNameList.Add (countryCodeList [7], "Singapore");
-				countryNameList.Add (countryCodeList [8], "Thai");
-				countryNameList.Add (countryCodeList [9], "Vietnam");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.bn.ToString (), "Brunei");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.kh.ToString (), "Cambodia");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.id.ToString (), "Indonesia");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.la.ToString (), "Lao");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.my.ToString (), "Malaysia");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.mm.ToString (), "Myanmar");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.ph.ToString (), "Philipines");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.sg.ToString (), "Singapore");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.th.ToString (), "Thai");
+				countryNameList.Add (CommonConfig.COUNTRY_CODE.vn.ToString (), "Vietnam");
 		}
 
 		public void RetrieveData (Callback callback = null)
@@ -54,9 +43,9 @@ public class StoryData : Singleton<StoryData>
 		{
 				AnimationData animationData;
 		
-				string[] customerCountryCodeList = GetCustomCountryCodeList ();
+				string[] customCountryCodeList = GetCustomCountryCodeList ();
 
-				foreach (string countryCode in customerCountryCodeList) {
+				foreach (string countryCode in customCountryCodeList) {
 						if (data ["results"] [countryCode] != null) {
 								JSONArray storyDataArray = data ["results"] [countryCode].AsArray;
 								storyData [countryCode] = new Dictionary<string, StorySet> ();
@@ -158,10 +147,11 @@ public class StoryData : Singleton<StoryData>
 
 		string[] GetCustomCountryCodeList ()
 		{
-				string[] customerCountryCodeList = new string[countryCodeList.Length + 1];
-				countryCodeList.CopyTo (customerCountryCodeList, 0);
-				customerCountryCodeList [countryCodeList.Length] = aecName;
-				return customerCountryCodeList;
+				string[] countryCodeList = Enum.GetNames (typeof(CommonConfig.COUNTRY_CODE));
+				string[] customCountryCodeList = new string[countryCodeList.Length + 1];
+				countryCodeList.CopyTo (customCountryCodeList, 0);
+				customCountryCodeList [countryCodeList.Length] = aecName;
+				return customCountryCodeList;
 		}
 }
 

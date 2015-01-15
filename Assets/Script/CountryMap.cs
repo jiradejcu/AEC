@@ -12,10 +12,11 @@ public class CountryMap : MonoBehaviour
 						foreach (string storyName in storyDictionary.Keys) {
 								if (storyDictionary [storyName].lat.HasValue && storyDictionary [storyName].lon.HasValue) {
 										GameObject placeObject = GameObject.Instantiate (Resources.Load ("Prefabs/Place")) as GameObject;
-										placeObject.transform.SetParent(transform.parent);
+										placeObject.transform.SetParent (transform.parent);
 										RectTransform rt = placeObject.GetComponent<RectTransform> ();
-										rt.anchoredPosition3D = new Vector3 (ConvertCoordinate (storyDictionary [storyName].lon.Value, 100), 0f, ConvertCoordinate (storyDictionary [storyName].lat.Value, 13));
-										rt.anchoredPosition = new Vector2 (ConvertCoordinate (storyDictionary [storyName].lon.Value, 100), 0f);
+										Vector2 convertedCoordinate = ConvertCoordinate (new Vector2 (storyDictionary [storyName].lat.Value, storyDictionary [storyName].lon.Value), Main.selectedCountry);
+										rt.anchoredPosition3D = new Vector3 (convertedCoordinate.y, 0f, convertedCoordinate.x);
+										rt.anchoredPosition = new Vector2 (convertedCoordinate.y, 0f);
 										SelectPlaceButton selectPlaceButton = placeObject.GetComponentInChildren<SelectPlaceButton> ();
 										selectPlaceButton.storyName = storyName;
 										selectPlaceButton.storyDisplayName = storyDictionary [storyName].displayName;
@@ -31,8 +32,10 @@ public class CountryMap : MonoBehaviour
 				}
 		}
 
-		public static float ConvertCoordinate (float original, float relativePosition)
+		public static Vector2 ConvertCoordinate (Vector2 original, string countryCode)
 		{
-				return original - relativePosition;
+				Vector2 relativeCoordinate = CommonConfig.CENTRAL_COORDINATE [countryCode];
+				float scale = CommonConfig.MAP_SCALE [countryCode];
+				return new Vector2 ((original.x - relativeCoordinate.x) * scale, (original.y - relativeCoordinate.y) * scale);
 		}
 }

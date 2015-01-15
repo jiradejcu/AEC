@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CommonConfig
 {
@@ -25,4 +26,26 @@ public class CommonConfig
 		public static string ANSWER_WRONG = "answer_wrong";
 		public static string SCORE_SUMMARY = "score_summary";
 		public static bool TEST_MODE = true;
+		public static Dictionary<string, Vector2> CENTRAL_COORDINATE = new Dictionary<string, Vector2> ();
+		public static Dictionary<string, float> MAP_SCALE = new Dictionary<string, float> ();
+	
+		public enum COUNTRY_CODE
+		{
+				bn = 1,
+				kh = 2,
+				id = 3,
+				la = 4,
+				my = 5,
+				mm = 6,
+				ph = 7,
+				sg = 8,
+				th = 9,
+				vn = 10
+		}
+
+		public static void Init ()
+		{
+				CENTRAL_COORDINATE.Add (COUNTRY_CODE.th.ToString (), new Vector2 (13.141246f, 101.520955f));
+				MAP_SCALE.Add (COUNTRY_CODE.th.ToString (), 0.9f);
+		}
 }
