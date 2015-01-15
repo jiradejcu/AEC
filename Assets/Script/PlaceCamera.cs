@@ -7,7 +7,7 @@ public class PlaceCamera : MonoBehaviour
 
 		void Start ()
 		{
-				Hashtable ht = iTween.Hash ("amount", new Vector3 (0f, 0.3f), "easetype", iTween.EaseType.easeInOutSine, "looptype", iTween.LoopType.pingPong);
+				Hashtable ht = iTween.Hash ("amount", new Vector3 (0f, 0.25f), "easetype", iTween.EaseType.easeInOutSine, "looptype", iTween.LoopType.pingPong);
 				iTween.MoveBy (gameObject, ht); 
 		}
 

@@ -5,6 +5,7 @@ public class SelectPlaceButton : CommonButton
 {
 		public string storyName;
 		public string storyDisplayName;
+		public GameObject image;
 		int originalSiblingIndex;
 		bool isSelected;
 	
@@ -13,26 +14,29 @@ public class SelectPlaceButton : CommonButton
 				isSelected = true;
 				base.OnMouseDown ();
 				PlaceCamera placeCamera = Camera.main.GetComponent<PlaceCamera> ();
-				placeCamera.SetTargetPosition (gameObject);
+				placeCamera.SetTargetPosition (image);
 				StartCoroutine (DoOnMouseDown ());
 		}
 
 		IEnumerator DoOnMouseDown ()
 		{
-				yield return new WaitForSeconds (PlaceCamera.flyTime);
+				yield return new WaitForSeconds (PlaceCamera.flyTime * 0.8f);
 				Main.selectedStory = storyName;
 				Application.LoadLevel ("Main");
 		}
 
 		public override void OnMouseOver ()
 		{
-				originalSiblingIndex = transform.parent.transform.parent.GetSiblingIndex ();
-				transform.parent.transform.parent.SetAsLastSibling ();
+				base.OnMouseOver ();
+				originalSiblingIndex = transform.GetSiblingIndex ();
+				transform.SetAsLastSibling ();
 		}
 	
 		public override void OnMouseExit ()
 		{
-				if (!isSelected)
-						transform.parent.transform.parent.SetSiblingIndex (originalSiblingIndex);
+				if (!isSelected) {
+						base.OnMouseExit ();
+						transform.SetSiblingIndex (originalSiblingIndex);
+				}
 		}
 }

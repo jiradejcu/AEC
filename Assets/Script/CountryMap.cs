@@ -12,7 +12,7 @@ public class CountryMap : MonoBehaviour
 						foreach (string storyName in storyDictionary.Keys) {
 								if (storyDictionary [storyName].lat.HasValue && storyDictionary [storyName].lon.HasValue) {
 										GameObject placeObject = GameObject.Instantiate (Resources.Load ("Prefabs/Place")) as GameObject;
-										placeObject.transform.parent = transform.parent;
+										placeObject.transform.SetParent(transform.parent);
 										RectTransform rt = placeObject.GetComponent<RectTransform> ();
 										rt.anchoredPosition3D = new Vector3 (ConvertCoordinate (storyDictionary [storyName].lon.Value, 100), 0f, ConvertCoordinate (storyDictionary [storyName].lat.Value, 13));
 										rt.anchoredPosition = new Vector2 (ConvertCoordinate (storyDictionary [storyName].lon.Value, 100), 0f);
@@ -21,7 +21,7 @@ public class CountryMap : MonoBehaviour
 										selectPlaceButton.storyDisplayName = storyDictionary [storyName].displayName;
 										foreach (AnimationData animationData in storyDictionary[storyName].animationDataList) {
 												if (!string.IsNullOrEmpty (animationData.imageName)) {
-														Image image = selectPlaceButton.GetComponent<Image> ();
+														Image image = selectPlaceButton.image.GetComponent<Image> ();
 														image.sprite = Resources.Load<Sprite> ("Image/Country/" + Main.selectedCountry + "/" + animationData.imageName);
 														break;
 												}
