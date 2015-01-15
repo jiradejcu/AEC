@@ -39,20 +39,4 @@ public class CurrentCountry : MonoBehaviour
 		{
 				isShow = true;
 		}
-
-		public void OnClick ()
-		{
-				if (image.sprite.name == logoSprite.name) {
-						SelectCountry.FadeOutCompleted -= selectStory.CreateSelectStoryButton;
-						Logo.FadeOutCompleted -= selectStory.CreateSelectStoryButton;
-						Main.selectedCountry = StoryData.aecName;
-						if (string.IsNullOrEmpty (selectedStory)) {
-								Dictionary<string, StorySet>.KeyCollection.Enumerator en = StoryData.storyData [Main.selectedCountry].Keys.GetEnumerator ();
-								if (en.MoveNext ())
-										selectedStory = en.Current;
-						}
-						Main.selectedStory = selectedStory;
-						Application.LoadLevel ("Main");
-				}
-		}
 }

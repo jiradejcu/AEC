@@ -5,15 +5,11 @@ using System.Collections;
 public class SelectCountry : CommonSelect
 {
 		static GameObject[] buttonObjectList;
-	
-		public delegate void Callback ();
-	
-		public static event Callback FadeOutCompleted;
 
 		void Start ()
 		{
 				columnCount = new int[]{3, 4, 3};
-				if (string.IsNullOrEmpty (Main.selectedCountry))
+				if (SelectTopic.isSelectingCountry && string.IsNullOrEmpty (Main.selectedCountry))
 						Logo.FadeOutCompleted += CreateSelectCountryButton;
 		}
 
@@ -34,6 +30,6 @@ public class SelectCountry : CommonSelect
 		{
 				foreach (GameObject buttonObject in buttonObjectList)
 						Destroy (buttonObject);
-				FadeOutCompleted.Invoke ();
+				Application.LoadLevel ("SelectStory");
 		}
 }
