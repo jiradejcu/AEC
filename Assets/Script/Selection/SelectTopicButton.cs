@@ -2,20 +2,12 @@
 using System.Collections;
 
 public class SelectTopicButton : CommonButton
-{
-
+{	
 		void Start ()
 		{
-	
+				scaleUp = 1.1f;
 		}
-	
-		public override void OnMouseOver ()
-		{
-				Animator animator = GetComponent<Animator> ();
-				if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Idle"))
-						base.OnMouseOver ();
-		}
-	
+
 		public override void OnMouseDown ()
 		{
 				base.OnMouseDown ();
