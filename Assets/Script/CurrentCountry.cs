@@ -14,14 +14,13 @@ public class CurrentCountry : MonoBehaviour
 
 		void Start ()
 		{
-				Logo.FadeOutCompleted += SetShow;
 				image = GetComponent<Image> ();
 				logoSprite = Resources.Load<Sprite> ("Image/Logo/icon_asean_small");
 		}
 
 		void Update ()
 		{
-				if (isShow) {
+				if (SelectTopic.isSelectingCountry) {
 						image.enabled = true;
 						if (!string.IsNullOrEmpty (Main.selectedCountry) && Main.selectedCountry != StoryData.aecName) {
 								if (currentCountrySprite == null || currentCountrySprite.name != Main.selectedCountry) {
@@ -33,10 +32,5 @@ public class CurrentCountry : MonoBehaviour
 						}
 				} else
 						image.enabled = false;
-		}
-	
-		void SetShow ()
-		{
-				isShow = true;
 		}
 }

@@ -23,7 +23,7 @@ public class Back : MonoBehaviour
 						button.enabled = true;
 						button.image.enabled = true;
 						text.enabled = true;
-						if (Application.loadedLevelName.Equals ("SelectStory") && string.IsNullOrEmpty (Main.selectedCountry))
+						if (Application.loadedLevelName.Equals ("SelectStory") && string.IsNullOrEmpty (Main.selectedCountry) && !SelectTopic.isSelectingCountry)
 								text.text = "Quit";
 						else
 								text.text = "Back";
@@ -39,7 +39,11 @@ public class Back : MonoBehaviour
 								Main.selectedCountry = "";
 								Application.LoadLevel ("SelectStory");
 						} else {
-								Application.Quit ();
+								if (SelectTopic.isSelectingCountry) {
+										SelectTopic.isSelectingCountry = false;
+										Application.LoadLevel ("SelectStory");
+								} else
+										Application.Quit ();
 						}
 				}
 		}
