@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class SelectTopicButton : CommonButton
-{	
+{
+		public string storyName;
+
 		void Start ()
 		{
 				scaleUp = 1.1f;
@@ -11,7 +13,7 @@ public class SelectTopicButton : CommonButton
 		public override void OnMouseDown ()
 		{
 				base.OnMouseDown ();
-				if (false) {
+				if (!string.IsNullOrEmpty (storyName)) {
 						Main.selectedCountry = StoryData.aecName;
 						Main.selectedStory = StoryData.aecName;
 						Application.LoadLevel ("Main");

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class CurrentCountry : MonoBehaviour
 {
 		Image image;
-		static bool isShow = false;
 		Sprite currentCountrySprite;
 		Sprite logoSprite;
 		string selectedStory;
