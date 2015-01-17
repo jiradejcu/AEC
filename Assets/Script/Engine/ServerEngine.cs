@@ -14,24 +14,40 @@ public class ServerEngine
 
 				Debug.Log (url);
 				form.AddField ("dummy", "");
-				w = new WWW (url, form);
-				yield return w;
 
-				try {
-						if (w != null) {
-								if (w.error == null) {
-										Debug.Log ("Post data response : " + w.text);
-										JSONNode data = JSON.Parse (w.text);
-										if (callback != null) {
-												callback (data);
-										}
-										w.Dispose ();
-								} else {
-										Debug.Log (w.error);
-								}
+				if (CommonConfig.OFFLINE_MODE) {
+						string result = ReadFile (CommonConfig.URL_MAPPING [url]);
+						Debug.Log ("OFFLINE Post data response : " + result);
+						JSONNode data = JSON.Parse (result);
+						if (callback != null) {
+								callback (data);
 						}
-				} catch (Exception e) {
-						Debug.Log (e.Message);
+				} else {
+						w = new WWW (url, form);
+						yield return w;
+
+						try {
+								if (w != null) {
+										if (w.error == null) {
+												Debug.Log ("Post data response : " + w.text);
+												JSONNode data = JSON.Parse (w.text);
+												if (callback != null) {
+														callback (data);
+												}
+												w.Dispose ();
+										} else {
+												Debug.Log (w.error);
+										}
+								}
+						} catch (Exception e) {
+								Debug.Log (e.Message);
+						}
 				}
+		}
+
+		public static string ReadFile (string path)
+		{
+				TextAsset data = Resources.Load (path) as TextAsset;
+				return data.text;
 		}
 }

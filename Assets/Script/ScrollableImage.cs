@@ -6,8 +6,8 @@ public class ScrollableImage : MonoBehaviour
 {
 		ScrollRect scrollRect;
 		public Image image;
-		static float speedCoeff = 0.00006f;
-		static float kenBurnsSpeed = 0.001f;
+		static float speedCoeff = 0.00005f;
+		static float kenBurnsSpeed = 0.0008f;
 		static float zoomTime = 2.5f;
 		public static float animationLength;
 		float speed;

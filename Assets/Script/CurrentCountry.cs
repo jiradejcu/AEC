@@ -24,8 +24,8 @@ public class CurrentCountry : MonoBehaviour
 						if (!string.IsNullOrEmpty (Main.selectedCountry) && Main.selectedCountry != StoryData.aecName) {
 								if (currentCountrySprite == null || currentCountrySprite.name != Main.selectedCountry) {
 										currentCountrySprite = Resources.Load<Sprite> ("Image/Button/" + Main.selectedCountry);
-										image.sprite = currentCountrySprite;
 								}
+								image.sprite = currentCountrySprite;
 						} else {
 								image.sprite = logoSprite;
 						}

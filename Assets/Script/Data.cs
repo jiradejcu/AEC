@@ -28,6 +28,9 @@ public class StoryData : Singleton<StoryData>
 				countryNameList.Add (CommonConfig.COUNTRY_CODE.sg.ToString (), "Singapore");
 				countryNameList.Add (CommonConfig.COUNTRY_CODE.th.ToString (), "Thai");
 				countryNameList.Add (CommonConfig.COUNTRY_CODE.vn.ToString (), "Vietnam");
+
+				CommonConfig.URL_MAPPING.Add (CommonConfig.API_URL + "route=api/aec", "Data/aec");
+				CommonConfig.URL_MAPPING.Add (CommonConfig.API_URL + "route=api/aec/questions", "Data/questions");
 		}
 
 		public void RetrieveData (Callback callback = null)
