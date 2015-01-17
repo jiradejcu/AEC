@@ -3,8 +3,14 @@ using System.Collections;
 
 public class MainGUI : MonoBehaviour
 {
+		public static GameObject mainGUI;
+
 		void Start ()
 		{
-				DontDestroyOnLoad (gameObject);
+				if (mainGUI == null) {
+						mainGUI = gameObject;
+						DontDestroyOnLoad (gameObject);
+				} else
+						Destroy (gameObject);
 		}
 }
