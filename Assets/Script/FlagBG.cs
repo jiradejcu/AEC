@@ -10,10 +10,15 @@ public class FlagBG : MonoBehaviour
 
 		void Start ()
 		{
-				SetNextShow (10f);
+				SetNextShow (5f);
 				anim = GetComponentInChildren<Animator> ();
 				Image image = GetComponentInChildren<Image> ();
 				image.sprite = Resources.Load<Sprite> ("Image/Country/" + country + "/flag");
+		
+				if (SelectTopic.isSelectingCountry) {
+						Image map = GetComponentInParent<Image> ();
+						map.gameObject.SetActive (false);
+				}
 		}
 
 		void Update ()
@@ -29,6 +34,6 @@ public class FlagBG : MonoBehaviour
 
 		void SetNextShow (float max)
 		{
-				nextShow = Random.Range (5f, max);
+				nextShow = Random.Range (3f, max);
 		}
 }
