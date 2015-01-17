@@ -21,7 +21,7 @@ public class Frame : MonoBehaviour
 				QUESTION = 3
 		}
 
-		public void SetImage (string countryCode, string imageName, List<ContentText> contentTextList, int scroll)
+		public void SetImage (string countryCode, string imageName, List<ContentText> contentTextList, int scrollType)
 		{
 				if (Main.ContainText (contentTextList)) {
 						if (string.IsNullOrEmpty (imageName)) {
@@ -39,7 +39,9 @@ public class Frame : MonoBehaviour
 						if (scrollableImage != null) {
 								scrollableImage.Reset ();
 						}
-						AnimationEngine.Instance.animateImage (imageContent.gameObject, 0);
+						AnimationEngine.Instance.animateImage (imageContent.gameObject, 0, delegate {
+								ScrollImage (scrollType);
+						});
 						List<ContentText> cloneContentTextList = ContentText.CloneImage (contentTextList);
 						SubImageContent[] subImageContentList = GetComponentsInChildren<SubImageContent> ();
 
@@ -54,17 +56,23 @@ public class Frame : MonoBehaviour
 						}
 				}
 
-				if (scrollableImage != null) {
-						if (scroll == (int)AnimationData.SCROLL.PAN)
-								scrollableImage.Zoom ();
-						else if (scroll == (int)AnimationData.SCROLL.NORMAL)
-								scrollableImage.KenBurns ();
-				}
+				if (string.IsNullOrEmpty (imageName))
+						ScrollImage (scrollType);
 
 				multipleText = GetComponentInChildren<MultipleText> ();
 				if (multipleText != null) {
 						MultipleText.previousTime = 0f;
 						multipleText.Text = ContentText.CloneText (contentTextList);
+				}
+		}
+
+		void ScrollImage (int scrollType)
+		{
+				if (scrollableImage != null) {
+						if (scrollType == (int)AnimationData.SCROLL.PAN)
+								scrollableImage.Zoom ();
+						else if (scrollType == (int)AnimationData.SCROLL.NORMAL)
+								scrollableImage.KenBurns ();
 				}
 		}
 
