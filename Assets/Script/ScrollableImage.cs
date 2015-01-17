@@ -6,9 +6,13 @@ public class ScrollableImage : MonoBehaviour
 {
 		ScrollRect scrollRect;
 		public Image image;
-		float speed = 0.001f;
+		static float speedCoeff = 0.000065f;
+		static float zoomTime = 2.5f;
+		public static float animationLength;
+		float speed;
 		bool vertical = true;
 		bool scroll;
+		bool scrollable;
 
 		void Start ()
 		{
@@ -17,7 +21,7 @@ public class ScrollableImage : MonoBehaviour
 
 		void Update ()
 		{
-				if (scroll) {
+				if (scroll && scrollable) {
 						if (vertical)
 								scrollRect.verticalNormalizedPosition -= speed;
 						else
@@ -28,6 +32,8 @@ public class ScrollableImage : MonoBehaviour
 		public void Reset ()
 		{
 				scroll = false;
+				scrollable = false;
+
 				if (vertical) {
 						image.rectTransform.pivot = new Vector2 (0.5f, 1f);
 				} else {
@@ -42,7 +48,16 @@ public class ScrollableImage : MonoBehaviour
 
 		public void Zoom ()
 		{
-				iTween.ScaleTo (image.rectTransform.gameObject, iTween.Hash ("scale", new Vector3 (2f, 2f), "time", 2.5f, "oncomplete", "StartScroll", "oncompletetarget", gameObject));
+				scrollable = true;
+		
+				if (vertical)
+						speed = image.rectTransform.rect.height / (animationLength - zoomTime);
+				else
+						speed = image.rectTransform.rect.width / (animationLength - zoomTime);
+
+				speed *= speedCoeff;
+
+				iTween.ScaleTo (image.rectTransform.gameObject, iTween.Hash ("scale", new Vector3 (2f, 2f), "time", zoomTime, "oncomplete", "StartScroll", "oncompletetarget", gameObject));
 		}
 
 		private void StartScroll ()

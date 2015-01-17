@@ -21,7 +21,7 @@ public class Frame : MonoBehaviour
 				QUESTION = 3
 		}
 
-		public void SetImage (string countryCode, string imageName, List<ContentText> contentTextList)
+		public void SetImage (string countryCode, string imageName, List<ContentText> contentTextList, bool scroll = true)
 		{
 				if (Main.ContainText (contentTextList)) {
 						if (string.IsNullOrEmpty (imageName)) {
@@ -39,11 +39,7 @@ public class Frame : MonoBehaviour
 						if (scrollableImage != null) {
 								scrollableImage.Reset ();
 						}
-						AnimationEngine.Instance.animateImage (imageContent.gameObject, 0, delegate() {
-								if (scrollableImage != null) {
-										scrollableImage.Zoom ();
-								}
-						});
+						AnimationEngine.Instance.animateImage (imageContent.gameObject, 0);
 						List<ContentText> cloneContentTextList = ContentText.CloneImage (contentTextList);
 						SubImageContent[] subImageContentList = GetComponentsInChildren<SubImageContent> ();
 
@@ -56,6 +52,10 @@ public class Frame : MonoBehaviour
 								if (i < subImageContentList.Length)
 										subImageContentList [i++].SetSprite (LoadCountryImage (countryCode, contentText.image), contentText.time);
 						}
+				}
+
+				if (scrollableImage != null && scroll) {
+						scrollableImage.Zoom ();
 				}
 
 				multipleText = GetComponentInChildren<MultipleText> ();

@@ -130,8 +130,9 @@ public class Main : MonoBehaviour
 								} else
 										countdown = 0;
 						} else {
-								frame.SetImage (selectedCountry, animationData.imageName, animationData.text);
 								countdown = animationData.animationDelay + animationData.animationLength;
+								ScrollableImage.animationLength = animationData.animationLength;
+								frame.SetImage (selectedCountry, animationData.imageName, animationData.text, animationData.scrollImage);
 
 								characterList [characterName].PlayAnimation (animationData);
 								subtitle.TextList = animationData.text;
