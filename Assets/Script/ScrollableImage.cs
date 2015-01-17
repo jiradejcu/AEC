@@ -7,12 +7,12 @@ public class ScrollableImage : MonoBehaviour
 		ScrollRect scrollRect;
 		public Image image;
 		static float speedCoeff = 0.000065f;
+		static float kenBurnsSpeed = 0.001f;
 		static float zoomTime = 2.5f;
 		public static float animationLength;
 		float speed;
 		bool vertical = true;
 		bool scroll;
-		bool scrollable;
 
 		void Start ()
 		{
@@ -21,7 +21,7 @@ public class ScrollableImage : MonoBehaviour
 
 		void Update ()
 		{
-				if (scroll && scrollable) {
+				if (scroll) {
 						if (vertical)
 								scrollRect.verticalNormalizedPosition -= speed;
 						else
@@ -32,7 +32,6 @@ public class ScrollableImage : MonoBehaviour
 		public void Reset ()
 		{
 				scroll = false;
-				scrollable = false;
 
 				if (vertical) {
 						image.rectTransform.pivot = new Vector2 (0.5f, 1f);
@@ -48,8 +47,6 @@ public class ScrollableImage : MonoBehaviour
 
 		public void Zoom ()
 		{
-				scrollable = true;
-		
 				if (vertical)
 						speed = image.rectTransform.rect.height / (animationLength - zoomTime);
 				else
@@ -58,6 +55,13 @@ public class ScrollableImage : MonoBehaviour
 				speed *= speedCoeff;
 
 				iTween.ScaleTo (image.rectTransform.gameObject, iTween.Hash ("scale", new Vector3 (2f, 2f), "time", zoomTime, "oncomplete", "StartScroll", "oncompletetarget", gameObject));
+		}
+	
+		public void KenBurns ()
+		{
+				speed = kenBurnsSpeed;
+				iTween.ScaleTo (image.rectTransform.gameObject, iTween.Hash ("scale", new Vector3 (1.5f, 1.5f), "time", animationLength, "easetype", iTween.EaseType.linear));
+				StartScroll ();
 		}
 
 		private void StartScroll ()

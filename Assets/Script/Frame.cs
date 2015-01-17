@@ -21,7 +21,7 @@ public class Frame : MonoBehaviour
 				QUESTION = 3
 		}
 
-		public void SetImage (string countryCode, string imageName, List<ContentText> contentTextList, bool scroll = true)
+		public void SetImage (string countryCode, string imageName, List<ContentText> contentTextList, int scroll)
 		{
 				if (Main.ContainText (contentTextList)) {
 						if (string.IsNullOrEmpty (imageName)) {
@@ -54,8 +54,11 @@ public class Frame : MonoBehaviour
 						}
 				}
 
-				if (scrollableImage != null && scroll) {
-						scrollableImage.Zoom ();
+				if (scrollableImage != null) {
+						if (scroll == (int)AnimationData.SCROLL.PAN)
+								scrollableImage.Zoom ();
+						else if (scroll == (int)AnimationData.SCROLL.NORMAL)
+								scrollableImage.KenBurns ();
 				}
 
 				multipleText = GetComponentInChildren<MultipleText> ();

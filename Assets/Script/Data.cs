@@ -61,8 +61,7 @@ public class StoryData : Singleton<StoryData>
 												animationData.animationDelay = animationDataNode ["animation_delay"].AsFloat;
 												if (!string.IsNullOrEmpty (animationDataNode ["image_name"].Value))
 														animationData.imageName = animationDataNode ["image_name"].Value;
-												if (animationDataNode ["scroll_image"].AsInt == 1)
-														animationData.scrollImage = true;
+												animationData.scrollImage = animationDataNode ["scroll_image"].AsInt;
 												if (!string.IsNullOrEmpty (animationDataNode ["sound"].Value)) {
 														animationData.sound = animationDataNode ["sound"].Value;
 														if (animationData.animationLength == 0)
@@ -166,10 +165,17 @@ public class AnimationData
 		public float? positionX;
 		public float? scaleX;
 		public string imageName;
-		public bool scrollImage;
+		public int scrollImage;
 		public string sound;
 		public List<ContentText> text;
 		public int autoProceed;
+
+		public enum SCROLL
+		{
+				FIXED = 0,
+				NORMAL = 1,
+				PAN = 2
+		}
 }
 
 public class StorySet
