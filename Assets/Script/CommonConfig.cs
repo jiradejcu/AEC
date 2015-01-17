@@ -46,6 +46,6 @@ public class CommonConfig
 		public static void Init ()
 		{
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.th.ToString (), new Vector2 (13.141246f, 101.520955f));
-				MAP_SCALE.Add (COUNTRY_CODE.th.ToString (), 0.9f);
+				MAP_SCALE.Add (COUNTRY_CODE.th.ToString (), 4.5f);
 		}
 }
