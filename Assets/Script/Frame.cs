@@ -51,19 +51,20 @@ public class Frame : MonoBehaviour
 								AnimationEngine.Instance.animateImage (imageContent.gameObject, 0, delegate {
 										ScrollImage (scrollType);
 								});
-								List<ContentText> cloneContentTextList = ContentText.CloneImage (contentTextList);
-								SubImageContent[] subImageContentList = GetComponentsInChildren<SubImageContent> ();
-
-								foreach (SubImageContent subImageContent in subImageContentList) {
-										subImageContent.ClearSprite ();
-								}
-			
-								int i = 0;
-								foreach (ContentText contentText in cloneContentTextList) {
-										if (i < subImageContentList.Length)
-												subImageContentList [i++].SetSprite (LoadCountryImage (countryCode, contentText.image), contentText.time);
-								}
 						}
+				}
+
+				List<ContentText> cloneContentTextList = ContentText.CloneImage (contentTextList);
+				SubImageContent[] subImageContentList = GetComponentsInChildren<SubImageContent> ();
+		
+				foreach (SubImageContent subImageContent in subImageContentList) {
+						subImageContent.ClearSprite ();
+				}
+		
+				int i = 0;
+				foreach (ContentText contentText in cloneContentTextList) {
+						if (i < subImageContentList.Length)
+								subImageContentList [i++].SetSprite (LoadCountryImage (countryCode, contentText.image), contentText.time);
 				}
 
 				if (string.IsNullOrEmpty (imageName))
@@ -93,7 +94,7 @@ public class Frame : MonoBehaviour
 	
 		GameObject LoadCountryPrefab (string countryCode, string imageName)
 		{
-				GameObject imageAnimation = Resources.Load<GameObject> ("Image/Country/" + countryCode + "/" + imageName);
+				GameObject imageAnimation = Resources.Load ("Image/Country/" + countryCode + "/" + imageName) as GameObject;
 				if (imageAnimation != null)
 						return GameObject.Instantiate (imageAnimation) as GameObject;
 				else
