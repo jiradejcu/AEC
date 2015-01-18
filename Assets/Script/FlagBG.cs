@@ -4,13 +4,12 @@ using System.Collections;
 
 public class FlagBG : MonoBehaviour
 {
-		float nextShow;
+		float nextShow = float.MaxValue;
 		Animator anim;
 		public string country;
 
 		void Start ()
 		{
-				SetNextShow (5f);
 				anim = GetComponentInChildren<Animator> ();
 				Image image = GetComponentInChildren<Image> ();
 				image.sprite = Resources.Load<Sprite> ("Image/Country/" + country + "/flag");
@@ -19,6 +18,7 @@ public class FlagBG : MonoBehaviour
 						Image map = GetComponentInParent<Image> ();
 						map.gameObject.SetActive (false);
 				}
+				Logo.FadeOutCompleted += SetFirstShow;
 		}
 
 		void Update ()
@@ -32,8 +32,17 @@ public class FlagBG : MonoBehaviour
 				}
 		}
 
+		void SetFirstShow ()
+		{
+				SetNextShow (3f);
+				Logo.FadeOutCompleted -= SetFirstShow;
+		}
+
 		void SetNextShow (float max)
 		{
-				nextShow = Random.Range (3f, max);
+				float min = 3f;
+				if (max <= min)
+						min = 0f;
+				nextShow = Random.Range (min, max);
 		}
 }

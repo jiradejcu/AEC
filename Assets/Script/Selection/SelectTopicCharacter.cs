@@ -8,10 +8,24 @@ public class SelectTopicCharacter : MonoBehaviour
 		void Start ()
 		{
 				characterList = GameObject.FindGameObjectsWithTag ("Character");
-				StartCoroutine (CharacterRespect ());
+				SetActive (false);
+				Logo.FadeOutCompleted += CharacterRespect;
 		}
 
-		IEnumerator CharacterRespect ()
+		void SetActive (bool active)
+		{
+				foreach (GameObject character in characterList)
+						character.SetActive (active);
+		}
+
+		void CharacterRespect ()
+		{
+				SetActive (true);
+				StartCoroutine (DoCharacterRespect ());
+				Logo.FadeOutCompleted -= CharacterRespect;
+		}
+
+		IEnumerator DoCharacterRespect ()
 		{
 				yield return new WaitForSeconds (2f);
 				AnimationData animationData = new AnimationData ();
