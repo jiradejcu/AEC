@@ -9,7 +9,8 @@ public class Character : MonoBehaviour
 
 		void Awake ()
 		{
-				verbalSource = (GameObject.Instantiate (Main.sound) as GameObject).GetComponent<AudioSource> ();
+				if (Main.sound != null)
+						verbalSource = (GameObject.Instantiate (Main.sound) as GameObject).GetComponent<AudioSource> ();
 				animator = GetComponent<Animator> ();
 		}
 

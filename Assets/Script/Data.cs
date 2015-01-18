@@ -28,6 +28,9 @@ public class StoryData : Singleton<StoryData>
 				countryNameList.Add (CommonConfig.COUNTRY_CODE.sg.ToString (), "Singapore");
 				countryNameList.Add (CommonConfig.COUNTRY_CODE.th.ToString (), "Thai");
 				countryNameList.Add (CommonConfig.COUNTRY_CODE.vn.ToString (), "Vietnam");
+
+				CommonConfig.URL_MAPPING.Add (CommonConfig.API_URL + "route=api/aec", "Data/aec");
+				CommonConfig.URL_MAPPING.Add (CommonConfig.API_URL + "route=api/aec/questions", "Data/questions");
 		}
 
 		public void RetrieveData (Callback callback = null)
@@ -61,6 +64,7 @@ public class StoryData : Singleton<StoryData>
 												animationData.animationDelay = animationDataNode ["animation_delay"].AsFloat;
 												if (!string.IsNullOrEmpty (animationDataNode ["image_name"].Value))
 														animationData.imageName = animationDataNode ["image_name"].Value;
+												animationData.scrollImage = animationDataNode ["scroll_image"].AsInt;
 												if (!string.IsNullOrEmpty (animationDataNode ["sound"].Value)) {
 														animationData.sound = animationDataNode ["sound"].Value;
 														if (animationData.animationLength == 0)
@@ -164,9 +168,17 @@ public class AnimationData
 		public float? positionX;
 		public float? scaleX;
 		public string imageName;
+		public int scrollImage;
 		public string sound;
 		public List<ContentText> text;
 		public int autoProceed;
+
+		public enum SCROLL
+		{
+				FIXED = 0,
+				NORMAL = 1,
+				PAN = 2
+		}
 }
 
 public class StorySet

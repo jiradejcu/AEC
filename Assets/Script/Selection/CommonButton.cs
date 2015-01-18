@@ -4,6 +4,7 @@ using System.Collections;
 public class CommonButton : MonoBehaviour
 {
 		public static AudioSource clickSource;
+		protected float scaleUp = 1.2f;
 		static float scaleUpTime = 0.5f;
 
 		void Awake ()
@@ -19,7 +20,7 @@ public class CommonButton : MonoBehaviour
 
 		public virtual void OnMouseOver ()
 		{
-				iTween.ScaleTo (gameObject, new Vector3 (1.2f, 1.2f), scaleUpTime);
+				iTween.ScaleTo (gameObject, new Vector3 (scaleUp, scaleUp), scaleUpTime);
 		}
 	
 		public virtual void OnMouseExit ()

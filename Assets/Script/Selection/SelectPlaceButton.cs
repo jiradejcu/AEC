@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class SelectPlaceButton : CommonButton
@@ -8,6 +9,12 @@ public class SelectPlaceButton : CommonButton
 		public GameObject image;
 		int originalSiblingIndex;
 		bool isSelected;
+
+		void Start ()
+		{
+				Text text = GetComponentInChildren<Text> ();
+				text.text = storyDisplayName;
+		}
 	
 		public override void OnMouseDown ()
 		{

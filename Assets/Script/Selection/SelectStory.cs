@@ -11,9 +11,7 @@ public class SelectStory : CommonSelect
 		{
 				columnCount = new int[]{2, 2};
 				scaleHeightCoeff = 1.8f;
-				if (string.IsNullOrEmpty (Main.selectedCountry))
-						SelectCountry.FadeOutCompleted += CreateSelectStoryButton;
-				else
+				if (SelectTopic.isSelectingCountry && !string.IsNullOrEmpty (Main.selectedCountry))
 						Logo.FadeOutCompleted += CreateSelectStoryButton;
 		}
 	
@@ -46,7 +44,6 @@ public class SelectStory : CommonSelect
 								}
 						}
 				}
-				SelectCountry.FadeOutCompleted -= CreateSelectStoryButton;
 				Logo.FadeOutCompleted -= CreateSelectStoryButton;
 		}
 	
