@@ -20,8 +20,10 @@ public class SelectTopicCharacter : MonoBehaviour
 
 		void CharacterRespect ()
 		{
-				SetActive (true);
-				StartCoroutine (DoCharacterRespect ());
+				if (gameObject.activeInHierarchy) {
+						SetActive (true);
+						StartCoroutine (DoCharacterRespect ());
+				}
 				Logo.FadeOutCompleted -= CharacterRespect;
 		}
 

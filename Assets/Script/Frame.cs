@@ -10,6 +10,7 @@ public class Frame : MonoBehaviour
 		public GameObject imageOnlyLayout;
 		public GameObject imageWithTextLayout;
 		public GameObject textOnlyLayout;
+		GameObject previousImageAnimation;
 		ImageContent imageContent;
 		ScrollableImage scrollableImage;
 
@@ -24,25 +25,29 @@ public class Frame : MonoBehaviour
 
 		public void SetImage (string countryCode, string imageName, List<ContentText> contentTextList, int scrollType)
 		{
+				GameObject imageAnimation = LoadCountryPrefab (countryCode, imageName);
+
 				if (Main.ContainText (contentTextList)) {
 						if (string.IsNullOrEmpty (imageName)) {
 								SetLayout ((int)Layout.TEXT_ONLY);
 						} else {
 								SetLayout ((int)Layout.IMAGE_WITH_TEXT);
 						}
-				} else if (!string.IsNullOrEmpty (imageName))
-						SetLayout ((int)Layout.IMAGE_ONLY);
+				} else {
+						if (imageAnimation != null || previousImageAnimation != null)
+								SetLayout ((int)Layout.NONE);
+						else
+								SetLayout ((int)Layout.IMAGE_ONLY);
+				}
 
 				imageContent = GetComponentInChildren<ImageContent> ();
 
-				if (imageContent != null && !string.IsNullOrEmpty (imageName)) {
-
-						GameObject imageAnimation = LoadCountryPrefab (countryCode, imageName);
+				if (!string.IsNullOrEmpty (imageName)) {
+						Destroy (previousImageAnimation);
 						if (imageAnimation != null) {
+								previousImageAnimation = imageAnimation;
 								imageAnimation.transform.SetParent (gameObject.transform, false);
-								SetLayout ((int)Layout.NONE);
-						} else {
-								Destroy (imageAnimation);
+						} else if (imageContent != null) {
 								imageContent.SetSprite (LoadCountryImage (countryCode, imageName));
 								scrollableImage = GetComponentInChildren<ScrollableImage> ();
 								if (scrollableImage != null) {
