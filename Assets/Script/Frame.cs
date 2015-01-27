@@ -134,6 +134,7 @@ public class Frame : MonoBehaviour
 						qp.gameObject.SetActive (false);
 						break;
 				case (int)Layout.QUESTION:
+						Destroy (previousImageAnimation);
 						imageOnlyLayout.SetActive (false);
 						imageWithTextLayout.SetActive (false);
 						textOnlyLayout.SetActive (false);
