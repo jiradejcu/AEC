@@ -15,8 +15,6 @@ public class Logo : MonoBehaviour
 		void Start ()
 		{
 				Input.simulateMouseWithTouches = true;
-				if (Main.selectedCountry.Equals (StoryData.aecName))
-						Main.selectedCountry = "";
 
 				if (bgmSource == null) {
 						GameObject sound = GameObject.Instantiate (Resources.Load ("Prefabs/Sound")) as GameObject;

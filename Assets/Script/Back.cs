@@ -32,9 +32,19 @@ public class Back : MonoBehaviour
 
 		public void OnClick ()
 		{
-				if (Application.loadedLevelName.Equals ("Main") || Application.loadedLevelName.Equals ("SelectPlace"))
+				if (Application.loadedLevelName.Equals ("Main") || Application.loadedLevelName.Equals ("SelectPlace")) {
+
+						if (CommonConfig.ASEAN_TOPIC_LIST.Contains (Main.selectedStory)) {
+								Main.selectedCountry = "";
+								SelectTopic.isSelectingCountry = false;
+						}
 						Application.LoadLevel ("SelectStory");
-				else if (Application.loadedLevelName.Equals ("SelectStory")) {
+
+				} else if (Application.loadedLevelName.Equals ("SelectStory")) {
+			
+						if (Main.selectedCountry == StoryData.aecName)
+								Main.selectedCountry = "";
+
 						if (!string.IsNullOrEmpty (Main.selectedCountry)) {
 								Main.selectedCountry = "";
 								Application.LoadLevel ("SelectStory");

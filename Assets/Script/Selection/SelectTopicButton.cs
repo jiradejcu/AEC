@@ -15,8 +15,13 @@ public class SelectTopicButton : CommonButton
 				base.OnMouseDown ();
 				if (!string.IsNullOrEmpty (storyName)) {
 						Main.selectedCountry = StoryData.aecName;
-						Main.selectedStory = storyName;
-						Application.LoadLevel ("Main");
+						if (storyName == CommonConfig.ASEAN_MAIN_TOPIC) {
+								SelectTopic.isSelectingCountry = true;
+								Application.LoadLevel ("SelectStory");
+						} else {
+								Main.selectedStory = storyName;
+								Application.LoadLevel ("Main");
+						}
 				} else {
 						SelectTopic.isSelectingCountry = true;
 						Application.LoadLevel ("SelectStory");

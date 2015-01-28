@@ -30,6 +30,8 @@ public class CommonConfig
 		public static Dictionary<string, Vector2> CENTRAL_COORDINATE = new Dictionary<string, Vector2> ();
 		public static Dictionary<string, float> MAP_SCALE = new Dictionary<string, float> ();
 		public static Dictionary<string, string> URL_MAPPING = new Dictionary<string, string> ();
+		public static List<string> ASEAN_TOPIC_LIST = new List<string> ();
+		public static string ASEAN_MAIN_TOPIC = "asean_found";
 	
 		public enum COUNTRY_CODE
 		{
@@ -76,5 +78,8 @@ public class CommonConfig
 		
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.vn.ToString (), new Vector2 (16.079912f, 105.852973f));
 				MAP_SCALE.Add (COUNTRY_CODE.vn.ToString (), 5f);
+
+				ASEAN_TOPIC_LIST.Add ("asean_charter");
+				ASEAN_TOPIC_LIST.Add ("asean_question");
 		}
 }
