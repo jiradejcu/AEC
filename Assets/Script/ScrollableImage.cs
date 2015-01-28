@@ -32,6 +32,7 @@ public class ScrollableImage : MonoBehaviour
 		public void Reset ()
 		{
 				scroll = false;
+				iTween.Stop (image.rectTransform.gameObject);
 
 				if (vertical) {
 						image.rectTransform.pivot = new Vector2 (0.5f, 1f);
@@ -52,8 +53,7 @@ public class ScrollableImage : MonoBehaviour
 				else
 						speed = image.rectTransform.rect.width / (animationLength - zoomTime);
 
-		speed *= speedCoeff;
-
+				speed *= speedCoeff;
 				iTween.ScaleTo (image.rectTransform.gameObject, iTween.Hash ("scale", new Vector3 (2f, 2f), "time", zoomTime, "oncomplete", "StartScroll", "oncompletetarget", gameObject));
 		}
 	
