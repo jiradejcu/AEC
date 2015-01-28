@@ -28,7 +28,9 @@ public class CommonConfig
 		public static bool TEST_MODE = true;
 		public static bool OFFLINE_MODE = false;
 		public static Dictionary<string, Vector2> CENTRAL_COORDINATE = new Dictionary<string, Vector2> ();
+		public static Dictionary<string, Vector2> CENTRAL_COORDINATE_OFFSET = new Dictionary<string, Vector2> ();
 		public static Dictionary<string, float> MAP_SCALE = new Dictionary<string, float> ();
+		public static Dictionary<string, float> MAP_OFFSET_SCALE = new Dictionary<string, float> ();
 		public static Dictionary<string, string> URL_MAPPING = new Dictionary<string, string> ();
 		public static List<string> ASEAN_TOPIC_LIST = new List<string> ();
 		public static string ASEAN_MAIN_TOPIC = "asean_found";
@@ -51,27 +53,39 @@ public class CommonConfig
 		{
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.bn.ToString (), new Vector2 (4.561211f, 114.712760f));
 				MAP_SCALE.Add (COUNTRY_CODE.bn.ToString (), 60f);
-
+				CENTRAL_COORDINATE_OFFSET.Add (COUNTRY_CODE.bn.ToString (), new Vector2 (-210f, -138f));
+				MAP_OFFSET_SCALE.Add (COUNTRY_CODE.bn.ToString (), 10f);
+		
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.kh.ToString (), new Vector2 (12.600536f, 104.986637f));
 				MAP_SCALE.Add (COUNTRY_CODE.kh.ToString (), 14.5f);
+				CENTRAL_COORDINATE_OFFSET.Add (COUNTRY_CODE.kh.ToString (), new Vector2 (0f, 20f));
 
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.id.ToString (), new Vector2 (-2.461119f, 117.839082f));
 				MAP_SCALE.Add (COUNTRY_CODE.id.ToString (), 1.85f);
+				MAP_OFFSET_SCALE.Add (COUNTRY_CODE.id.ToString (), 1.5f);
 
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.la.ToString (), new Vector2 (18.227167f, 103.867049f));
 				MAP_SCALE.Add (COUNTRY_CODE.la.ToString (), 8.55f);
 
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.my.ToString (), new Vector2 (3.886775f, 109.521332f));
 				MAP_SCALE.Add (COUNTRY_CODE.my.ToString (), 3.83f);
+				CENTRAL_COORDINATE_OFFSET.Add (COUNTRY_CODE.my.ToString (), new Vector2 (0f, 240f));
+				MAP_OFFSET_SCALE.Add (COUNTRY_CODE.my.ToString (), 8f);
 
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.mm.ToString (), new Vector2 (19.260256f, 96.780903f));
 				MAP_SCALE.Add (COUNTRY_CODE.mm.ToString (), 4.27f);
+				CENTRAL_COORDINATE_OFFSET.Add (COUNTRY_CODE.mm.ToString (), new Vector2 (0f, 0f));
+				MAP_OFFSET_SCALE.Add (COUNTRY_CODE.mm.ToString (), 2f);
 
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.ph.ToString (), new Vector2 (13.098078f, 121.764821f));
 				MAP_SCALE.Add (COUNTRY_CODE.ph.ToString (), 5f);
+				CENTRAL_COORDINATE_OFFSET.Add (COUNTRY_CODE.ph.ToString (), new Vector2 (0f, 17f));
+				MAP_OFFSET_SCALE.Add (COUNTRY_CODE.ph.ToString (), 2f);
 
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.sg.ToString (), new Vector2 (1.323338f, 103.848287f));
 				MAP_SCALE.Add (COUNTRY_CODE.sg.ToString (), 130f);
+				CENTRAL_COORDINATE_OFFSET.Add (COUNTRY_CODE.sg.ToString (), new Vector2 (29f, 0f));
+				MAP_OFFSET_SCALE.Add (COUNTRY_CODE.sg.ToString (), 10f);
 
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.th.ToString (), new Vector2 (13.141246f, 101.620955f));
 				MAP_SCALE.Add (COUNTRY_CODE.th.ToString (), 4.8f);
