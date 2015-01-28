@@ -25,8 +25,8 @@ public class CommonConfig
 		public static string ANSWER_CORRECT = "answer_correct";
 		public static string ANSWER_WRONG = "answer_wrong";
 		public static string SCORE_SUMMARY = "score_summary";
-		public static bool TEST_MODE = true;
-		public static bool OFFLINE_MODE = false;
+		public static bool TEST_MODE = false;
+		public static bool OFFLINE_MODE = true;
 		public static Dictionary<string, Vector2> CENTRAL_COORDINATE = new Dictionary<string, Vector2> ();
 		public static Dictionary<string, Vector2> CENTRAL_COORDINATE_OFFSET = new Dictionary<string, Vector2> ();
 		public static Dictionary<string, float> MAP_SCALE = new Dictionary<string, float> ();
