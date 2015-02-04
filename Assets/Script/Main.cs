@@ -130,12 +130,13 @@ public class Main : MonoBehaviour
 								} else
 										countdown = 0;
 						} else {
+								List<ContentText> animationDataText = animationData.text [CommonConfig.LANGUAGE_MAP [PlayerPrefs.GetString ("language")].subtitle];
 								countdown = animationData.animationDelay + animationData.animationLength;
 								ScrollableImage.animationLength = animationData.animationLength;
-								frame.SetImage (selectedCountry, animationData.imageName, animationData.text, animationData.scrollImage);
+								frame.SetImage (selectedCountry, animationData.imageName, animationDataText, animationData.scrollImage);
 
 								characterList [characterName].PlayAnimation (animationData);
-								subtitle.TextList = animationData.text;
+								subtitle.TextList = animationDataText;
 						} 
 
 						currentSceneNo++;

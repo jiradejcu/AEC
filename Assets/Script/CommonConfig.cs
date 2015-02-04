@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class CommonConfig
 {
+		public static bool TEST_MODE = true;
+		public static bool OFFLINE_MODE = false;
 		public static string API_URL = "http://localhost:10088/AEC/index.php?";
 //		public static string API_URL = "http://192.168.1.3:10088/AEC/index.php?";
 //		public static string API_URL = "http://203.172.250.148/AEC/Server/index.php?";
@@ -25,13 +27,12 @@ public class CommonConfig
 		public static string ANSWER_CORRECT = "answer_correct";
 		public static string ANSWER_WRONG = "answer_wrong";
 		public static string SCORE_SUMMARY = "score_summary";
-		public static bool TEST_MODE = false;
-		public static bool OFFLINE_MODE = true;
 		public static Dictionary<string, Vector2> CENTRAL_COORDINATE = new Dictionary<string, Vector2> ();
 		public static Dictionary<string, Vector2> CENTRAL_COORDINATE_OFFSET = new Dictionary<string, Vector2> ();
 		public static Dictionary<string, float> MAP_SCALE = new Dictionary<string, float> ();
 		public static Dictionary<string, float> MAP_OFFSET_SCALE = new Dictionary<string, float> ();
 		public static Dictionary<string, string> URL_MAPPING = new Dictionary<string, string> ();
+		public static Dictionary<string, LanguageSetting> LANGUAGE_MAP = new Dictionary<string, LanguageSetting> ();
 		public static List<string> ASEAN_TOPIC_LIST = new List<string> ();
 		public static string ASEAN_MAIN_TOPIC = "asean_found";
 	
@@ -47,6 +48,12 @@ public class CommonConfig
 				sg = 8,
 				th = 9,
 				vn = 10
+		}
+
+		public enum LANGUAGE_MODE
+		{
+				th = 1,
+				en = 2
 		}
 
 		public static void Init ()
@@ -95,5 +102,28 @@ public class CommonConfig
 
 				ASEAN_TOPIC_LIST.Add ("asean_charter");
 				ASEAN_TOPIC_LIST.Add ("asean_question");
+
+				LANGUAGE_MAP.Add (LANGUAGE_MODE.th.ToString (), new LanguageSetting (LANGUAGE_MODE.th.ToString (), LANGUAGE_MODE.en.ToString ()));
+				LANGUAGE_MAP.Add (LANGUAGE_MODE.en.ToString (), new LanguageSetting (LANGUAGE_MODE.en.ToString (), LANGUAGE_MODE.th.ToString ()));
+				if (!PlayerPrefs.HasKey ("language"))
+						LanguageSetting.SetLanguage (LANGUAGE_MODE.th.ToString ());
+		}
+}
+
+public class LanguageSetting
+{
+		public string voice;
+		public string subtitle;
+
+		public LanguageSetting (string voice, string subtitle)
+		{
+				this.voice = voice;
+				this.subtitle = subtitle;
+		}
+
+		public static void SetLanguage (string language)
+		{
+				Debug.Log ("Set Language : " + language);
+				PlayerPrefs.SetString ("language", language);
 		}
 }

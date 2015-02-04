@@ -71,14 +71,21 @@ public class StoryData : Singleton<StoryData>
 																animationData.animationLength = Character.GetVerbalClip (animationData.sound).length;
 												}
 												JSONArray textArray = animationDataNode ["text"].AsArray;
-												animationData.text = new List<ContentText> ();
+												animationData.text = new Dictionary<string, List<ContentText>> ();
+
+												foreach (string lang in Enum.GetNames(typeof(CommonConfig.LANGUAGE_MODE))) {
+														animationData.text.Add (lang, new List<ContentText> ());
+												}
 												foreach (JSONNode textNode in textArray) {
 														ContentText contentText = new ContentText ();
 														contentText.time = textNode ["time"].AsFloat;
 														contentText.image = textNode ["image"].Value;
 														contentText.text = textNode ["text"].Value;
 														contentText.subtitle = textNode ["subtitle"].Value;
-														animationData.text.Add (contentText);
+														string lang = textNode ["language"].Value;
+														if (animationData.text.ContainsKey (lang)) {
+																animationData.text [lang].Add (contentText);
+														}
 												}
 												if (animationDataNode ["position_x"].Value != "null")
 														animationData.positionX = animationDataNode ["position_x"].AsFloat;
@@ -170,7 +177,7 @@ public class AnimationData
 		public string imageName;
 		public int scrollImage;
 		public string sound;
-		public List<ContentText> text;
+		public Dictionary<string, List<ContentText>> text;
 		public int autoProceed;
 
 		public enum SCROLL
