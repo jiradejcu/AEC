@@ -56,6 +56,8 @@ public class CommonConfig
 				en = 2
 		}
 
+		public static string DEFAULT_LANGUAGE_MODE = LANGUAGE_MODE.th.ToString ();
+
 		public static void Init ()
 		{
 				CENTRAL_COORDINATE.Add (COUNTRY_CODE.bn.ToString (), new Vector2 (4.561211f, 114.712760f));

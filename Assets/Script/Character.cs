@@ -57,7 +57,17 @@ public class Character : MonoBehaviour
 
 		public static AudioClip GetVerbalClip (string name)
 		{
-				return Resources.Load ("Sound/Verbal/" + name) as AudioClip;
+				string lang = PlayerPrefs.GetString ("language");
+				string localized_name = name;
+				if (!lang.Equals (CommonConfig.DEFAULT_LANGUAGE_MODE))
+						localized_name += "_" + lang;
+
+				AudioClip audioClip = Resources.Load ("Sound/Verbal/" + localized_name) as AudioClip;
+
+				if (audioClip == null)
+						audioClip = Resources.Load ("Sound/Verbal/" + name) as AudioClip;
+
+				return audioClip;
 		}
 
 		public static string GetCharacterName (string countryCode, string sex)
