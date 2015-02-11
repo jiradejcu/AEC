@@ -107,6 +107,10 @@ public class Main : MonoBehaviour
 				if (!IsFinished) {
 						animationData = StoryData.storyData [selectedCountry] [selectedStory].animationDataList [currentSceneNo];
 						mode = animationData.autoProceed;
+			
+						if (!string.IsNullOrEmpty (animationData.sound) && animationData.animationLength == 0) {
+								animationData.animationLength = Character.GetVerbalClip (animationData.sound).length;
+						}
 
 						string characterName = Character.GetCharacterName (selectedCountry, animationData.character);
 						if (!characterList.ContainsKey (characterName)) {

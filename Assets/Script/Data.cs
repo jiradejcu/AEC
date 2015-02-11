@@ -67,8 +67,6 @@ public class StoryData : Singleton<StoryData>
 												animationData.scrollImage = animationDataNode ["scroll_image"].AsInt;
 												if (!string.IsNullOrEmpty (animationDataNode ["sound"].Value)) {
 														animationData.sound = animationDataNode ["sound"].Value;
-														if (animationData.animationLength == 0)
-																animationData.animationLength = Character.GetVerbalClip (animationData.sound).length;
 												}
 												JSONArray textArray = animationDataNode ["text"].AsArray;
 												animationData.text = new Dictionary<string, List<ContentText>> ();
