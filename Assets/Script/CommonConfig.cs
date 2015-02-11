@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class CommonConfig
 {
-		public static bool TEST_MODE = true;
-		public static bool OFFLINE_MODE = false;
+		public static bool TEST_MODE = false;
+		public static bool OFFLINE_MODE = true;
 		public static string API_URL = "http://localhost:10088/AEC/index.php?";
 //		public static string API_URL = "http://192.168.1.3:10088/AEC/index.php?";
 //		public static string API_URL = "http://203.172.250.148/AEC/Server/index.php?";
